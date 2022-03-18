@@ -99,7 +99,7 @@
             </div>
             <div class="flex justify-center mt-4">
                 <x-button class="ml-4">
-                    {{ __('Register') }}
+                    {{ __('Registrar') }}
                 </x-button>
             </div>
         </form>
