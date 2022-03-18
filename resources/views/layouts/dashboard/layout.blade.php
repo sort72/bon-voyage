@@ -18,6 +18,7 @@
 
     @livewireScripts
 
+
 </head>
 
 <body>
