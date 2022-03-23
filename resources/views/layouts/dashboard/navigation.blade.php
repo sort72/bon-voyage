@@ -1,3 +1,9 @@
+@if (session('success'))
+    <div class="bg-green-600 h-12 w-full py-3 px-2 text-center text-white">
+        {{ session('success') }}
+    </div>
+@endif
+
 <nav id="navbar-main" class="navbar is-fixed-top">
     <div class="navbar-brand">
         <a class="navbar-item mobile-aside-button">

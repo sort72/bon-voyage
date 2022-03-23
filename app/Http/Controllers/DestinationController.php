@@ -58,21 +58,24 @@ class DestinationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Destination $destination)
     {
-        //
+
+        return view('pages.dashboard.destination.edit', compact('destination'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DestinationRequest $request, Destination $destination)
     {
-        //
+        $destination->update($request->only(['name']));
+
+        return redirect()->route('dashboard.destination.index')->with('success', 'Destino ' . $request->name . ' modificado con éxito');
     }
 
     /**
