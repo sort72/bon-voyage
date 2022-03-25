@@ -11,6 +11,9 @@
         <form method="POST" action="{{route('dashboard.create-admin')}}">
           @csrf
           <div class="grid grid-cols-2 gap-6">
+            <div class="col-span-2 justify-self-center">
+              <h1 class="text-2xl text-cyan-600 underline font-semibold">Crear Administrador</h1>
+            </div>
             <!-- Nombres -->
             <div>
               <label class="font-semibold" for="name">Nombres</label>
