@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\FlightController;
 use App\Http\Controllers\RootController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,7 @@ Route::middleware(['auth', 'role:root,admin'])->as('dashboard.')->prefix('dashbo
 
     Route::middleware(['role:admin'])->group(function() {
         Route::resource('destination', DestinationController::class);
-        Route::resource('flight', DestinationController::class);
+        Route::resource('flight', FlightController::class);
         Route::resource('inbox', DestinationController::class);
     });
 

@@ -14,7 +14,7 @@ class FlightController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.dashboard.flight.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class FlightController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.dashboard.flight.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class FlightController extends Controller
      */
     public function edit(Flight $flight)
     {
-        //
+        return view('pages.dashboard.flight.edit', compact('flight'));
     }
 
     /**
