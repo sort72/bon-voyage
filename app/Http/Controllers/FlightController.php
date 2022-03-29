@@ -38,10 +38,17 @@ class FlightController extends Controller
      */
     public function store(FlightRequest $request)
     {
-        Destination::create([
+        Flight::create([
             'name' => $request->name,
-            'destination_id' => $request->destinetion_id
+            'destination_id' => $request->destination_id,
+            'origin_id' => $request->origin_id,
+            'departure_time' => $request->departure_time,
+            'arrival_time' => $request->arrival_time,
+            'is_international' => $request->is_international
+            #'time_diff' => $request->time_diff
         ]);
+
+        return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' creado con éxito');
     }
 
     /**
@@ -75,7 +82,9 @@ class FlightController extends Controller
      */
     public function update(FlightRequest $request, Flight $flight)
     {
-        //
+        $destination->update($request->only(['name']));
+
+        return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' modificado con éxito');
     }
 
     /**
