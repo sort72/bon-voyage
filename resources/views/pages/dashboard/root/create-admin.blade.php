@@ -8,7 +8,7 @@
   <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <div class="overflow-hidden">
       <div class="p-5 border-b bg-white max-w-lg mx-auto border-gray-200 sm:rounded-lg shadow-md">
-        <form method="POST" action="{{route('dashboard.create-admin')}}">
+        <form method="POST" action="{{route('dashboard.store-admin')}}">
           @csrf
           <div class="grid grid-cols-2 gap-6">
             <div class="col-span-2 justify-self-center">

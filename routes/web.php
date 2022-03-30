@@ -28,6 +28,7 @@ Route::middleware(['auth', 'role:root,admin'])->as('dashboard.')->prefix('dashbo
 
     Route::middleware(['role:root'])->group(function() {
         Route::get('crear-administrador', [RootController::class, 'createAdmin'] )->name('create-admin');
+        Route::post('crear-administrador', [RootController::class, 'storeAdmin'] )->name('store-admin');
     });
 
     Route::middleware(['role:admin'])->group(function() {
