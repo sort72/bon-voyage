@@ -45,7 +45,7 @@ class FlightController extends Controller
             'departure_time' => $request->departure_time,
             'arrival_time' => $request->arrival_time,
             'is_international' => $request->is_international
-            #'time_diff' => $request->time_diff
+            //'time_diff' => $request->time_diff
         ]);
 
         return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' creado con éxito');
@@ -82,7 +82,7 @@ class FlightController extends Controller
      */
     public function update(FlightRequest $request, Flight $flight)
     {
-        $destination->update($request->only(['name']));
+        $destination->update($request->only(['name','destination_id','origin_id','departure_time','arrival_time','is_international']));
 
         return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' modificado con éxito');
     }
