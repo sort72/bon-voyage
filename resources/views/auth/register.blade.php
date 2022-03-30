@@ -58,7 +58,7 @@
                 <div class="w-1/2 px-2">
                     <x-label for="gender" :value="__('Género')" />
 
-                    <select name="gender" id="gender" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <select name="gender" id="gender" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
                         <option value="">Seleccione el género</option>
                         <option value="female">Femenino</option>
                         <option value="male">Masculino</option>
@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="flex justify-center mt-4">
-                <a class="underline text-sm text-cyan-500 hover:text-cyan-700" href="{{ route('login') }}">
+                <a class="underline text-sm text-sky-500 hover:text-sky-700" href="{{ route('login') }}">
                     {{ __('Ya tienes una cuenta? Inicia sesión') }}
                 </a>
             </div>

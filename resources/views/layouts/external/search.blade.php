@@ -1,7 +1,7 @@
-<div class="h-64 w-full bg-sky-300 flex content-center">
+<div class="sm:py-8 h-hit w-full bg-sky-300 flex content-center">
     <div class="h-fit flex justify-center items-center content-center p-2 md:p-0 self-center">
-        <div class="w-2/3 p-6 bg-sky-600 shadow-lg rounded-lg">
-            <div class="flex mb-3">
+        <div class="sm:w-2/3 w-full p-6 bg-sky-600 shadow-lg rounded-lg">
+            <div class="flex mb-3 text-center">
                 <h3 class="text-xl text-white font-bold mr-6">Busca tu vuelo</h3>
                 <!-- Code block starts -->
                 <div class="flex items-center">
@@ -22,8 +22,8 @@
                 </div>
                 <!-- Code block ends -->
             </div>
-            <div class="flex">
-                <div class="flex w-1/3 mr-3">
+            <div class="lg:flex grid grid-cols-4">
+                <div class="flex lg:w-1/3 sm:col-span-2 col-span-4 lg:mr-3 sm:mr-3 lg:mb-0 mb-2">
                     <div class="w-1/2">
                         <div class="grid grid-cols-3 rounded-l border-r-2 border-gray-600 bg-white items-center p-2 h-16">
                             <label id="label2" class="col-span-3 ml-2 text-sm leading-4">Origen</label>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex w-1/4  mr-3">
+                <div class="flex lg:w-1/4 sm:col-span-2 col-span-4 lg:mr-3 lg:mb-0 mb-2">
                     <div class="w-1/2">
                         <div class="grid grid-cols-3 rounded-l border-r-2 border-gray-600 bg-white items-center p-2 h-16">
                             <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Fecha ida</label>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex w-1/4">
+                <div class="flex lg:w-1/4 col-span-2 col-start-2">
                     <div class="w-full">
                         <div class="grid grid-cols-3 rounded-lg border-gray-600 bg-white items-center p-2 h-16">
                             <label id="label2" class="col-span-3 ml-2 text-sm leading-4">Pasajeros y clase</label>
@@ -63,8 +63,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex">
-                    <button class="mx-3 my-4 bg-orange-600 transition duration-150 ease-in-out hover:bg-orange-500 rounded-lg font-semibold text-white px-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-orange-500"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+                <div class="col-span-2 col-start-2 text-center">
+                    <button class=" mx-3 lg:my-4 mt-3 bg-orange-600 transition duration-150 ease-in-out hover:bg-orange-500 rounded-lg font-semibold text-white p-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-orange-500"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
                 </div>
             </div>
         </div>
