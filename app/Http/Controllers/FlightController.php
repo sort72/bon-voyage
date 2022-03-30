@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flight;
+use App\Models\Destination;
 use Illuminate\Http\Request;
 use App\Http\Requests\FlightRequest;
 
@@ -25,7 +26,8 @@ class FlightController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.flight.create');
+        $destinations = Destination::all();
+        return view('pages.dashboard.flight.create',compact('destinations'));
     }
 
     /**
@@ -69,7 +71,8 @@ class FlightController extends Controller
      */
     public function edit(Flight $flight)
     {
-        return view('pages.dashboard.flight.edit', compact('flight'));
+        $destinations = Destination::all();
+        return view('pages.dashboard.flight.edit', compact('flight','destinations'));
     }
 
     /**
