@@ -20,7 +20,10 @@ class CreateFlightsTable extends Migration
             $table->foreignId('origin_id')->constrained('destinations')->cascadeOnDelete();
             $table->boolean('is_international')->default(false);
             $table->timestamp('departure_time');
-            $table->timestamp('arrival_time')->nullable();
+            $table->timestamp('arrival_time');
+            $table->double('price_tourist');
+            $table->double('price_business');
+            $table->integer('discount')->default(0);
             $table->timestamps();
         });
     }

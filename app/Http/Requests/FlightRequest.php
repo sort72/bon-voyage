@@ -32,7 +32,10 @@ class FlightRequest extends FormRequest
             'origin_id' => ['required', 'exists:destinations,id'],
             'departure_time' => ['required', 'date', 'after:now'],
             'arrival_time' => ['required', 'date', 'after:departure_time'],
-            'is_international' => ['required', 'boolean']
+            'is_international' => ['required', 'boolean'],
+            'price_tourist' => ['numeric','integer','required','min:1','max:5000000'],
+            'price_business' => ['numeric','integer','required','min:1','max:5000000'],
+            'discount' => ['numeric','integer','required','min:1','max:100']
         ];
     }
 }
