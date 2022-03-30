@@ -45,7 +45,6 @@ class FlightController extends Controller
             'departure_time' => $request->departure_time,
             'arrival_time' => $request->arrival_time,
             'is_international' => $request->is_international
-            //'time_diff' => $request->time_diff
         ]);
 
         return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' creado con éxito');
