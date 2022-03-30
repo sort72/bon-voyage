@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\FlightController;
+use App\Http\Controllers\RootController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +20,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth', 'role:root,admin'])->as('dashboard.')->prefix('dashboard')->group(function() {
+
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('index');
+
+    Route::middleware(['role:root'])->group(function() {
+        Route::get('crear-administrador', [RootController::class, 'createAdmin'] )->name('create-admin');
+        Route::post('crear-administrador', [RootController::class, 'storeAdmin'] )->name('store-admin');
+    });
+
+    Route::middleware(['role:admin'])->group(function() {
+        Route::resource('destination', DestinationController::class);
+        Route::resource('flight', FlightController::class);
+        Route::resource('inbox', DestinationController::class);
+    });
+
+
+
+});
+
+
 
 require __DIR__.'/auth.php';

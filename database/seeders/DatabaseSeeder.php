@@ -13,6 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory()->create([
+            'role' => 'root',
+            'email' => 'root@bon-voyage.com'
+        ]);
+
+        \App\Models\User::factory()->create([
+            'role' => 'admin',
+            'email' => 'admin@bon-voyage.com'
+        ]);
+
+        $this->call(DestinationSeeder::class);
     }
 }
