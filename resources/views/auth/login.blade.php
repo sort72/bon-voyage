@@ -42,9 +42,12 @@
 
             <div class="flex items-center justify-center mt-4 px-6">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-cyan-500 hover:text-cyan-700" href="{{ route('password.request') }}">
+                    <a class="underline text-sm text-sky-500 hover:text-sky-700 mr-12" href="{{ route('password.request') }}">
                         {{ __('Olvidaste tu contraseña?') }}
                     </a>
+                @endif
+                @if (Route::has('register'))
+                    <a class="rounded text-sm text-sky-500 hover:text-sky-700 hover:bg-sky-200 p-2" href="{{ route('register') }}"> {{ __('Crear cuenta') }}</a>
                 @endif
             </div>
             <div class="flex items-center justify-center mt-4 px-6">

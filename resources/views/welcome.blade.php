@@ -4,9 +4,9 @@
 
 @section('content')
 @include('layouts.external.search')
-<div class="sm:flex mb-6">
+<div class="lg:flex mb-6">
     @include('layouts.external.carousel')
-    <div class="sm:w-1/2 w-full px-6 justify-center">
+    <div class="lg:w-1/2 w-full px-6 justify-center">
         <h3 class="text-xl text-gray-600 font-semibold mr-6 my-6">Ofertas que no te puedes perder</h3>
         <div class=" rounded overflow-hidden shadow-lg mt-6 ">
             <img class="w-full" src="https://cdn.pixabay.com/photo/2016/03/04/19/36/beach-1236581_1280.jpg" alt="Sunset in the mountains">

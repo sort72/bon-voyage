@@ -4,7 +4,7 @@
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
-          <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+          <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
             <!--
               Icon when menu is closed.
@@ -34,10 +34,10 @@
           </div>
         </div>
         <div class="h-12 w-1/3 self-start justify-center rounded-bl bg-gray-200 md:flex items-center hidden">
-            <button type="button" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <a href="{{ route('login') }}" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <i class="fa-solid fa-user mt-1 mr-2"></i>
                 <span class="">Iniciar sesión</span>
-            </button>
+            </a>
             <button type="button" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <i class="fa-solid fa-suitcase mt-1 mr-2"></i>
                 <span class="">Mis viajes</span>
@@ -78,21 +78,30 @@
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden" id="mobile-menu">
+    <div class="hidden mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Vuelos</a>
+        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Vuelos</a>
 
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Ofertas</a>
+        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Ofertas</a>
 
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Check-in</a>
+        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Check-in</a>
 
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Iniciar sesión</a>
+        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Iniciar sesión</a>
 
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mis viajes</a>
+        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mis viajes</a>
 
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Ayuda</a>
+        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Ayuda</a>
       </div>
     </div>
   </nav>
+
+  <script>
+    const btn = document.querySelector("button.mobile-menu-button");
+    const menu = document.querySelector(".mobile-menu");
+
+    btn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+    });
+</script>
 
