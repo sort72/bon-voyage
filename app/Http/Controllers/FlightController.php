@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Flight;
 use Illuminate\Http\Request;
+use App\Http\Requests\FlightRequest;
 
 class FlightController extends Controller
 {
@@ -32,10 +33,21 @@ class FlightController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * 
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(FlightRequest $request)
     {
-        //
+        Flight::create([
+            'name' => $request->name,
+            'destination_id' => $request->destination_id,
+            'origin_id' => $request->origin_id,
+            'departure_time' => $request->departure_time,
+            'arrival_time' => $request->arrival_time,
+            'is_international' => $request->is_international
+        ]);
+
+        return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' creado con éxito');
     }
 
     /**
@@ -67,9 +79,11 @@ class FlightController extends Controller
      * @param  \App\Models\Flight  $flight
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Flight $flight)
+    public function update(FlightRequest $request, Flight $flight)
     {
-        //
+        $destination->update($request->only(['name','destination_id','origin_id','departure_time','arrival_time','is_international']));
+
+        return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' modificado con éxito');
     }
 
     /**
