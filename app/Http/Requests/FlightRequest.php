@@ -33,7 +33,6 @@ class FlightRequest extends FormRequest
             'departure_time' => ['required', 'date', 'after:now'],
             'arrival_time' => ['required', 'date', 'after:departure_time'],
             'is_international' => ['required', 'boolean']
-            #'time_diff' => ['nullable', 'numeric']
         ];
     }
 }
