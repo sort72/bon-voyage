@@ -40,6 +40,9 @@ class FlightController extends Controller
      */
     public function store(FlightRequest $request)
     {
+        /*do
+            $codigo = Flight::count()+1
+        while (isset())*/
         Flight::create([
             'name' => $request->name,
             'destination_id' => $request->destination_id,

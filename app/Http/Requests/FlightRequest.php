@@ -23,8 +23,8 @@ class FlightRequest extends FormRequest
      */
     public function rules()
     {
-        $unique = Rule::unique('flights');
-        if(isset($this->flight->id)) $unique = $unique->ignore($this->flight->id);
+        /*$unique = Rule::unique('flights');
+        if(isset($this->flight->id)) $unique = $unique->ignore($this->flight->id);*/
 
         return [
             'name' => ['required', 'regex:/([A-Z]){2}([0-9]){3}/i', 'max:5', 'unique:flights'],
