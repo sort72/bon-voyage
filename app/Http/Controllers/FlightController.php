@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Flight;
 use Illuminate\Http\Request;
 use App\Http\Requests\FlightRequest;
+use Illuminate\Support\Str;
 
 class FlightController extends Controller
 {
@@ -33,13 +34,15 @@ class FlightController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     * 
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(FlightRequest $request)
     {
+        $name = Str::random(6);
+
         Flight::create([
-            'name' => $request->name,
+            'name' => $name,
             'destination_id' => $request->destination_id,
             'origin_id' => $request->origin_id,
             'departure_time' => $request->departure_time,
