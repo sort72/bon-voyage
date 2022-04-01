@@ -42,16 +42,18 @@ class FlightController extends Controller
      */
     public function store(FlightRequest $request)
     {
-        $name = Str::random(6);
+        $name = Str::upper(Str::random(6));
         $arrival_time = Carbon::parse($request->departure_time)->addMinutes($request->duration);
 
         Flight::create([
             'name' => $name,
+            'economy_class_price' => $request->economy_class_price,
+            'first_class_price' => $request->first_class_price,
             'destination_id' => $request->destination_id,
             'origin_id' => $request->origin_id,
             'departure_time' => $request->departure_time,
             'arrival_time' => $arrival_time,
-            
+
             // 'is_international' => $request->is_international
         ]);
 

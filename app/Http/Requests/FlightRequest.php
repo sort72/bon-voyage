@@ -32,9 +32,11 @@ class FlightRequest extends FormRequest
             'destination_id' => ['required', 'exists:destinations,id', 'different:origin_id'],
             'origin_id' => ['required', 'exists:destinations,id', 'different:destination_id'],
             'departure_time' => ['required', 'date', 'after:now'],
-            'flight_duration' => ['required', 'min:0', 'max:10000'],
+            'duration' => ['required', 'min:0', 'max:10000'],
             // 'arrival_time' => ['required', 'date', 'after:departure_time'],
-            'is_international' => ['required', 'boolean']
+            // 'is_international' => ['required', 'boolean'],
+            'economy_class_price' => ['required', 'numeric', 'min:0', 'max:9999999999', 'lt:first_class_price'],
+            'first_class_price' => ['required', 'numeric', 'min:0', 'max:9999999999', 'gt:economy_class_price'],
         ];
     }
 }
