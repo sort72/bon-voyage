@@ -26,7 +26,7 @@ class FlightController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.flight.create');
+        return view('pages.dashboard.flight.create', ['min_flight_date' => date('Y-m-d')]);
     }
 
     /**
