@@ -3954,6 +3954,10 @@ textarea.form-control.is-invalid {
   margin-left: 0.75rem;
   margin-right: 0.75rem;
 }
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -4750,6 +4754,9 @@ textarea.form-control.is-invalid {
 }
 .uppercase {
   text-transform: uppercase;
+}
+.italic {
+  font-style: italic;
 }
 .leading-5 {
   line-height: 1.25rem;
