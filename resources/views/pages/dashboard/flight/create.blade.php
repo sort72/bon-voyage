@@ -18,18 +18,9 @@
             <!-- Fecha de vuelo -->
             <div class="col-span-2">
               <label class="font-semibold" for="flight_date">Fecha de vuelo</label>
-              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="flight_date" name="flight_date" type="date" value="{{old('flight_date')}}" />
+              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="flight_date" name="flight_date" type="datetime-local" value="{{old('flight_date')}}" />
               @error('flight_date')
               <span class="text-red-500 font-semibold">{{$errors->first('flight_date')}}</span>
-              @enderror
-            </div>
-
-            <!-- Hora salida -->
-            <div>
-              <label class="font-semibold" for="departure_time">Hora salida</label>
-              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="departure_time" name="departure_time" placeholder="Hora de salida" required type="time" value="{{old('departure_time')}}" />
-              @error('departure_time')
-              <span class="text-red-500 font-semibold">{{$errors->first('departure_time')}}</span>
               @enderror
             </div>
 
@@ -74,7 +65,14 @@
 
             <!-- Precio -->
             <div>
-              <label class="font-semibold" for="flight_price">Precio</label>
+              <label class="font-semibold" for="flight_price">Precio clase económica</label>
+              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="flight_price" name="flight_price" min="0" placeholder="Precio" required step="1" type="number" value="{{old('flight_price')}}" />
+              @error('flight_price')
+              <span class="text-red-500 font-semibold">{{$errors->first('flight_price')}}</span>
+              @enderror
+            </div>
+            <div>
+              <label class="font-semibold" for="first_class_price">Precio primera clase</label>
               <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="flight_price" name="flight_price" min="0" placeholder="Precio" required step="1" type="number" value="{{old('flight_price')}}" />
               @error('flight_price')
               <span class="text-red-500 font-semibold">{{$errors->first('flight_price')}}</span>
@@ -91,5 +89,10 @@
     </div>
   </div>
 </div>
+
+<script>
+    // flatpickr("#flight_date");
+</script>
+
 
 @endsection

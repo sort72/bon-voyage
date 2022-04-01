@@ -706,42 +706,6 @@ select {
   -webkit-text-shadow: 0 0 0 #212529;
   text-shadow: 0 0 0 #212529;
 }
-.form-check-input:checked {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-}
-.form-check-input:checked[type=checkbox] {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
-}
-.form-check-input:checked[type=radio] {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
-}
-.form-check-input[type=checkbox]:indeterminate {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
-}
-.form-check-input:disabled {
-  pointer-events: none;
-  filter: none;
-  opacity: 0.5;
-}
-.form-switch {
-  padding-left: 2.5em;
-}
-.form-switch .form-check-input {
-  margin-top: 0.1rem;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-  background-position: left center;
-  transition: background-position 0.15s ease-in-out;
-}
-.form-switch .form-check-input:focus {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-}
-.form-switch .form-check-input:checked {
-  background-position: right center;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-}
 .btn-check[disabled] + .btn {
   pointer-events: none;
   filter: none;
@@ -838,33 +802,6 @@ select {
   border-color: #198754;
   box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
 }
-.was-validated .form-check-input:valid {
-  border-color: #198754;
-}
-.form-check-input.is-valid {
-  border-color: #198754;
-}
-.was-validated .form-check-input:valid:checked {
-  background-color: #198754;
-}
-.form-check-input.is-valid:checked {
-  background-color: #198754;
-}
-.was-validated .form-check-input:valid:focus {
-  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
-}
-.form-check-input.is-valid:focus {
-  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
-}
-.was-validated .form-check-input:valid ~ .form-check-label {
-  color: #198754;
-}
-.form-check-input.is-valid ~ .form-check-label {
-  color: #198754;
-}
-.form-check-inline .form-check-input ~ .valid-feedback {
-  margin-left: 0.5em;
-}
 .was-validated .input-group .form-select:valid {
   z-index: 1;
 }
@@ -937,32 +874,17 @@ textarea.form-control.is-invalid {
   border-color: #dc3545;
   box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
 }
-.was-validated .form-check-input:invalid {
-  border-color: #dc3545;
-}
 .form-check-input.is-invalid {
   border-color: #dc3545;
-}
-.was-validated .form-check-input:invalid:checked {
-  background-color: #dc3545;
 }
 .form-check-input.is-invalid:checked {
   background-color: #dc3545;
 }
-.was-validated .form-check-input:invalid:focus {
-  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
-}
 .form-check-input.is-invalid:focus {
   box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
 }
-.was-validated .form-check-input:invalid ~ .form-check-label {
-  color: #dc3545;
-}
 .form-check-input.is-invalid ~ .form-check-label {
   color: #dc3545;
-}
-.form-check-inline .form-check-input ~ .invalid-feedback {
-  margin-left: 0.5em;
 }
 .input-group .form-control.is-invalid {
   z-index: 2;
@@ -4360,9 +4282,6 @@ textarea.form-control.is-invalid {
 .-mb-0 {
   margin-bottom: -0px;
 }
-.-ml-10 {
-  margin-left: -2.5rem;
-}
 .-mr-2 {
   margin-right: -0.5rem;
 }
@@ -4913,9 +4832,6 @@ textarea.form-control.is-invalid {
 .bg-indigo-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(238 242 255 / var(--tw-bg-opacity));
-}
-.bg-contain {
-  background-size: contain;
 }
 .bg-no-repeat {
   background-repeat: no-repeat;

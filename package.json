@@ -21,6 +21,7 @@
         "tailwindcss": "^3.0.18"
     },
     "dependencies": {
+        "flatpickr": "^4.6.11",
         "tw-elements": "^1.0.0-alpha12"
     }
 }
