@@ -133,6 +133,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'birth_date' => [
+            'before' => 'El usuario debe ser mayor de edad',
+            'after' => 'La edad máxima permitida es de 99 años'
+        ],
     ],
 
     /*
@@ -146,6 +150,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'birth_date' => 'fecha de nacimiento',
+    ],
 
 ];

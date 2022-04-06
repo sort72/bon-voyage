@@ -4,6 +4,7 @@
 
 @section('content')
 
+<!-- //TODO: Añadir la zona horaria -->
 <div class="py-2">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="overflow-hidden">
@@ -17,7 +18,7 @@
                         <x-label>Nombre</x-label>
                         <input placeholder="Nombre" value="{{old('name')}}" name="name" class="py-2 px-4 rounded shadow border border-gray-300 outline-1 outline-gray-900 bg-gray-50" required />
                         @error('name')
-                            <span class="text-red-500 font-semibold">{{$errors->first('name')}}</span>
+                        <span class="text-red-500 font-semibold">{{$errors->first('name')}}</span>
                         @enderror
                         <button type="submit" class="my-2 w-24 text-white py-2 px-5 rounded bg-gray-900 hover:bg-gray-800">Crear</button>
 
