@@ -13,10 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Scripts -->
-    <script src="./TW-ELEMENTS-PATH/dist/js/index.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
 </head>
@@ -24,7 +20,11 @@
 <body class="bg-gray-100">
 
     <div id="app">
-        @include('layouts.external.navigation')
+        @if(auth()->user())
+            @include('layouts.external.clientNavigation')
+        @else
+            @include('layouts.external.externalNavigation')
+        @endif
         <section class="section main-section">
             @yield('content')
         </section>

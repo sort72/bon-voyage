@@ -18,6 +18,7 @@ class CreateDestinationsTable extends Migration
             $table->string('name');
             $table->string('timezone')->default('UTC');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,5 +30,6 @@ class CreateDestinationsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('destinations');
+        $table->dropSoftDeletes();
     }
 }
