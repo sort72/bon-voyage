@@ -18,7 +18,7 @@
             <!-- Fecha de vuelo -->
             <div class="col-span-2">
               <label class="font-semibold" for="departure_time">Fecha de vuelo</label>
-              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="departure_time" name="departure_time" type="datetime-local" value="{{old('departure_time')}}" />
+              <input class="mt-1 w-full border border-black-800 rounded-md p-1 flatpickr-datetime" id="departure_time" name="departure_time" type="text" value="{{old('departure_time')}}" />
               @error('departure_time')
               <span class="text-red-500 font-semibold">{{$errors->first('departure_time')}}</span>
               @enderror
@@ -89,10 +89,6 @@
     </div>
   </div>
 </div>
-
-<script>
-    // flatpickr("#flight_date");
-</script>
 
 
 @endsection
