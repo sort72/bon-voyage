@@ -24,7 +24,7 @@
 <body class="bg-gray-100">
 
     <div id="app">
-        @include('layouts.external.navigation')
+        @include('layouts.external.externalNavigation')
         <section class="section main-section">
             @yield('content')
         </section>
