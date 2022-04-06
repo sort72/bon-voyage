@@ -11,16 +11,17 @@
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.4.0",
-        "alpinejs": "^3.4.2",
-        "autoprefixer": "^10.4.2",
+        "alpinejs": "^3.9.5",
+        "autoprefixer": "^10.4.4",
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.4.6",
-        "postcss-import": "^14.0.2",
+        "postcss": "^8.4.12",
+        "postcss-import": "^14.1.0",
         "tailwindcss": "^3.0.18"
     },
     "dependencies": {
+        "flatpickr": "^4.6.11",
         "tw-elements": "^1.0.0-alpha12"
     }
 }

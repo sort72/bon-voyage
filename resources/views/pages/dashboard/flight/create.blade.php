@@ -8,7 +8,7 @@
   <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <div class="overflow-hidden">
       <div class="p-5 border-b bg-white max-w-lg mx-auto border-gray-200 sm:rounded-lg shadow-md">
-        <form method="GET" action="#">
+        <form method="POST" action="{{route('dashboard.flight.store')}}">
           @csrf
           <div class="grid grid-cols-2 gap-6">
             <div class="col-span-2 justify-self-center">
@@ -17,17 +17,8 @@
 
             <!-- Fecha de vuelo -->
             <div class="col-span-2">
-              <label class="font-semibold" for="flight_date">Fecha de vuelo</label>
-              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="flight_date" min={{$min_flight_date}} name="flight_date" type="date" value="{{old('flight_date')}}" />
-              @error('flight_date')
-              <span class="text-red-500 font-semibold">{{$errors->first('flight_date')}}</span>
-              @enderror
-            </div>
-
-            <!-- Hora salida -->
-            <div>
-              <label class="font-semibold" for="departure_time">Hora salida</label>
-              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="departure_time" name="departure_time" placeholder="Hora de salida" required type="time" value="{{old('departure_time')}}" />
+              <label class="font-semibold" for="departure_time">Fecha de vuelo</label>
+              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="departure_time" name="departure_time" type="datetime-local" value="{{old('departure_time')}}" />
               @error('departure_time')
               <span class="text-red-500 font-semibold">{{$errors->first('departure_time')}}</span>
               @enderror
@@ -35,10 +26,10 @@
 
             <!-- Tiempo o duración -->
             <div>
-              <label class="font-semibold" for="flight_duration">Tiempo / Duración</label>
-              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="flight_duration" min="0" name="flight_duration" placeholder="Duración" required step="1" type="number" value="{{old('flight_duration')}}" />
-              @error('flight_duration')
-              <span class="text-red-500 font-semibold">{{$errors->first('flight_duration')}}</span>
+              <label class="font-semibold" for="duration">Duración del vuelo</label>
+              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="duration" min="0" name="duration" placeholder="Duración en minutos" required step="1" type="number" value="{{old('duration')}}" />
+              @error('duration')
+              <span class="text-red-500 font-semibold">{{$errors->first('duration')}}</span>
               @enderror
             </div>
 
@@ -46,7 +37,12 @@
             <!-- //TODO: Reviar como mandar el id de origen o renombrar el campo-->
             <div>
               <label class="font-semibold" for="origin_id">Origen</label>
-              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="origin_id" name="origin_id" placeholder="Origen" required type="text" value="{{old('origin_id')}}" />
+              <select class=" mt-1 w-full border border-black-800 rounded-md p-1" name="origin_id">
+                <option val="">Seleccione...</option>
+                @foreach ($destinations as $destination)
+                    <option @if(old('origin_id') == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->name}}</option>
+                @endforeach
+              </select>
               @error('origin_id')
               <span class="text-red-500 font-semibold">{{$errors->first('origin_id')}}</span>
               @enderror
@@ -56,7 +52,12 @@
             <!-- //TODO: Reviar como mandar el id de destino o renombrar el campo-->
             <div>
               <label class="font-semibold" for="destination_id">Destino</label>
-              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="destination_id" name="destination_id" placeholder="Destino" required type="text" value="{{old('destination_id')}}" />
+              <select class=" mt-1 w-full border border-black-800 rounded-md p-1" name="destination_id">
+                <option val="">Seleccione...</option>
+                @foreach ($destinations as $destination)
+                    <option @if(old('destination_id') == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->name}}</option>
+                @endforeach
+              </select>
               @error('destination_id')
               <span class="text-red-500 font-semibold">{{$errors->first('destination_id')}}</span>
               @enderror
@@ -64,27 +65,17 @@
 
             <!-- Precio -->
             <div>
-              <label class="font-semibold" for="flight_price">Precio</label>
-              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="flight_price" name="flight_price" min="0" placeholder="Precio" required step="1" type="number" value="{{old('flight_price')}}" />
-              @error('flight_price')
-              <span class="text-red-500 font-semibold">{{$errors->first('flight_price')}}</span>
+              <label class="font-semibold" for="economy_class_price">Precio clase económica</label>
+              <input class="mt-1 w-full border border-black-800 rounded-md p-1" name="economy_class_price" min="0" placeholder="Precio" required step="1" type="number" value="{{old('economy_class_price')}}" />
+              @error('economy_class_price')
+                <span class="text-red-500 font-semibold">{{$errors->first('economy_class_price')}}</span>
               @enderror
             </div>
-
-            <!-- Es internacional -->
             <div>
-              <div class="form-check form-switch mt-8">
-                <label class="form-check-label inline-block font-semibold text-sm" for="is_international">¿Es un vuelo internaiconal?</label>
-                <input class="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-white bg-no-repeat bg-contain focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" id="is_international">
-              </div>
-            </div>
-
-            <!-- Hora llegada-->
-            <div>
-              <label class="font-semibold" for="arrive_time">Hora llegada</label>
-              <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="arrive_time" name="arrive_time" placeholder="Hora de llegada" required type="time" value="{{old('arrive_time')}}" />
-              @error('arrive_time')
-              <span class="text-red-500 font-semibold">{{$errors->first('arrive_time')}}</span>
+              <label class="font-semibold" for="first_class_price">Precio primera clase</label>
+              <input class="mt-1 w-full border border-black-800 rounded-md p-1" name="first_class_price" min="0" placeholder="Precio" required step="1" type="number" value="{{old('first_class_price')}}" />
+              @error('first_class_price')
+                <span class="text-red-500 font-semibold">{{$errors->first('first_class_price')}}</span>
               @enderror
             </div>
 
@@ -98,5 +89,10 @@
     </div>
   </div>
 </div>
+
+<script>
+    // flatpickr("#flight_date");
+</script>
+
 
 @endsection

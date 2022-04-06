@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Flight;
 use Illuminate\Http\Request;
 use App\Http\Requests\FlightRequest;
+use App\Models\Destination;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class FlightController extends Controller
 {
@@ -25,7 +28,8 @@ class FlightController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.flight.create', ['min_flight_date' => date('Y-m-d')]);
+        $destinations = Destination::all();
+        return view('pages.dashboard.flight.create', compact('destinations'));
     }
 
     /**
@@ -33,18 +37,24 @@ class FlightController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     * 
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(FlightRequest $request)
     {
+        $name = Str::upper(Str::random(6));
+        $arrival_time = Carbon::parse($request->departure_time)->addMinutes($request->duration);
+
         Flight::create([
-            'name' => $request->name,
+            'name' => $name,
+            'economy_class_price' => $request->economy_class_price,
+            'first_class_price' => $request->first_class_price,
             'destination_id' => $request->destination_id,
             'origin_id' => $request->origin_id,
             'departure_time' => $request->departure_time,
-            'arrival_time' => $request->arrival_time,
-            'is_international' => $request->is_international
+            'arrival_time' => $arrival_time,
+
+            // 'is_international' => $request->is_international
         ]);
 
         return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' creado con éxito');
@@ -81,7 +91,7 @@ class FlightController extends Controller
      */
     public function update(FlightRequest $request, Flight $flight)
     {
-        $destination->update($request->only(['name','destination_id','origin_id','departure_time','arrival_time','is_international']));
+        $flight->update($request->only(['name','destination_id','origin_id','departure_time','arrival_time','is_international']));
 
         return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' modificado con éxito');
     }
