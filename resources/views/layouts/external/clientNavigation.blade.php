@@ -36,7 +36,7 @@
         <div class="h-12 w-1/3 self-start justify-center rounded-bl bg-gray-200 md:flex items-center hidden">
             <a href="{{ route('login') }}" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <i class="fa-solid fa-user mt-1 mr-2"></i>
-                <span class="">Iniciar sesión</span>
+                <span class="">Mi perfil</span>
             </a>
             <button type="button" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <i class="fa-solid fa-suitcase mt-1 mr-2"></i>
@@ -70,6 +70,34 @@
                 <div class="text-center">
                     <i class="block fa-solid fa-suitcase"></i>
                     <span class="block w-full">Check-in</span>
+                </div>
+            </a>
+
+            <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <div class="text-center">
+                    <i class="block fa-solid fa-credit-card"></i>
+                    <span class="block w-full">Mis tarjetas</span>
+                </div>
+            </a>
+
+            <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <div class="text-center">
+                    <i class="block fa-solid fa-couch"></i>
+                    <span class="block w-full">Mis reservas</span>
+                </div>
+            </a>
+
+            <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <div class="text-center">
+                    <i class="block fa-solid fa-message"></i>
+                    <span class="block w-full">Mi muro</span>
+                </div>
+            </a>
+
+            <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <div class="text-center">
+                    <i class="block fa-solid fa-cart-plus"></i>
+                    <span class="block w-full">Carrito de compras</span>
                 </div>
             </a>
           </div>

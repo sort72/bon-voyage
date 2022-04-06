@@ -17,6 +17,7 @@ class CreateDestinationsTable extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,5 +29,6 @@ class CreateDestinationsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('destinations');
+        $table->dropSoftDeletes();
     }
 }
