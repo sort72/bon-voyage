@@ -87,7 +87,7 @@ class FlightController extends Controller
      */
     public function update(FlightRequest $request, Flight $flight)
     {
-        $destination->update($request->only(['name','destination_id','origin_id','departure_time','arrival_time','is_international',
+        $flight->update($request->only(['name','destination_id','origin_id','departure_time','arrival_time','is_international',
         'price_tourist','price_business','discount']));
 
         return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' modificado con éxito');
