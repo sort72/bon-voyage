@@ -31,7 +31,9 @@ class UserRequest extends FormRequest
             'birth_date' => ['required', 'date'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'gender' => ['required']
+            'gender' => ['required'],
+            'birth_place' => ['required', 'exists:cities,id'],
+            'address' => ['required', 'string', 'max:255']
         ];
     }
 }

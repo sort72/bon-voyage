@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flight;
+use App\Models\Destination;
 use Illuminate\Http\Request;
 use App\Http\Requests\FlightRequest;
 
@@ -25,7 +26,8 @@ class FlightController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.flight.create', ['min_flight_date' => date('Y-m-d')]);
+        $destinations = Destination::all();
+        return view('pages.dashboard.flight.create',compact('destinations'));
     }
 
     /**
@@ -44,7 +46,10 @@ class FlightController extends Controller
             'origin_id' => $request->origin_id,
             'departure_time' => $request->departure_time,
             'arrival_time' => $request->arrival_time,
-            'is_international' => $request->is_international
+            'is_international' => $request->is_international,
+            'price_tourist' => $request->price_tourist,
+            'price_business' => $request->price_vip,
+            'discount' => $request->discount 
         ]);
 
         return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' creado con éxito');
@@ -69,7 +74,8 @@ class FlightController extends Controller
      */
     public function edit(Flight $flight)
     {
-        return view('pages.dashboard.flight.edit', compact('flight'));
+        $destinations = Destination::all();
+        return view('pages.dashboard.flight.edit', compact('flight','destinations'));
     }
 
     /**
@@ -81,7 +87,8 @@ class FlightController extends Controller
      */
     public function update(FlightRequest $request, Flight $flight)
     {
-        $destination->update($request->only(['name','destination_id','origin_id','departure_time','arrival_time','is_international']));
+        $destination->update($request->only(['name','destination_id','origin_id','departure_time','arrival_time','is_international',
+        'price_tourist','price_business','discount']));
 
         return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' modificado con éxito');
     }
