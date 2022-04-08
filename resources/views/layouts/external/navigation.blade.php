@@ -36,7 +36,7 @@
         <div class="h-12 w-1/3 self-start justify-center rounded-bl bg-gray-200 md:flex items-center hidden">
             <a href="{{ route('login') }}" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <i class="fa-solid fa-user mt-1 mr-2"></i>
-                <span class="">Iniciar sesión</span>
+                <span class="">@if(auth()->user()) Mi perfil @else Iniciar sesión @endif</span>
             </a>
             <button type="button" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <i class="fa-solid fa-suitcase mt-1 mr-2"></i>
@@ -72,6 +72,35 @@
                     <span class="block w-full">Check-in</span>
                 </div>
             </a>
+            @if(auth()->user())
+                <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                    <div class="text-center">
+                        <i class="block fa-solid fa-credit-card"></i>
+                        <span class="block w-full">Mis tarjetas</span>
+                    </div>
+                </a>
+
+                <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                    <div class="text-center">
+                        <i class="block fa-solid fa-couch"></i>
+                        <span class="block w-full">Mis reservas</span>
+                    </div>
+                </a>
+
+                <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                    <div class="text-center">
+                        <i class="block fa-solid fa-message"></i>
+                        <span class="block w-full">Mi muro</span>
+                    </div>
+                </a>
+
+                <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                    <div class="text-center">
+                        <i class="block fa-solid fa-cart-plus"></i>
+                        <span class="block w-full">Carrito de compras</span>
+                    </div>
+                </a>
+            @endif
           </div>
         </div>
       </div>
@@ -86,11 +115,26 @@
         <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Ofertas</a>
 
         <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Check-in</a>
+        @if(auth()->user())
 
-        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Iniciar sesión</a>
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Mis tarjetas</a>
 
-        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mis viajes</a>
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mis reservas</a>
 
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mi muro</a>
+
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Carrito de compras</a>
+
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mi perfil</a>
+
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mis viajes</a>
+        @else
+
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Iniciar sesión</a>
+
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mis viajes</a>
+
+        @endif
         <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Ayuda</a>
       </div>
     </div>
