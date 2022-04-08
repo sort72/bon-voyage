@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(DestinationSeeder::class);
+        $this->call(LocationDatabaseSeeder::class);
     }
 }
