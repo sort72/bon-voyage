@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('gender')->default('male');
             $table->string('profile_picture')->nullable();
+            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

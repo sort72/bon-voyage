@@ -28,7 +28,7 @@ class DestinationRequest extends FormRequest
         if(isset($this->destination->id)) $unique = $unique->ignore($this->destination->id);
 
         return [
-            'name' => ['required', 'min:4', $unique], 
+            'city_id' => ['required', 'exists:cities,id'], 
             'timezone' => ['required', 'string']
         ];
     }
