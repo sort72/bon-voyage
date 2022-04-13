@@ -28,5 +28,7 @@ class RootController extends Controller
             'gender' => $request->gender,
             'profile_picture' => '',
         ]);
+
+        return redirect()->route('dashboard.index')->with('success', 'Administrador ' . $request->name . ' creado con éxito');
     }
 }

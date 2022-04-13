@@ -6,6 +6,9 @@ use App\Models\Flight;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 use App\Http\Requests\FlightRequest;
+use App\Models\Destination;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class FlightController extends Controller
 {
@@ -35,17 +38,22 @@ class FlightController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     * 
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(FlightRequest $request)
     {
+        $name = Str::upper(Str::random(6));
+        $arrival_time = Carbon::parse($request->departure_time)->addMinutes($request->duration);
+
         Flight::create([
-            'name' => $request->name,
+            'name' => $name,
+            'economy_class_price' => $request->economy_class_price,
+            'first_class_price' => $request->first_class_price,
             'destination_id' => $request->destination_id,
             'origin_id' => $request->origin_id,
             'departure_time' => $request->departure_time,
-            'arrival_time' => $request->arrival_time,
+            'arrival_time' => $arrival_time,
             'is_international' => $request->is_international,
             'price_tourist' => $request->price_tourist,
             'price_business' => $request->price_vip,

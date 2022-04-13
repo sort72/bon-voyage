@@ -18,6 +18,7 @@ class CreateDestinationsTable extends Migration
             $table->foreignId('city_id')->constrained()->cascadeOnDelete();
             $table->string('timezone')->default('UTC');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,5 +30,6 @@ class CreateDestinationsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('destinations');
+        $table->dropSoftDeletes();
     }
 }

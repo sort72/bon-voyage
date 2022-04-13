@@ -9,6 +9,8 @@ class Flight extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function destination()
     {
         return $this->belongsTo(Destination::class, 'destination_id');

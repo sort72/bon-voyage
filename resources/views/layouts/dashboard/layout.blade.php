@@ -9,10 +9,10 @@
     <title>@yield('header') - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Tailwind is included -->
-    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/dashboard.css') }}">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
     @livewireStyles
 
@@ -50,6 +50,7 @@
     </script>
 
     @stack('scripts')
+
 
 
 </body>

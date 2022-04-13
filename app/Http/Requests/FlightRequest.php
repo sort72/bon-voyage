@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class FlightRequest extends FormRequest
 {
@@ -27,12 +28,15 @@ class FlightRequest extends FormRequest
         if(isset($this->flight->id)) $unique = $unique->ignore($this->flight->id);
 
         return [
-            'name' => ['required', 'regex:/([A-Z]){2}([0-9]){3}/i', 'max:5', 'unique:flights'],
-            'destination_id' => ['required', 'exists:destinations,id'],
-            'origin_id' => ['required', 'exists:destinations,id'],
+            // 'name' => ['required', 'regex:/([A-Z]){2}([0-9]){3}/i', 'max:5', 'unique:flights'],
+            'destination_id' => ['required', 'exists:destinations,id', 'different:origin_id'],
+            'origin_id' => ['required', 'exists:destinations,id', 'different:destination_id'],
             'departure_time' => ['required', 'date', 'after:now'],
-            'arrival_time' => ['required', 'date', 'after:departure_time'],
-            'is_international' => ['required', 'boolean']
+            'duration' => ['required', 'min:0', 'max:10000'],
+            // 'arrival_time' => ['required', 'date', 'after:departure_time'],
+            // 'is_international' => ['required', 'boolean'],
+            'economy_class_price' => ['required', 'numeric', 'min:0', 'max:9999999999', 'lt:first_class_price'],
+            'first_class_price' => ['required', 'numeric', 'min:0', 'max:9999999999', 'gt:economy_class_price'],
         ];
     }
 }
