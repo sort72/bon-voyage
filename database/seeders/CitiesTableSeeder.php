@@ -13,12 +13,10 @@ class CitiesTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $citiesTable = config('location.cities_table', 'cities');
-        
-         Schema::disableForeignKeyConstraints();
-        DB::table($citiesTable)->truncate();
-         Schema::enableForeignKeyConstraints();
+    {        
+        //  Schema::disableForeignKeyConstraints();
+        // DB::table('cities')->truncate();
+        //  Schema::enableForeignKeyConstraints();
 
         $cities = array(
             array('name' => "Bombuflat",'state_id' => 1),
@@ -6024,7 +6022,7 @@ class CitiesTableSeeder extends Seeder
 
         );
 
-        DB::table($citiesTable)->insert($cities);
+        DB::table('cities')->insert($cities);
 
         $cities2 = array(
             array('name' => "Qal'eh-ye Zal",'state_id' => 67),
@@ -12030,7 +12028,7 @@ class CitiesTableSeeder extends Seeder
 
         );
 
-        DB::table($citiesTable)->insert($cities2);
+        DB::table('cities')->insert($cities2);
 
         $cities3 = array(
             array('name' => "Huanren",'state_id' => 755),
@@ -13554,6 +13552,20 @@ class CitiesTableSeeder extends Seeder
             array('name' => "Venadillo",'state_id' => 804),
             array('name' => "Villahermosa",'state_id' => 804),
             array('name' => "Villarrica",'state_id' => 804),
+            array('name' => "Argelia",'state_id' => 805),
+            array('name' => "Bolivar",'state_id' => 805),
+            array('name' => "Buenaventura",'state_id' => 805),
+            array('name' => "Buga",'state_id' => 805),
+            array('name' => "Bugalagrande",'state_id' => 805),
+            array('name' => "Caicedonia",'state_id' => 805),
+            array('name' => "Cali",'state_id' => 805),
+            array('name' => "Cartago",'state_id' => 805),
+            array('name' => "La Unión",'state_id' => 805),
+            array('name' => "La Victoria",'state_id' => 805),
+            array('name' => "Obando",'state_id' => 805),
+            array('name' => "Yotoco",'state_id' => 805),
+            array('name' => "Yumbo",'state_id' => 805),
+            array('name' => "Zarzal",'state_id' => 805),
             array('name' => "Acaricuara",'state_id' => 806),
             array('name' => "Mitu",'state_id' => 806),
             array('name' => "Papunaua",'state_id' => 806),
@@ -18036,7 +18048,7 @@ class CitiesTableSeeder extends Seeder
 
         );
 
-        DB::table($citiesTable)->insert($cities3);
+        DB::table('cities')->insert($cities3);
 
         $cities4 = array(
             array('name' => "Saint-Gratien",'state_id' => 1305),
@@ -24042,7 +24054,7 @@ class CitiesTableSeeder extends Seeder
 
         );
 
-        DB::table($citiesTable)->insert($cities4);
+        DB::table('cities')->insert($cities4);
 
         $cities5 = array(
 
@@ -30049,7 +30061,7 @@ class CitiesTableSeeder extends Seeder
 
         );
 
-        DB::table($citiesTable)->insert($cities5);
+        DB::table('cities')->insert($cities5);
 
         $cities6 = array(
 
@@ -36077,7 +36089,7 @@ class CitiesTableSeeder extends Seeder
 
         );
 
-        DB::table($citiesTable)->insert($cities6);
+        DB::table('cities')->insert($cities6);
 
         $cities7 = array(
 
@@ -42084,7 +42096,7 @@ class CitiesTableSeeder extends Seeder
 
         );
 
-        DB::table($citiesTable)->insert($cities7);
+        DB::table('cities')->insert($cities7);
 
         $cities8 = array(
 
@@ -48404,6 +48416,6 @@ class CitiesTableSeeder extends Seeder
             array('name' => "Summersville",'state_id' => 3976),
         );
 
-        DB::table($citiesTable)->insert($cities);
+        DB::table('cities')->insert($cities8);
     }
 }

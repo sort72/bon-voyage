@@ -14,18 +14,12 @@ class CreateCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->getTableName(), function (Blueprint $table) {
-            $table->increments('id')->index();
+        Schema::create('countries', function (Blueprint $table) {
+            $table->id();
             $table->string('code');
             $table->string('name');
             $table->integer('phonecode');
-            $table->timestamps();
         });
-    }
-
-    protected function getTableName()
-    {
-        return Config::get('location.countries_table');
     }
 
     /**
@@ -35,6 +29,6 @@ class CreateCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($this->getTableName());
+        Schema::dropIfExists('countries');
     }
 }

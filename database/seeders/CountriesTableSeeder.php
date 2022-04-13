@@ -14,7 +14,6 @@ class CountriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $countriesTable = config('location.countries_table', 'countries');
         $countries = array(
             array('id' => 1,'code' => 'AF' ,'name' => "Afghanistan",'phonecode' => 93),
             array('id' => 2,'code' => 'AL' ,'name' => "Albania",'phonecode' => 355),
@@ -265,9 +264,9 @@ class CountriesTableSeeder extends Seeder
         );
 
         // Fix for issue #29 https://github.com/ichtrojan/laravel-location/issues/29
-        Schema::disableForeignKeyConstraints();
-        DB::table($countriesTable)->truncate();
-        Schema::enableForeignKeyConstraints();
-        DB::table($countriesTable)->insert($countries);
+        // Schema::disableForeignKeyConstraints();
+        // DB::table($countriesTable)->truncate();
+        // Schema::enableForeignKeyConstraints();
+        DB::table('countries')->insert($countries);
     }
 }

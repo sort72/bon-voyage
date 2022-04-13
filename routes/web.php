@@ -41,7 +41,7 @@ Route::middleware(['auth', 'role:root,admin'])->as('dashboard.')->prefix('dashbo
 
 });
 
-Route::group(['prefix' => Config::get('location.routes.prefix'), 'namespace' => 'App\Http\Controllers', 'middleware' => [Config::get('location.routes.middleware')]], function () {
+Route::group(['prefix' => 'locations', 'namespace' => 'App\Http\Controllers', 'middleware' => ['web']], function () {
     # Get all Countries
     Route::get('countries', 'LocationController@getCountries');
 

@@ -14,8 +14,6 @@ class StatesTableSeeder extends Seeder
      */
     public function run()
     {
-        $statesTable  = config('location.states_table', 'states');
-
         $states = array(
             array('name' => "Andaman and Nicobar Islands",'country_id' => 101),
             array('name' => "Andhra Pradesh",'country_id' => 101),
@@ -4139,9 +4137,9 @@ class StatesTableSeeder extends Seeder
             array('name' => "Matabeleland South",'country_id' => 246),
             array('name' => "Midlands",'country_id' => 246)
         );
-        Schema::disableForeignKeyConstraints();
-        DB::table($statesTable)->truncate();
-        Schema::enableForeignKeyConstraints();
-        DB::table($statesTable)->insert($states);
+        // Schema::disableForeignKeyConstraints();
+        // DB::table($statesTable)->truncate();
+        // Schema::enableForeignKeyConstraints();
+        DB::table('states')->insert($states);
     }
 }

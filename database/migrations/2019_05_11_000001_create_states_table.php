@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCitiesTable extends Migration
+class CreateStatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,17 +14,11 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->getTableName(), function (Blueprint $table) {
-            $table->increments('id')->index();
+        Schema::create('states', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('country_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->integer('state_id');
-            $table->timestamps();
         });
-    }
-
-    protected function getTableName()
-    {
-        return Config::get('location.cities_table');
     }
 
     /**
@@ -34,6 +28,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($this->getTableName());
+        Schema::dropIfExists('states');
     }
 }

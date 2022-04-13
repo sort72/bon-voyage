@@ -30,6 +30,5 @@ class CreateDestinationsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('destinations');
-        $table->dropSoftDeletes();
     }
 }

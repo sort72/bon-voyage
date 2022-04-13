@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@bon-voyage.com'
         ]);
 
-        $this->call(DestinationSeeder::class);
         $this->call(LocationDatabaseSeeder::class);
+        $this->call(DestinationSeeder::class);
     }
 }
