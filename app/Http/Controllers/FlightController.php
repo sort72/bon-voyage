@@ -6,7 +6,6 @@ use App\Models\Flight;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 use App\Http\Requests\FlightRequest;
-use App\Models\Destination;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
