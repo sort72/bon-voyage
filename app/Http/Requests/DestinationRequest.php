@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\LocationHelper;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -28,8 +29,10 @@ class DestinationRequest extends FormRequest
         if(isset($this->destination->id)) $unique = $unique->ignore($this->destination->id);
 
         return [
-            'city_id' => ['required', 'exists:cities,id'], 
-            'timezone' => ['required', 'string']
+            'country_id' => ['required', 'exists:countries,id'],
+            'state_id' => ['required', 'exists:states,id'],
+            'city_id' => ['required', 'exists:cities,id'],
+            'timezone' => ['required', 'string', Rule::in(array_keys(LocationHelper::timezones()))]
         ];
     }
 }
