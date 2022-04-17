@@ -54,10 +54,10 @@
             </li>
 
             @if(Auth()->user()->role === 'root')
-            <li class="{{Route::is('dashboard.create-admin') ? 'active' : ''}}">
-                <a href="{{route('dashboard.create-admin')}}">
+            <li class="{{Route::is('dashboard.list-admin') || Route::is('dashboard.create-admin') ? 'active' : ''}}">
+                <a href="{{route('dashboard.list-admin')}}">
                     <span class="icon"><i class="mdi mdi-shield-crown"></i></span>
-                    <span class="menu-item-label">Crear administrador</span>
+                    <span class="menu-item-label">Administradores</span>
                 </a>
             </li>
             @else
@@ -74,12 +74,12 @@
                     <span class="menu-item-label">Vuelos</span>
                 </a>
             </li>
-            <li class="{{Route::is('dashboard.inbox*') ? 'active' : ''}}">
+            {{-- <li class="{{Route::is('dashboard.inbox*') ? 'active' : ''}}">
                 <a href="{{route('dashboard.inbox.index')}}">
                     <span class="icon"><i class="mdi mdi-message-bulleted"></i></span>
                     <span class="menu-item-label">Mensajes privados</span>
                 </a>
-            </li>
+            </li> --}}
             @endif
 
 

@@ -24,6 +24,7 @@ class CreateFlightsTable extends Migration
             $table->timestamp('departure_time');
             $table->timestamp('arrival_time')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,8 @@ class Flight extends LivewireDatatable
         return ModelsFlight::query()
         ->leftJoin('destinations as dest', 'dest.id', '=', 'flights.destination_id')
         ->leftJoin('destinations as orig', 'orig.id', '=', 'flights.origin_id')
+        ->leftJoin('world_cities as destCity', 'destCity.id', '=', 'dest.city_id')
+        ->leftJoin('world_cities as origCity', 'origCity.id', '=', 'orig.city_id')
         ->orderBy('id', 'desc');
     }
 
@@ -34,9 +36,9 @@ class Flight extends LivewireDatatable
 
             DateColumn::name('arrival_time')->label('Fecha de aterrizaje')->filterable(),
 
-            Column::name('orig.name')->label('Origen'),
+            Column::name('origCity.name')->label('Origen'),
 
-            Column::name('dest.name')->label('Destino'),
+            Column::name('destCity.name')->label('Destino'),
 
             Column::callback(['id'], function ($id) {
                 return view('components.table-actions', ['id' => $id, 'resource' => 'flight']);

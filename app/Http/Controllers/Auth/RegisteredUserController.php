@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
             'dni' => $request->dni,
             'email' => $request->email,
             'birth_date' => $request->birth_date,
-            'birth_place' => $request->birth_place,
+            'city_id' => $request->city_id,
             'address' => $request->address,
             'gender' => $request->gender,
             'profile_picture' => '',

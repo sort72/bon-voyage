@@ -36,7 +36,7 @@ class DestinationController extends Controller
      */
     public function store(DestinationRequest $request)
     {
-        Destination::create($request->only(['name','timezone']));
+        Destination::create($request->only(['city_id','timezone']));
 
         return redirect()->route('dashboard.destination.index')->with('success', 'Destino ' . $request->name . ' creado con éxito');
     }
@@ -73,7 +73,7 @@ class DestinationController extends Controller
      */
     public function update(DestinationRequest $request, Destination $destination)
     {
-        $destination->update($request->only(['name','timezone']));
+        $destination->update($request->only(['city_id','timezone']));
 
         return redirect()->route('dashboard.destination.index')->with('success', 'Destino ' . $request->name . ' modificado con éxito');
     }

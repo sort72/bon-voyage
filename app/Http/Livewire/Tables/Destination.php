@@ -17,7 +17,7 @@ class Destination extends LivewireDatatable
         return [
             NumberColumn::name('id'),
 
-            Column::name('name')->label('Nombre')->filterable()->searchable(),
+            Column::name('city.name')->label('Nombre')->filterable()->searchable(),
 
             DateColumn::name('created_at')->label('Fecha de creación')->filterable(),
 
