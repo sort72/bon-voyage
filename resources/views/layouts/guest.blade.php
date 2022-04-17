@@ -15,6 +15,10 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+
+        @livewireStyles
+
+        @livewireScripts
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">

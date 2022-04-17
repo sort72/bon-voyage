@@ -1,10 +1,10 @@
 <div class="mt-5">
-    <x-label>País de destino</x-label>
+    <x-label>País</x-label>
     <livewire:location.country
         name="country_id"
         :value="old('country_id', $country_id ?? '')"
         :searchable="true"
-        placeholder="Selecciona un país de destino"
+        placeholder="Selecciona un país"
     />
     @error('country_id') <span class="text-red-500 font-semibold">{{$errors->first('country_id')}}</span> @enderror
 </div>
