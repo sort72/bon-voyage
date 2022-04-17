@@ -2,8 +2,28 @@
 
 namespace App\Helpers;
 
+use App\Models\City;
+use App\Models\Destination;
+
 class LocationHelper
 {
+
+    public static function areCitiesFromTheSameCountry($city_id1, $city_id2)
+    {
+        $city1 = City::where('id', $city_id1)->first();
+        $city2 = City::where('id', $city_id2)->first();
+
+        return $city1->country_id == $city2->country_id;
+    }
+
+    public static function areDestinationsFromTheSameCountry($destination_id1, $destination_id2)
+    {
+        $destination1 = Destination::with('city')->where('id', $destination_id1)->first();
+        $destination2 = Destination::with('city')->where('id', $destination_id2)->first();
+
+        return $destination1->city->country_id == $destination2->city->country_id;
+    }
+
     public static function timezones()
     {
         $timezones = array(

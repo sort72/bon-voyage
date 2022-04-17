@@ -30,7 +30,7 @@ class DestinationRequest extends FormRequest
 
         return [
             'country_id' => ['required', 'exists:world_countries,id'],
-            'division_id' => ['required', 'exists:world_divisions,id'],
+            'division_id' => ['nullable', 'exists:world_divisions,id'],
             'city_id' => ['required', 'exists:world_cities,id', $unique],
             'timezone' => ['required', 'string', Rule::in(array_keys(LocationHelper::timezones()))]
         ];

@@ -156,6 +156,12 @@ return [
         'division_id' => 'estado/provincia',
         'city_id' => 'ciudad',
         'timezone' => 'zona horaria',
+        'departure_time' => 'fecha del vuelo',
+        'origin_id' => 'origen',
+        'destination_id' => 'destino',
+        'economy_class_price' => 'precio clase económica',
+        'first_class_price' => 'precio primera clase',
+        'discount' => 'descuento',
     ],
 
 ];

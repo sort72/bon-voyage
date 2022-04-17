@@ -15,11 +15,20 @@
                     @csrf
                     @method('PATCH')
                     <div class="flex justify-center flex-col">
-                        <x-label>Nombre</x-label>
-                        <input placeholder="Nombre" value="{{old('name', $destination->name)}}" name="name" class="py-2 px-4 rounded shadow border border-gray-300 outline-1 outline-gray-900 bg-gray-50" required />
-                        @error('name')
-                            <span class="text-red-500 font-semibold">{{$errors->first('name')}}</span>
-                        @enderror
+
+                        @include('components.location-select', ['country_id' => $destination->city->country->id, 'division_id' => $destination->city->destination ? $destination->city->destination->id : '', 'city_id' => $destination->city_id ])
+
+                        <div class="mt-5">
+                            <x-label>Zona horaria</x-label>
+                            <livewire:location.timezone
+                                name="timezone"
+                                :value="$errors->has('timezone') ? '' : old('timezone', $destination->timezone)"
+                                placeholder="Selecciona una zona horaria"
+                                :searchable="true"
+                            />
+                            @error('timezone') <span class="text-red-500 font-semibold">{{$errors->first('timezone')}}</span> @enderror
+                        </div>
+
                         <button type="submit" class="my-2 w-24 text-white py-2 px-5 rounded bg-gray-900 hover:bg-gray-800">Modificar</button>
 
                     </div>

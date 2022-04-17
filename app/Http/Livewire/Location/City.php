@@ -13,9 +13,16 @@ class City extends LivewireSelect
 		$cities = \App\Models\City::select('id', 'name');
 
         $stateId = $this->getDependingValue('division_id');
+        $countryId = $this->getDependingValue('country_id');
 
-        if ($this->hasDependency('division_id') && $stateId != null) {
-            $cities = $cities->where('division_id', $stateId);
+        if($this->hasDependency('country_id') && $countryId != null) {
+            $country = \App\Models\Country::where('id', $countryId)->first();
+            if ($this->hasDependency('division_id') && $stateId != null) {
+                $cities = $cities->where('division_id', $stateId);
+            }
+            else {
+                $cities = $cities->where('country_id', $countryId);
+            }
         }
         else {
             return collect();
