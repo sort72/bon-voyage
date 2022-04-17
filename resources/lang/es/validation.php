@@ -152,6 +152,7 @@ return [
 
     'attributes' => [
         'birth_date' => 'fecha de nacimiento',
+        'gender' => 'género',
         'password' => 'contraseña',
         'country_id' => 'país',
         'division_id' => 'estado/provincia',

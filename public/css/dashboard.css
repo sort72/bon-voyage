@@ -4195,6 +4195,9 @@ textarea.form-control.is-invalid {
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
 .col-start-2 {
   grid-column-start: 2;
 }
@@ -4656,6 +4659,9 @@ textarea.form-control.is-invalid {
 }
 .overflow-x-scroll {
   overflow-x: scroll;
+}
+.break-all {
+  word-break: break-all;
 }
 .rounded-md {
   border-radius: 0.375rem;
