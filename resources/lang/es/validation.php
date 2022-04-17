@@ -153,7 +153,7 @@ return [
     'attributes' => [
         'birth_date' => 'fecha de nacimiento',
         'country_id' => 'país',
-        'state_id' => 'estado/provincia',
+        'division_id' => 'estado/provincia',
         'city_id' => 'ciudad',
         'timezone' => 'zona horaria',
     ],

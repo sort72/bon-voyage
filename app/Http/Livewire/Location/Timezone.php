@@ -32,10 +32,13 @@ class Timezone extends LivewireSelect
 
     public function selectedOption($value)
     {
-        return [
-            'value' => $value,
-            'description' => LocationHelper::timezones()[$value]
-        ];
+        if(isset(LocationHelper::timezones()[$value])) {
+            return [
+                'value' => $value,
+                'description' => LocationHelper::timezones()[$value]
+            ];
+        }
+        return null;
     }
 
 }

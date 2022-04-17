@@ -12,10 +12,10 @@ class City extends LivewireSelect
 	{
 		$cities = \App\Models\City::select('id', 'name');
 
-        $stateId = $this->getDependingValue('state_id');
+        $stateId = $this->getDependingValue('division_id');
 
-        if ($this->hasDependency('state_id') && $stateId != null) {
-            $cities = $cities->where('state_id', $stateId);
+        if ($this->hasDependency('division_id') && $stateId != null) {
+            $cities = $cities->where('division_id', $stateId);
         }
         else {
             return collect();

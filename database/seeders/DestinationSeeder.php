@@ -16,15 +16,15 @@ class DestinationSeeder extends Seeder
      */
     public function run()
     {
-        Destination::factory()->create(['city_id' => City::where('name', 'Pereira')->first()->id, 'timezone' => 'America/Bogota']);
-        Destination::factory()->create(['city_id' => City::where('name', 'Bogota')->first()->id, 'timezone' => 'America/Bogota']);
-        Destination::factory()->create(['city_id' => City::where('name', 'Medellín')->first()->id, 'timezone' => 'America/Bogota']);
-        Destination::factory()->create(['city_id' => City::where('name', 'Cali')->first()->id, 'timezone' => 'America/Bogota']);
-        Destination::factory()->create(['city_id' => City::where('name', 'Cartagena')->first()->id, 'timezone' => 'America/Bogota']);
-        Destination::factory()->create(['city_id' => City::where('name', 'Madrid')->first()->id, 'timezone' => 'Europe/Madrid']);
-        Destination::factory()->create(['city_id' => City::where('name', 'London')->first()->id, 'timezone' => 'Europe/London']);
-        Destination::factory()->create(['city_id' => City::where('name', 'New York')->first()->id, 'timezone' => 'America/New_York']);
-        Destination::factory()->create(['city_id' => City::where('name', 'Miami')->first()->id, 'timezone' => 'America/New_York']);
-        Destination::factory()->create(['city_id' => City::where('name', 'Buenos Aires')->first()->id, 'timezone' => 'America/Buenos_Aires']);
+        Destination::factory()->create(['city_id' => 70067, 'timezone' => 'America/Bogota']); // Pereira
+        Destination::factory()->create(['city_id' => 761, 'timezone' => 'America/Bogota']); // Bogota
+        Destination::factory()->create(['city_id' => 104277, 'timezone' => 'America/Bogota']); // Medellín
+        Destination::factory()->create(['city_id' => 70171, 'timezone' => 'America/Bogota']); // Cali
+        Destination::factory()->create(['city_id' => 70166, 'timezone' => 'America/Bogota']); // Cartagena
+        Destination::factory()->create(['city_id' => 2311, 'timezone' => 'Europe/Madrid']); // Madrid
+        Destination::factory()->create(['city_id' => 3732, 'timezone' => 'Europe/London']); // London
+        Destination::factory()->create(['city_id' => 3609, 'timezone' => 'America/New_York']); // New York
+        Destination::factory()->create(['city_id' => 3487, 'timezone' => 'America/New_York']); // Miami
+        Destination::factory()->create(['city_id' => 69, 'timezone' => 'America/Buenos_Aires']); // Buenos Aires
     }
 }

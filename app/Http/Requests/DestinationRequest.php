@@ -25,13 +25,13 @@ class DestinationRequest extends FormRequest
      */
     public function rules()
     {
-        $unique = Rule::unique('destinations');
+        $unique = Rule::unique('destinations', 'city_id');
         if(isset($this->destination->id)) $unique = $unique->ignore($this->destination->id);
 
         return [
-            'country_id' => ['required', 'exists:countries,id'],
-            'state_id' => ['required', 'exists:states,id'],
-            'city_id' => ['required', 'exists:cities,id'],
+            'country_id' => ['required', 'exists:world_countries,id'],
+            'division_id' => ['required', 'exists:world_divisions,id'],
+            'city_id' => ['required', 'exists:world_cities,id', $unique],
             'timezone' => ['required', 'string', Rule::in(array_keys(LocationHelper::timezones()))]
         ];
     }

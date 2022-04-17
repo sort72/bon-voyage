@@ -15,7 +15,7 @@ class CreateDestinationsTable extends Migration
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('city_id')->constrained('world_cities')->cascadeOnDelete();
             $table->string('timezone')->default('UTC');
             $table->timestamps();
             $table->softDeletes();
