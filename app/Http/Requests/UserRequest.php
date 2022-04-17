@@ -27,9 +27,9 @@ class UserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'string', 'max:20', 'unique:users'],
             'birth_date' => ['required', 'date', 'before:-18 years', 'after:-85 years'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'gender' => ['required'],
             'country_id' => ['required', 'exists:world_countries,id'],

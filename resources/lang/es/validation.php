@@ -135,7 +135,7 @@ return [
         ],
         'birth_date' => [
             'before' => 'El usuario debe ser mayor de edad',
-            'after' => 'La edad máxima permitida es de 99 años'
+            'after' => 'La edad máxima permitida es de 85 años'
         ],
     ],
 
@@ -152,6 +152,7 @@ return [
 
     'attributes' => [
         'birth_date' => 'fecha de nacimiento',
+        'password' => 'contraseña',
         'country_id' => 'país',
         'division_id' => 'estado/provincia',
         'city_id' => 'ciudad',

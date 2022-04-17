@@ -48,16 +48,6 @@
                 @include('components.location-select')
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 px-2 gap-4 mt-4">
-                <div>
-                    <x-label for="gender" value="Género" />
-
-                    <select name="gender" id="gender" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
-                        <option value="">Seleccione el género</option>
-                        <option value="female">Femenino</option>
-                        <option value="male">Masculino</option>
-                        <option value="others">Otros</option>
-                    </select>
-                </div>
 
                 <div>
                     <x-label for="address" value="Dirección de facturación *" />
@@ -65,7 +55,18 @@
                 </div>
 
                 <div>
-                    <x-label for="password" value="Password *" />
+                    <x-label for="gender" value="Género *" />
+
+                    <select name="gender" id="gender" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
+                        <option value="">Seleccione el género</option>
+                        <option @if(old('gender') == 'male') selected @endif value="male">Masculino</option>
+                        <option @if(old('gender') == 'female') selected @endif value="female">Femenino</option>
+                        <option @if(old('gender') == 'others') selected @endif value="others">Otros</option>
+                    </select>
+                </div>
+
+                <div>
+                    <x-label for="password" value="Contraseña *" />
 
                     <x-input id="password" class="block mt-1 w-full"
                                     type="password"
@@ -75,7 +76,7 @@
 
                 <!-- Confirm Password -->
                 <div>
-                    <x-label for="password_confirmation" value="Confirm Password *" />
+                    <x-label for="password_confirmation" value="Confirmar contraseña *" />
 
                     <x-input id="password_confirmation" class="block mt-1 w-full"
                                     type="password"
