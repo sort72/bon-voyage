@@ -20,11 +20,8 @@
 <body class="bg-gray-100">
 
     <div id="app">
-        @if(auth()->user())
-            @include('layouts.external.clientNavigation')
-        @else
-            @include('layouts.external.externalNavigation')
-        @endif
+
+        @include('layouts.external.navigation')
         <section class="section main-section">
             @yield('content')
         </section>
