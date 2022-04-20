@@ -22,8 +22,8 @@
                 </div>
                 <!-- Code block ends -->
             </div>
-            <div class="lg:flex grid grid-cols-4">
-                <div class="flex lg:w-1/3 sm:col-span-2 col-span-4 lg:mr-3 sm:mr-3 lg:mb-0 mb-2">
+            <div class="lg:flex">
+                <div class="flex lg:w-1/3 lg:mr-3 w-full mb-2 lg:mb-0">
                     <div class="w-1/2">
                         <div class="grid grid-cols-3 rounded-l border-r-2 border-gray-600 bg-white items-center p-2 h-16">
                             <label id="label2" class="col-span-3 ml-2 text-sm leading-4">Origen</label>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex lg:w-1/4 sm:col-span-2 col-span-4 lg:mr-3 lg:mb-0 mb-2">
+                <div class="flex lg:w-1/4 lg:mr-3 mb-2 lg:mb-0">
                     <div class="w-1/2">
                         <div class="grid grid-cols-3 rounded-l border-r-2 border-gray-600 bg-white items-center p-2 h-16">
                             <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Fecha ida</label>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex lg:w-1/4 col-span-2 col-start-2">
+                <div class="flex lg:w-1/4 mb-2 lg:mb-0">
                     <div class="w-full">
                         <div class="grid grid-cols-3 rounded-lg border-gray-600 bg-white items-center p-2 h-16">
                             <label id="label2" class="col-span-3 ml-2 text-sm leading-4">Pasajeros y clase</label>
