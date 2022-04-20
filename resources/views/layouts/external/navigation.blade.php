@@ -33,10 +33,10 @@
             <img class="block h-10 w-auto" src="{{asset('images/logo.png')}}" alt="logo_bon_voyage">
           </div>
         </div>
-        <div class="h-12 w-1/3 self-start justify-center rounded-bl bg-gray-200 md:flex items-center hidden">
+        <div class="h-12 w-2/5 self-start justify-center rounded-bl bg-gray-200 md:flex items-center hidden">
             <a href="{{ route('login') }}" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <i class="fa-solid fa-user mt-1 mr-2"></i>
-                <span class="">@if(auth()->user()) Mi perfil @else Iniciar sesión @endif</span>
+                <span class="">@if(auth()->user()) {{auth()->user()->name}} {{auth()->user()->surname}} @else Iniciar sesión @endif</span>
             </a>
             <button type="button" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <i class="fa-solid fa-suitcase mt-1 mr-2"></i>
@@ -46,6 +46,16 @@
                 <i class="fa-solid fa-circle-question mt-1 mr-2"></i>
                 <span class="">Ayuda</span>
             </button>
+            @if(auth()->user())
+                <form method="POST" action="{{ route('logout') }}" class="navbar-item desktop-icon-only">
+                    @csrf
+
+                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="mr-2  p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span>Cerrar sesión</span>
+                    </a>
+                </form>
+            @endif
         </div>
       </div>
       <div class="mx-auto mb-2 px-2 sm:px-6 lg:px-8 flex-1 sm:items-stretch sm:justify-start">
@@ -110,32 +120,41 @@
     <div class="hidden mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Vuelos</a>
+        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-plane-up"></i>  Vuelos</a>
 
-        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Ofertas</a>
+        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-fire"></i> Ofertas</a>
 
-        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Check-in</a>
+        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-suitcase"></i> Check-in</a>
         @if(auth()->user())
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Mis tarjetas</a>
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-credit-card"></i> Mis tarjetas</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mis reservas</a>
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-couch"></i> Mis reservas</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mi muro</a>
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-message"></i> Mi muro</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Carrito de compras</a>
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-cart-plus"></i> Carrito de compras</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mi perfil</a>
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> {{auth()->user()->name}} {{auth()->user()->surname}}</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mis viajes</a>
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-suitcase mt-1 mr-2"></i> Mis viajes</a>
+
+            <form method="POST" action="{{ route('logout') }}" class="navbar-item desktop-icon-only">
+                @csrf
+
+                <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </form>
         @else
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Iniciar sesión</a>
+            <a href="{{ route('login') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> Iniciar sesión</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Mis viajes</a>
+            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-suitcase mt-1 mr-2"></i> Mis viajes</a>
 
         @endif
-        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Ayuda</a>
+        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-circle-question mt-1 mr-2"></i> Ayuda</a>
       </div>
     </div>
   </nav>
