@@ -12,9 +12,9 @@ class RootController extends Controller
 {
     public function listAdmin()
     {
-        $user = auth()->user();
-        $token = app('auth.password.broker')->createToken($user);
-        Mail::to($user->email)->send(new WelcomeAdmin($user, $token));
+        // $user = auth()->user();
+        // $token = app('auth.password.broker')->createToken($user);
+        // Mail::to($user->email)->send(new WelcomeAdmin($user, $token));
         return view('pages.dashboard.root.list-admin');
     }
 
