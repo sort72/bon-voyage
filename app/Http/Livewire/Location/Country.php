@@ -10,7 +10,8 @@ class Country extends LivewireSelect
 {
     public function options($searchTerm = null) : Collection
 	{
-		$countries = \App\Models\Country::select('id', 'name');
+		$countries = \App\Models\Country::select('id', 'name')
+                    ->has('cities');
 
         if($searchTerm) {
             $countries = $countries->where('name', 'LIKE', '%' . $searchTerm . '%');
