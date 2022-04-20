@@ -17,15 +17,16 @@
 
             <!-- Fecha de vuelo -->
             <div class="col-span-2">
-              <label class="font-semibold" for="departure_time">Fecha de vuelo</label>
+              <label class="font-semibold" for="departure_time">Fecha de vuelo (En UTC+0)</label>
               <input class="mt-1 w-full border border-black-800 rounded-md p-1 flatpickr-datetime" id="departure_time" name="departure_time" type="text" value="{{old('departure_time')}}" />
+              <p>La fecha y hora debe ser en tiempo UTC. El vuelo se mostrará en la zona horaria del origen y del destino automáticamente.</p>
               @error('departure_time')
-              <span class="text-red-500 font-semibold">{{$errors->first('departure_time')}}</span>
+                <span class="text-red-500 font-semibold">{{$errors->first('departure_time')}}</span>
               @enderror
             </div>
 
             <!-- Tiempo o duración -->
-            <div>
+            <div class="col-span-2">
               <label class="font-semibold" for="duration">Duración del vuelo</label>
               <input class="mt-1 w-full border border-black-800 rounded-md p-1" id="duration" min="0" name="duration" placeholder="Duración en minutos" required step="1" type="number" value="{{old('duration')}}" />
               @error('duration')
@@ -40,7 +41,7 @@
               <select class=" mt-1 w-full border border-black-800 rounded-md p-1" name="origin_id">
                 <option val="">Seleccione...</option>
                 @foreach ($destinations as $destination)
-                    <option @if(old('origin_id') == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->name}}</option>
+                    <option @if(old('origin_id') == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->city->name}}</option>
                 @endforeach
               </select>
               @error('origin_id')
@@ -55,7 +56,7 @@
               <select class=" mt-1 w-full border border-black-800 rounded-md p-1" name="destination_id">
                 <option val="">Seleccione...</option>
                 @foreach ($destinations as $destination)
-                    <option @if(old('destination_id') == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->name}}</option>
+                    <option @if(old('destination_id') == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->city->name}}</option>
                 @endforeach
               </select>
               @error('destination_id')

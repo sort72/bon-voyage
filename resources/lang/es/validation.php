@@ -135,7 +135,7 @@ return [
         ],
         'birth_date' => [
             'before' => 'El usuario debe ser mayor de edad',
-            'after' => 'La edad máxima permitida es de 99 años'
+            'after' => 'La edad máxima permitida es de 85 años'
         ],
     ],
 
@@ -152,6 +152,18 @@ return [
 
     'attributes' => [
         'birth_date' => 'fecha de nacimiento',
+        'gender' => 'género',
+        'password' => 'contraseña',
+        'country_id' => 'país',
+        'division_id' => 'estado/provincia',
+        'city_id' => 'ciudad',
+        'timezone' => 'zona horaria',
+        'departure_time' => 'fecha del vuelo',
+        'origin_id' => 'origen',
+        'destination_id' => 'destino',
+        'economy_class_price' => 'precio clase económica',
+        'first_class_price' => 'precio primera clase',
+        'discount' => 'descuento',
     ],
 
 ];

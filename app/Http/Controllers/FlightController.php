@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\FlightHelper;
+use App\Helpers\LocationHelper;
 use App\Models\Flight;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 use App\Http\Requests\FlightRequest;
-use App\Models\Destination;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 
 class FlightController extends Controller
 {
@@ -30,7 +30,7 @@ class FlightController extends Controller
     public function create()
     {
         $destinations = Destination::all();
-        return view('pages.dashboard.flight.create',compact('destinations'));
+        return view('pages.dashboard.flight.create', compact('destinations'));
     }
 
     /**
@@ -43,7 +43,7 @@ class FlightController extends Controller
      */
     public function store(FlightRequest $request)
     {
-        $name = Str::upper(Str::random(6));
+        $name = FlightHelper::generateName();
         $arrival_time = Carbon::parse($request->departure_time)->addMinutes($request->duration);
 
         Flight::create([
@@ -54,10 +54,9 @@ class FlightController extends Controller
             'origin_id' => $request->origin_id,
             'departure_time' => $request->departure_time,
             'arrival_time' => $arrival_time,
-            'is_international' => $request->is_international,
+            'is_international' => ! LocationHelper::areDestinationsFromTheSameCountry($request->origin_id, $request->destination_id),
             'price_tourist' => $request->price_tourist,
-            'price_business' => $request->price_vip,
-            'discount' => $request->discount 
+            'price_business' => $request->price_vip
         ]);
 
         return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' creado con éxito');
@@ -95,8 +94,20 @@ class FlightController extends Controller
      */
     public function update(FlightRequest $request, Flight $flight)
     {
-        $flight->update($request->only(['name','destination_id','origin_id','departure_time','arrival_time','is_international',
-        'price_tourist','price_business','discount']));
+        $arrival_time = Carbon::parse($request->departure_time)->addMinutes($request->duration);
+
+        $flight->update([
+            'economy_class_price' => $request->economy_class_price,
+            'first_class_price' => $request->first_class_price,
+            'destination_id' => $request->destination_id,
+            'origin_id' => $request->origin_id,
+            'departure_time' => $request->departure_time,
+            'arrival_time' => $arrival_time,
+            'is_international' => ! LocationHelper::areDestinationsFromTheSameCountry($request->origin_id, $request->destination_id),
+            'price_tourist' => $request->price_tourist,
+            'price_business' => $request->price_vip,
+            'discount' => $request->discount
+        ]);
 
         return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' modificado con éxito');
     }
