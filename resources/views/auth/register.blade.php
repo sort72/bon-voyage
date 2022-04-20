@@ -12,70 +12,61 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <div class="flex">
+            <div class="grid grid-cols-1 md:grid-cols-2 px-2 gap-4">
                 <!-- Name -->
-                <div class="w-1/2 px-2">
+                <div>
                     <x-label for="name" value="Nombres *" />
 
-                    <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                    <x-input id="name" type="text" name="name" class="block mt-1 w-full" :value="old('name')" required autofocus />
                 </div>
 
-                <div class="w-1/2 px-2">
+                <div>
                     <x-label for="surname" value="Apellidos *" />
 
-                    <x-input id="surname" class="block mt-1 w-full" type="text" name="surname" :value="old('surname')" required autofocus />
+                    <x-input id="surname" type="text" name="surname" class="block mt-1 w-full" :value="old('surname')" required />
                 </div>
-            </div>
-            <div class="flex mt-4">
-                <!-- Email Address -->
-                <div class="w-1/2 px-2">
+
+                <div>
                     <x-label for="email" value="Email *" />
 
-                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                    <x-input id="email" type="email" name="email" class="block mt-1 w-full" :value="old('email')" required />
                 </div>
 
-                <div class="w-1/2 px-2">
+                <div>
                     <x-label for="dni" value="Documento *" />
 
-                    <x-input id="dni" class="block mt-1 w-full" type="text" name="dni" :value="old('dni')" required />
+                    <x-input id="dni" type="text" name="dni" class="block mt-1 w-full" :value="old('dni')" required />
                 </div>
-            </div>
-            <div class="flex mt-4">
-                <!-- Email Address -->
-                <div class="w-1/2 px-2">
+
+                <div class="md:col-span-2">
                     <x-label for="birth_date" value="Fecha de nacimiento *" />
 
-                    <x-input id="birth_date" class="block mt-1 w-full" type="date" name="birth_date" :value="old('birth_date')" required />
-                </div>
-
-                <div class="w-1/2 px-2">
-                    <x-label for="birth_place" value="Lugar de nacimiento *" />
-                    <x-input id="birth_place" class="block mt-1 w-full" type="text" name="birth_place" :value="old('birth_place')" required />
+                    <x-input id="birth_date" type="text" name="birth_date" class="block mt-1 w-full flatpickr" :value="old('birth_date')" required />
                 </div>
             </div>
-            <div class="flex mt-4">
-                <!-- Email Address -->
-                <div class="w-1/2 px-2">
-                    <x-label for="gender" value="Género" />
+            <div class="grid grid-cols-1 px-2">
+                @include('components.location-select')
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 px-2 gap-4 mt-4">
 
-                    <select name="gender" id="gender" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
-                        <option value="">Seleccione el género</option>
-                        <option value="female">Femenino</option>
-                        <option value="male">Masculino</option>
-                        <option value="others">Otros</option>
-                    </select>
-                </div>
-
-                <div class="w-1/2 px-2">
+                <div>
                     <x-label for="address" value="Dirección de facturación *" />
                     <x-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
                 </div>
-            </div>
 
-            <div class="flex mt-4">
-                <!-- Password -->
-                <div class="w-1/2 px-2">
-                    <x-label for="password" value="Password *" />
+                <div>
+                    <x-label for="gender" value="Género *" />
+
+                    <select name="gender" id="gender" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
+                        <option value="">Seleccione el género</option>
+                        <option @if(old('gender') == 'male') selected @endif value="male">Masculino</option>
+                        <option @if(old('gender') == 'female') selected @endif value="female">Femenino</option>
+                        <option @if(old('gender') == 'others') selected @endif value="others">Otros</option>
+                    </select>
+                </div>
+
+                <div>
+                    <x-label for="password" value="Contraseña *" />
 
                     <x-input id="password" class="block mt-1 w-full"
                                     type="password"
@@ -84,14 +75,15 @@
                 </div>
 
                 <!-- Confirm Password -->
-                <div class="w-1/2 px-2">
-                    <x-label for="password_confirmation" value="Confirm Password *" />
+                <div>
+                    <x-label for="password_confirmation" value="Confirmar contraseña *" />
 
                     <x-input id="password_confirmation" class="block mt-1 w-full"
                                     type="password"
                                     name="password_confirmation" required />
                 </div>
             </div>
+
             <p class="italic my-2 text-sm px-2">
                 Todos los campos marcados con * son obligatorios.
             </p>

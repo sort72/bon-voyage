@@ -12,6 +12,11 @@ class Flight extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'departure_time' => 'datetime',
+        'arrival_time' => 'datetime',
+    ];
+
     public function destination()
     {
         return $this->belongsTo(Destination::class, 'destination_id')->withTrashed();
@@ -20,5 +25,10 @@ class Flight extends Model
     public function origin()
     {
         return $this->belongsTo(Destination::class, 'origin_id')->withTrashed();
+    }
+
+    public function getDurationAttribute()
+    {
+        return $this->departure_time->diffInMinutes($this->arrival_time);
     }
 }
