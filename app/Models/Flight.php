@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\LocationHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -30,5 +31,10 @@ class Flight extends Model
     public function getDurationAttribute()
     {
         return $this->departure_time->diffInMinutes($this->arrival_time);
+    }
+
+    public function getIsInternationalAttribute()
+    {
+        return ! LocationHelper::areDestinationsFromTheSameCountry($this->origin_id, $this->destination_id);
     }
 }
