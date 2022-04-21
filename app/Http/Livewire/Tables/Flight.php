@@ -45,7 +45,8 @@ class Flight extends LivewireDatatable
             Column::name('destCity.name')->label('Destino')->searchable(),
 
             Column::callback(['id'], function ($id) {
-                return view('components.table-actions', ['id' => $id, 'resource' => 'flight']);
+                $model = ModelsFlight::find($id);
+                return view('components.table-actions', ['id' => $id, 'resource' => 'flight', 'model' => $model]);
             })->unsortable()
         ];
     }

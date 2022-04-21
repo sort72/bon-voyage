@@ -2,6 +2,10 @@
     <div class="bg-green-600 h-12 w-full py-3 px-2 text-center text-white">
         {{ session('success') }}
     </div>
+@elseif (session('danger'))
+    <div class="bg-red-600 h-12 w-full py-3 px-2 text-center text-white">
+        {{ session('danger') }}
+    </div>
 @endif
 
 <nav id="navbar-main" class="navbar is-fixed-top">
