@@ -24,15 +24,15 @@ class Administrator extends LivewireDatatable
         return [
             NumberColumn::name('id'),
 
-            Column::name('email')->label('Correo electrónico')->filterable()->searchable(),
+            Column::name('email')->label('Correo electrónico')->searchable(),
 
-            Column::name('dni')->label('Documento')->filterable()->searchable(),
+            Column::name('dni')->label('Documento')->searchable(),
 
             Column::callback(['name', 'surname'], function ($name, $surname) {
                 return $name . ' ' . $surname;
-            }),
+            })->searchable(),
 
-            DateColumn::name('created_at')->label('Fecha de creación')->filterable(),
+            DateColumn::name('created_at')->label('Fecha de creación'),
 
         ];
     }

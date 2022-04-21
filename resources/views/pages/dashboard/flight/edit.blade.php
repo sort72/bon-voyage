@@ -18,7 +18,7 @@
 
               <!-- Fecha de vuelo -->
               <div class="col-span-2">
-                <label class="font-semibold" for="departure_time">Fecha de vuelo (En UTC+0)</label>
+                <label class="font-semibold" for="departure_time">Fecha de vuelo (En UTC+0) [Fecha actual: {{ now() }}]</label>
                 <input class="mt-1 w-full border border-black-800 rounded-md p-1 flatpickr-datetime" id="departure_time" name="departure_time" type="text" value="{{old('departure_time', $flight->departure_time)}}" />
                 <p>La fecha y hora debe ser en tiempo UTC. El vuelo se mostrará en la zona horaria del origen y del destino automáticamente.</p>
                 @error('departure_time')
