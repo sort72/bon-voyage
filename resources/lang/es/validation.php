@@ -137,6 +137,9 @@ return [
             'before' => 'El usuario debe ser mayor de edad',
             'after' => 'La edad máxima permitida es de 85 años'
         ],
+        'duration' => [
+            'min' => 'La :attribute debe ser de al menos :min minutos.'
+        ]
     ],
 
     /*
@@ -163,6 +166,7 @@ return [
         'destination_id' => 'destino',
         'economy_class_price' => 'precio clase económica',
         'first_class_price' => 'precio primera clase',
+        'duration' => 'duración del vuelo',
         'discount' => 'descuento',
     ],
 

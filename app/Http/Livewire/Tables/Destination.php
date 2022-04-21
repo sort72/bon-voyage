@@ -17,9 +17,9 @@ class Destination extends LivewireDatatable
         return [
             NumberColumn::name('id'),
 
-            Column::name('city.name')->label('Nombre')->filterable()->searchable(),
+            Column::name('city.name')->label('Nombre')->searchable(),
 
-            DateColumn::name('created_at')->label('Fecha de creación')->filterable(),
+            DateColumn::name('created_at')->label('Fecha de creación'),
 
             Column::callback(['id'], function ($id) {
                 return view('components.table-actions', ['id' => $id, 'resource' => 'destination']);

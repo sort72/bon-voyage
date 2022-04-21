@@ -12,9 +12,9 @@ class RootController extends Controller
 {
     public function listAdmin()
     {
-        $user = auth()->user();
-        $token = app('auth.password.broker')->createToken($user);
-        Mail::to($user->email)->send(new WelcomeAdmin($user, $token));
+        // $user = auth()->user();
+        // $token = app('auth.password.broker')->createToken($user);
+        // Mail::to($user->email)->send(new WelcomeAdmin($user, $token));
         return view('pages.dashboard.root.list-admin');
     }
 
@@ -32,11 +32,6 @@ class RootController extends Controller
             'role' => 'admin',
             'dni' => $request->dni,
             'email' => $request->email,
-            'birth_date' => $request->birth_date,
-            'city_id' => $request->city_id,
-            'address' => $request->address,
-            'gender' => $request->gender,
-            'profile_picture' => '',
             'password' => 'changeme'
         ]);
 
