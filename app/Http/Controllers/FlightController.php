@@ -81,6 +81,8 @@ class FlightController extends Controller
      */
     public function edit(Flight $flight)
     {
+        if($flight->departure_time < now()) return redirect()->route('dashboard.flight.index')->with('danger', 'Este vuelo ya no se puede modificar');
+
         $destinations = Destination::all();
         return view('pages.dashboard.flight.edit', compact('flight','destinations'));
     }
