@@ -32,9 +32,4 @@ class Flight extends Model
     {
         return $this->departure_time->diffInMinutes($this->arrival_time);
     }
-
-    public function getIsInternationalAttribute()
-    {
-        return ! LocationHelper::areDestinationsFromTheSameCountry($this->origin_id, $this->destination_id);
-    }
 }
