@@ -41,7 +41,7 @@
                 <div class="md:col-span-2">
                     <x-label for="birth_date" value="Fecha de nacimiento *" />
 
-                    <x-input id="birth_date" type="text" name="birth_date" class="block mt-1 w-full flatpickr" :value="old('birth_date')" required />
+                    <x-input id="birth_date" type="text" name="birth_date" class="block mt-1 w-full flatpickr-birth" :value="old('birth_date')" required />
                 </div>
             </div>
             <div class="grid grid-cols-1 px-2">

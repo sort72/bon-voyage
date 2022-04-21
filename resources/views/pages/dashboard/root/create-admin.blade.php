@@ -51,37 +51,6 @@
               @enderror
             </div>
 
-            <!-- Fecha nacimiento -->
-            <div>
-              <label class="font-semibold" for="birth_date">Fecha nacimiento</label>
-              <input class="mt-1 w-full border border-black-800 rounded-md p-1 flatpickr" id="birth_date" name="birth_date" type="text" value="{{old('birth_date')}}" />
-              @error('birth_date')
-                <span class="text-red-500 font-semibold">{{$errors->first('birth_date')}}</span>
-              @enderror
-            </div>
-
-            <!-- Género -->
-            <div>
-              <label class="font-semibold" for="gender">Género</label>
-
-              <select class="mt-1 w-full border border-black-800 rounded-md p-1" id="gender" name="gender">
-                <option value="">Seleccione una opcion</option>
-                <option @if(old('gender') == 'male') selected @endif value="male">Masculino</option>
-                <option @if(old('gender') == 'female') selected @endif value="female">Femenino</option>
-                <option @if(old('gender') == 'others') selected @endif value="others">Otros</option>
-              </select>
-              @error('gender')
-                <span class="text-red-500 font-semibold">{{$errors->first('gender')}}</span>
-              @enderror
-            </div>
-
-            <!-- Lugar nacimiento -->
-            <div class="md:col-span-2 grid grid-cols-1">
-                @include('components.location-select')
-            </div>
-
-
-
             <!-- Botón envio de formulario -->
             <div class="col-span-2 justify-self-center">
               <button type="submit" class="my-2 w-24 text-white py-2 px-5 rounded bg-cyan-600 hover:bg-gray-800">Crear</button>
