@@ -32,7 +32,7 @@ class FlightRequest extends FormRequest
             'destination_id' => ['required', 'exists:destinations,id', 'different:origin_id'],
             'origin_id' => ['required', 'exists:destinations,id', 'different:destination_id'],
             'departure_time' => ['required', 'date', 'after:now'],
-            'duration' => ['required', 'min:15', 'max:1800'],
+            'duration' => ['required', 'numeric', 'integer', 'min:15', 'max:1800'],
             // 'arrival_time' => ['required', 'date', 'after:departure_time'],
             // 'is_international' => ['required', 'boolean'],
             'economy_class_price' => ['required', 'numeric', 'min:0', 'max:9999999999', 'lt:first_class_price'],
