@@ -16,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['validate_client_guest'])->group(function(){
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
 });
+
 
 Route::middleware(['auth', 'role:root,admin'])->as('dashboard.')->prefix('dashboard')->group(function() {
 

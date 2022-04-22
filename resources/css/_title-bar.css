@@ -1,6 +1,7 @@
 .is-title-bar {
-  @apply p-6 border-b border-gray-100;
+    @apply p-6;
 }
+
 
 /* .is-title-bar li {
   @apply inline-block pr-3 text-2xl text-gray-500;
