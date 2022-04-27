@@ -14,9 +14,9 @@
 
             <!-- Fecha de vuelo -->
             <div class="col-span-2">
-              <label class="font-medium text-sky-800" for="departure_time">Fecha de vuelo (En UTC+0) [Fecha actual: {{ now() }}]</label>
-              <input class="mt-1 w-full border border-gray-300 rounded-md p-1 flatpickr-datetime" id="departure_time" name="departure_time" type="text" value="{{old('departure_time')}}" />
-              <p class="italic text-gray-500">La fecha y hora debe ser en tiempo UTC. El vuelo se mostrará en la zona horaria del origen y del destino automáticamente.</p>
+              <label class="font-semibold" for="departure_time">Fecha de vuelo (Hora Colombia) [Fecha actual: {{ now()->timezone('America/Bogota') }}]</label>
+              <input class="mt-1 w-full border border-black-800 rounded-md p-1 flatpickr-datetime" id="departure_time" name="departure_time" type="text" value="{{old('departure_time')}}" />
+              <p>La fecha y hora debe ser en hora de Colombia aunque el origen o el destino sean de otro país. El vuelo se mostrará en la zona horaria del origen y del destino automáticamente.</p>
               @error('departure_time')
                 <span class="text-red-500 font-semibold">{{$errors->first('departure_time')}}</span>
               @enderror

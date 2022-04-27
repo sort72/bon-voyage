@@ -6,6 +6,7 @@ use App\Models\Destination;
 use App\Models\Flight as ModelsFlight;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\DateColumn;
+use Carbon\Carbon;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 use Mediconesystems\LivewireDatatables\NumberColumn;
 
@@ -32,9 +33,13 @@ class Flight extends LivewireDatatable
 
             Column::name('name')->label('Nombre')->searchable(),
 
-            DateColumn::name('departure_time')->format('Y-m-d H:m:s')->label('Fecha del vuelo')->searchable(),
+            Column::callback(['departure_time', 'orig.timezone'], function ($departure_time, $timezone) {
+                return Carbon::parse($departure_time)->timezone($timezone)->format('Y-m-d H:m:s');
+            })->label('Fecha del vuelo')->searchable(),
 
-            DateColumn::name('arrival_time')->format('Y-m-d H:m:s')->label('Fecha de aterrizaje')->searchable(),
+            Column::callback(['arrival_time', 'orig.timezone'], function ($arrival_time, $timezone) {
+                return Carbon::parse($arrival_time)->timezone($timezone)->format('Y-m-d H:m:s');
+            })->label('Fecha de aterrizaje')->searchable(),
 
             Column::callback(['is_international'], function ($is_international) {
                 return $is_international ? 'Sí' : 'No';
