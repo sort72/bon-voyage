@@ -30,18 +30,23 @@ class Flight extends LivewireDatatable
         return [
             NumberColumn::name('id'),
 
-            Column::name('name')->label('Nombre')->filterable()->searchable(),
+            Column::name('name')->label('Nombre')->searchable(),
 
-            DateColumn::name('departure_time')->label('Fecha del vuelo')->filterable(),
+            DateColumn::name('departure_time')->format('Y-m-d H:m:s')->label('Fecha del vuelo')->searchable(),
 
-            DateColumn::name('arrival_time')->label('Fecha de aterrizaje')->filterable(),
+            DateColumn::name('arrival_time')->format('Y-m-d H:m:s')->label('Fecha de aterrizaje')->searchable(),
 
-            Column::name('origCity.name')->label('Origen'),
+            Column::callback(['is_international'], function ($is_international) {
+                return $is_international ? 'Sí' : 'No';
+            })->unsortable()->label('¿Es internacional?'),
 
-            Column::name('destCity.name')->label('Destino'),
+            Column::name('origCity.name')->label('Origen')->searchable(),
+
+            Column::name('destCity.name')->label('Destino')->searchable(),
 
             Column::callback(['id'], function ($id) {
-                return view('components.table-actions', ['id' => $id, 'resource' => 'flight']);
+                $model = ModelsFlight::find($id);
+                return view('components.table-actions', ['id' => $id, 'resource' => 'flight', 'model' => $model]);
             })->unsortable()
         ];
     }

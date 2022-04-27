@@ -9,21 +9,21 @@
     <div class="carousel-inner relative w-full overflow-hidden rounded shadow-lg">
         <div class="carousel-item active float-left w-full">
         <img
-            src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp"
+            src="https://cdn.colombia.com/images/v2/turismo/sitios-turisticos/cartagena/ciudad-cartagena-800.jpg"
             class="block w-full"
             alt="Wild Landscape"
         />
         </div>
         <div class="carousel-item float-left w-full">
         <img
-            src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp"
+            src="http://c.files.bbci.co.uk/57D2/production/_119128422_gettyimages-590299316.jpg"
             class="block w-full"
             alt="Camera"
         />
         </div>
         <div class="carousel-item float-left w-full">
         <img
-            src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp"
+            src="https://www.aviatur.com/source/contenidos/blog/nueva-york-lugares-turisticos-capital-del-mundo.jpg"
             class="block w-full"
             alt="Exotic Fruits"
         />

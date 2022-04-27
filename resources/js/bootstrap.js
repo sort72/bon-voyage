@@ -17,11 +17,19 @@ window.flatpickr = flatpickr;
 
 flatpickr('.flatpickr-datetime', {
     enableTime: true,
-    locale: Spanish
+    locale: Spanish,
+    minDate: new Date(),
+    maxDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1))
 })
 
 flatpickr('.flatpickr', {
     locale: Spanish
+})
+
+flatpickr('.flatpickr-birth', {
+    locale: Spanish,
+    minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 85)),
+    maxDate: new Date(new Date().setFullYear(new Date().getFullYear() - 17))
 })
 
 /**
