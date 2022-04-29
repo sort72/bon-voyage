@@ -10,4 +10,9 @@ class ExternalController extends Controller
     {
         return view("pages.external.index");
     }
+
+    public function flights(Request $request)
+    {
+        return view('pages.external.flights');
+    }
 }
