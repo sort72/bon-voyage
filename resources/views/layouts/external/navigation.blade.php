@@ -33,7 +33,7 @@
             <img class="block h-10 w-auto" src="{{asset('images/logo.png')}}" alt="logo_bon_voyage">
           </div>
         </div>
-        <div class="float-right h-12 w-2/5 self-start justify-center rounded-bl bg-gray-200 md:flex items-center hidden">
+        <div class="h-12 w-2/5 self-start justify-center rounded-bl bg-gray-200 md:flex items-center hidden">
             <a href="{{ route('login') }}" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <i class="fa-solid fa-user mt-1 mr-2"></i>
                 <span class="">@if(auth()->user()) {{auth()->user()->name}} {{auth()->user()->surname}} @else Iniciar sesión @endif</span>
