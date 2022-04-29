@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\ExternalController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\RootController;
 use App\Models\Flight;
@@ -18,11 +19,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['validate_client_guest'])->group(function(){
+Route::as('external.')->middleware(['validate_client_guest'])->group(function(){
     Route::get('/', function () {
         $flights = Flight::with('destination.city','origin.city')->where('departure_time','>',Carbon::now())->get();
         return view('welcome',compact('flights'));
     });
+
+    Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
 
 });
 

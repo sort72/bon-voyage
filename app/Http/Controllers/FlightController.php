@@ -43,8 +43,9 @@ class FlightController extends Controller
      */
     public function store(FlightRequest $request)
     {
+        $departure_time = Carbon::parse($request->departure_time, 'America/Bogota')->setTimezone('UTC');
+        $arrival_time = Carbon::parse($departure_time)->addMinutes($request->duration);
         $name = FlightHelper::generateName();
-        $arrival_time = Carbon::parse($request->departure_time)->addMinutes($request->duration);
 
         Flight::create([
             'name' => $name,
@@ -52,7 +53,7 @@ class FlightController extends Controller
             'first_class_price' => $request->first_class_price,
             'destination_id' => $request->destination_id,
             'origin_id' => $request->origin_id,
-            'departure_time' => $request->departure_time,
+            'departure_time' => $departure_time,
             'arrival_time' => $arrival_time,
             'is_international' => ! LocationHelper::areDestinationsFromTheSameCountry($request->origin_id, $request->destination_id),
             'price_tourist' => $request->price_tourist,
@@ -84,6 +85,8 @@ class FlightController extends Controller
         if($flight->departure_time < now()) return redirect()->route('dashboard.flight.index')->with('danger', 'Este vuelo ya no se puede modificar');
 
         $destinations = Destination::all();
+        $flight->departure_time = $flight->departure_time->timezone('America/Bogota');
+        $flight->arrival_time = $flight->arrival_time->timezone('America/Bogota');
         return view('pages.dashboard.flight.edit', compact('flight','destinations'));
     }
 
@@ -96,14 +99,15 @@ class FlightController extends Controller
      */
     public function update(FlightRequest $request, Flight $flight)
     {
-        $arrival_time = Carbon::parse($request->departure_time)->addMinutes($request->duration);
+        $departure_time = Carbon::parse($request->departure_time, 'America/Bogota')->setTimezone('UTC');
+        $arrival_time = Carbon::parse($departure_time)->addMinutes($request->duration);
 
         $flight->update([
             'economy_class_price' => $request->economy_class_price,
             'first_class_price' => $request->first_class_price,
             'destination_id' => $request->destination_id,
             'origin_id' => $request->origin_id,
-            'departure_time' => $request->departure_time,
+            'departure_time' => $departure_time,
             'arrival_time' => $arrival_time,
             'is_international' => ! LocationHelper::areDestinationsFromTheSameCountry($request->origin_id, $request->destination_id),
             'price_tourist' => $request->price_tourist,

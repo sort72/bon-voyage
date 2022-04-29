@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 
 class FlightRequest extends FormRequest
@@ -31,7 +32,7 @@ class FlightRequest extends FormRequest
             // 'name' => ['required', 'regex:/([A-Z]){2}([0-9]){3}/i', 'max:5', 'unique:flights'],
             'destination_id' => ['required', 'exists:destinations,id', 'different:origin_id'],
             'origin_id' => ['required', 'exists:destinations,id', 'different:destination_id'],
-            'departure_time' => ['required', 'date', 'after:now'],
+            'departure_time' => ['required', 'date', 'after:' . Carbon::now('America/Bogota')],
             'duration' => ['required', 'numeric', 'integer', 'min:15', 'max:1800'],
             // 'arrival_time' => ['required', 'date', 'after:departure_time'],
             // 'is_international' => ['required', 'boolean'],
