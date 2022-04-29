@@ -22,51 +22,93 @@
                 </div>
                 <!-- Code block ends -->
             </div>
-            <div class="lg:flex">
-                <div class="flex lg:w-1/3 lg:mr-3 w-full mb-2 lg:mb-0">
-                    <div class="w-1/2">
-                        <div class="grid grid-cols-3 rounded-l border-r-2 border-gray-600 bg-white items-center p-2 h-16">
-                            <label id="label2" class="col-span-3 ml-2 text-sm leading-4">Origen</label>
-                            <i class="ml-2 fa-solid fa-map-pin"></i>
-                            <input type="text" class="max-w-full rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
+            <form action="{{ route('external.flights') }}">
+                <div class="lg:flex">
+                    <div class="flex lg:w-1/3 lg:mr-3 w-full mb-2 lg:mb-0">
+                        <div class="w-1/2">
+                            <div class="grid grid-cols-3 rounded-l border-r-2 border-gray-600 bg-white items-center p-2 h-16">
+                                <label id="label2" class="col-span-3 ml-2 text-sm leading-4">Origen</label>
+                                <i class="ml-2 fa-solid fa-map-pin"></i>
+                                {{-- <input type="text" class="max-w-full rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/> --}}
+                                <div class="col-span-2">
+                                    <livewire:destination-select
+                                        name="origin_id"
+                                        :value="old('origin_id')"
+                                        :searchable="true"
+                                        placeholder=""
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-1/2">
+                            <div class="grid grid-cols-3 rounded-r bg-white items-center p-2 h-16">
+                                <label id="label2" class="col-span-3 ml-2 text-sm leading-4 ">Destino</label>
+                                <i class="ml-2 fa-solid fa-location-dot"></i>
+                                <div class="col-span-2">
+                                    <livewire:destination-select
+                                        name="destination_id"
+                                        :value="old('destination_id')"
+                                        :searchable="true"
+                                        placeholder=""
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="w-1/2">
-                        <div class="grid grid-cols-3 rounded-r bg-white items-center p-2 h-16">
-                            <label id="label2" class="col-span-3 ml-2 text-sm leading-4 ">Destino</label>
-                            <i class="ml-2 fa-solid fa-location-dot"></i>
-                            <input type="text" class="max-w-full rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
+                    <div class="flex lg:w-1/4 lg:mr-3 mb-2 lg:mb-0">
+                        <div class="w-1/2">
+                            <div class="grid grid-cols-3 rounded-l border-r-2 border-gray-600 bg-white items-center p-2 h-16">
+                                <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Fecha ida</label>
+                                <i class="ml-2 fa-solid fa-calendar-days"></i>
+                                <input type="text"  placeholder="Ida" class="departure_date col-span-2 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
+                            </div>
                         </div>
+                        <div class="w-1/2">
+                            <div class="grid grid-cols-3 rounded-r bg-white items-center p-2 h-16">
+                                <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Fecha vuelta</label>
+                                <input type="text" placeholder="Vuelta" class="back_date col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex lg:w-1/4 mb-2 lg:mb-0">
+                        <div class="w-full">
+                            <div class="grid grid-cols-3 rounded-lg border-gray-600 bg-white items-center p-2 h-16">
+                                <label id="label2" class="col-span-3 ml-2 text-sm leading-4">Pasajeros y clase</label>
+                                <i class="ml-2 fa-solid fa-user"></i>
+                                {{-- <input type="text" placeholder="Seleccione" class="col-span-2 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/> --}}
+                                @include('layouts.external.passengers-select')
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-2 col-start-2 text-center">
+                        <button class=" mx-3 lg:my-4 mt-3 bg-orange-600 transition duration-150 ease-in-out hover:bg-orange-500 rounded-lg font-semibold text-white p-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-orange-500"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
                     </div>
                 </div>
-                <div class="flex lg:w-1/4 lg:mr-3 mb-2 lg:mb-0">
-                    <div class="w-1/2">
-                        <div class="grid grid-cols-3 rounded-l border-r-2 border-gray-600 bg-white items-center p-2 h-16">
-                            <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Fecha ida</label>
-                            <i class="ml-2 fa-solid fa-calendar-days"></i>
-                            <input type="text" placeholder="Ida" class="col-span-2 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
-                        </div>
-                    </div>
-                    <div class="w-1/2">
-                        <div class="grid grid-cols-3 rounded-r bg-white items-center p-2 h-16">
-                            <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Fecha vuelta</label>
-                            <input type="text" placeholder="Vuelta" class="col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex lg:w-1/4 mb-2 lg:mb-0">
-                    <div class="w-full">
-                        <div class="grid grid-cols-3 rounded-lg border-gray-600 bg-white items-center p-2 h-16">
-                            <label id="label2" class="col-span-3 ml-2 text-sm leading-4">Pasajeros y clase</label>
-                            <i class="ml-2 fa-solid fa-user"></i>
-                            <input type="text" placeholder="Seleccione" class="col-span-2 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-span-2 col-start-2 text-center">
-                    <button class=" mx-3 lg:my-4 mt-3 bg-orange-600 transition duration-150 ease-in-out hover:bg-orange-500 rounded-lg font-semibold text-white p-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-orange-500"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        window.addEventListener("load", function(event) {
+            window.flatpickr('.departure_date', {
+                locale: window.flatpickr_spanish,
+                onChange: function(selectedDates, dateStr, instance) {
+                    window.flatpickr('.back_date', {
+                        locale: window.flatpickr_spanish,
+                        minDate: dateStr
+                    })
+                },
+                minDate: new Date()
+            })
+
+            window.flatpickr('.back_date', {
+                locale: window.flatpickr_spanish,
+                minDate: new Date()
+            })
+        });
+
+    </script>
+
+@endpush

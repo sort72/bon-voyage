@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\ExternalController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\RootController;
 use Illuminate\Support\Facades\Route;
@@ -16,10 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['validate_client_guest'])->group(function(){
+Route::as('external.')->middleware(['validate_client_guest'])->group(function(){
     Route::get('/', function () {
         return view('welcome');
     });
+
+    Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
 
 });
 
