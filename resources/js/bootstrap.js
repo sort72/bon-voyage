@@ -14,6 +14,7 @@ import flatpickr from "flatpickr";
 import { Spanish } from "flatpickr/dist/l10n/es.js"
 
 window.flatpickr = flatpickr;
+window.flatpickr_spanish = Spanish;
 
 flatpickr('.flatpickr-datetime', {
     enableTime: true,

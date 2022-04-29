@@ -3,3 +3,5 @@
 @import 'tailwindcss/utilities';
 
 @import "flatpickr/dist/flatpickr.css";
+
+[x-cloak] { display: none !important; }
