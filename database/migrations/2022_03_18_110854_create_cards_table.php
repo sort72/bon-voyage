@@ -15,6 +15,13 @@ class CreateCardsTable extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('client_id')->constrained('users')->cascadeOnDelete();
+            $table->string('type');
+            $table->string('holder_name');
+            $table->date('expiration_date');
+            $table->string('number');
+            $table->unsignedSmallInteger('cvc');
+            $table->double('amount')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
