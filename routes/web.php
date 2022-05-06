@@ -24,6 +24,8 @@ Route::as('external.')->middleware(['validate_client_guest'])->group(function(){
 
     Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
 
+    Route::get('/editar-perfil', [ExternalController::class, 'editProfile'])->name('edit-profile');
+
 });
 
 
