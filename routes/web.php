@@ -22,9 +22,10 @@ Route::as('external.')->middleware(['validate_client_guest'])->group(function(){
         return view('welcome');
     });
 
+
     Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
 
-    Route::get('/editar-perfil', [ExternalController::class, 'editProfile'])->name('edit-profile');
+    Route::get('/reservar', [ExternalController::class, 'booking'])->name('booking');
 
 });
 
