@@ -15,4 +15,8 @@ class ExternalController extends Controller
     {
         return view('pages.external.flights');
     }
+
+    public function editProfile(Request $request){
+        return view('pages.external.user.edit');
+    }
 }

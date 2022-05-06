@@ -4,6 +4,7 @@ use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\ExternalController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\RootController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,7 @@ Route::as('external.')->middleware(['validate_client_guest'])->group(function(){
     });
 
     Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
-
+    Route::get('/editar-perfil', [UserController::class, 'editProfile'])->name('edit-profile');
 });
 
 
@@ -32,6 +33,8 @@ Route::middleware(['auth', 'role:root,admin'])->as('dashboard.')->prefix('dashbo
     Route::get('/', function () {
         return view('dashboard');
     })->name('index');
+
+	
 
     Route::middleware(['role:root'])->group(function() {
         Route::get('administrator', [RootController::class, 'listAdmin'] )->name('list-admin');
