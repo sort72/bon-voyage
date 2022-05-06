@@ -8,7 +8,7 @@
     @include('layouts.external.carousel')
     <div class="lg:w-1/2 w-full px-6 justify-center">
         <h3 class="text-xl text-gray-600 font-semibold mr-6 my-6">Ofertas que no te puedes perder</h3>
-        <div class=" rounded overflow-hidden shadow-lg mt-6 ">
+        <div class="rounded overflow-hidden shadow-lg mt-6 ">
             <img class="w-full" src="https://cdn.pixabay.com/photo/2016/03/04/19/36/beach-1236581_1280.jpg" alt="Sunset in the mountains">
             <div class="px-6 py-4 flex">
                 <p class="w-4/5 text-gray-700 text-sm">
@@ -20,5 +20,11 @@
             </div>
         </div>
     </div>
+</div>
+<div class="flex flex-wrap mx-6 gap-y-2 gap-x-6 justify-center">
+    @foreach ($flights as $flight)
+        <x-flight-card :flight="$flight"></x-flight-card>
+    @endforeach
+
 </div>
 @endsection
