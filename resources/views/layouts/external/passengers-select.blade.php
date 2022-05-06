@@ -1,6 +1,7 @@
 <div class="relative col-span-3 text-center" x-data="dropdown">
-    <button type="button" class="font-bold" @click="toggle"><input class="focus:outline-0" id="client_data" value="1 Persona, Económica" /> </button>
+    <button type="button" class="font-bold cursor-pointer" @click="toggle"><input class="focus:outline-0 cursor-pointer" readonly id="client_data" value="1 Persona, Económica" /> </button>
     <div x-cloak x-show="open" @click.away="open = false" class="absolute -right-24 h-fit w-72 py-4 px-3 z-50 bg-white shadow-lg rounded-lg">
+        <input type="hidden" id="passengers" name="passengers" value="1">
         <div class="flex flex-col gap-8 mx-2">
             <div class="flex flex-wrap">
                 <div class="flex flex-col text-left w-1/2">
@@ -35,7 +36,7 @@
 
             <div class="flex flex-wrap content-center">
                 <x-label class="text-xl w-1/3 text-left">Clase</x-label>
-                <select id="flight_class" onchange="updateData()" class="w-2/3 rounded border-gray-300 h-10">
+                <select id="flight_class" name="flight_class" onchange="updateData()" class="w-2/3 rounded border-gray-300 h-10">
                     <option value="economy_class">Económica</option>
                     <option value="first_class">Primera Clase</option>
                 </select>
@@ -75,6 +76,8 @@
       people = Number(adults.value) + Number(kids.value);
       client_data = document.getElementById('client_data');
       flight_class = document.getElementById('flight_class');
+
+      document.getElementById('passengers').value = people;
 
       final_client_data = people+' '
       if(people > 1)

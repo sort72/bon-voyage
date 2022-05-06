@@ -12,10 +12,17 @@ class DestinationSelect extends LivewireSelect
 	{
 		$destinations = \App\Models\Destination::with('city');
 
+
         if($searchTerm) {
             $destinations = \App\Models\Destination::whereHas('city', function(Builder $query) use ($searchTerm) {
                 $query->where('name', 'LIKE', '%' . $searchTerm . '%');
             });
+        }
+
+        $originId = $this->getDependingValue('origin_id');
+
+        if($this->hasDependency('origin_id') && $originId != null) {
+            $destinations = $destinations->where('id', '<>', $originId);
         }
 
         $destinations = $destinations->limit(10)->get();
@@ -31,7 +38,18 @@ class DestinationSelect extends LivewireSelect
 
     public function selectedOption($value)
     {
-        return $this->loadSelected($value, \App\Models\Country::class);
+        $resource = \App\Models\Destination::where('id', $value)->with('city')->first();
+        if($resource) {
+            return [
+                'value' => $value,
+                'description' => $resource->city->name
+            ];
+        }
+
+        return [
+            'value' => null,
+            'description' => 'Selecciona...'
+        ];
     }
 
 }
