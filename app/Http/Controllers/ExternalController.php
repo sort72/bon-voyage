@@ -15,4 +15,9 @@ class ExternalController extends Controller
     {
         return view('pages.external.flights');
     }
+
+    public function changeSeat()
+    {
+        return view('pages.external.seat');
+    }
 }

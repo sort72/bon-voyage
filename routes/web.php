@@ -27,6 +27,8 @@ Route::as('external.')->middleware(['validate_client_guest'])->group(function(){
 
     Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
 
+    Route::get('/checkin/cambio-silla', [ExternalController::class, 'changeSeat'])->name('change-seat');
+
 });
 
 
