@@ -5,6 +5,8 @@ use App\Http\Controllers\ExternalController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\RootController;
 use App\Http\Controllers\UserController;
+use App\Models\Flight;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,11 +22,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::as('external.')->middleware(['validate_client_guest'])->group(function(){
     Route::get('/', function () {
-        return view('welcome');
+        $flights = Flight::with('destination.city','origin.city')->where('departure_time','>',Carbon::now())->get();
+        return view('welcome',compact('flights'));
     });
 
     Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
     Route::get('/editar-perfil', [UserController::class, 'editProfile'])->name('edit-profile');
+
+    Route::get('/checkin/cambio-silla', [ExternalController::class, 'changeSeat'])->name('change-seat');
+
 });
 
 
