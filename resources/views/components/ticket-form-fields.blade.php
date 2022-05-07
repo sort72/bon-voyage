@@ -1,8 +1,7 @@
-<div class="overflow-hidden bg-white">
-  <form action="" class="shadow-md overflow-hidden">
+<div class="overflow-hidden  py-4">
     <!-- Campos -->
     <div
-      class="sm:grid md:grid-cols-2 gap-x-8 gap-y-4 rounded-xl border-2 font-semibold border-gray-400 p-6 overflow-hidden">
+      class="sm:grid md:grid-cols-2 gap-x-8 gap-y-4 rounded-xl border-2 font-semibold bg-white border-gray-400 p-6 overflow-hidden">
       <div class="col-span-2 -mb-4">
         <h1 class="mb-3 text-xl text-sky-700">Adulto #</h1>
       </div>
@@ -11,8 +10,6 @@
         <label for="dni">Documento *</label>
         <input
           class="w-full rounded-xl border border-gray-400 p-1"
-          <!-- TODO: Borrar los ID's de todos los inputs -->
-          id="dni" 
           name="dni[]"
           required
           type="text"
@@ -29,7 +26,6 @@
         <label for="email">Correo *</label>
         <input
           class="w-full rounded-xl border border-gray-400 p-1"
-          id="email"
           name="email"
           required
           type="email"
@@ -46,7 +42,6 @@
         <label for="name">Nombre *</label>
         <input
           class="w-full rounded-xl border border-gray-400 p-1"
-          id="name"
           name="name"
           required
           type="text"
@@ -63,7 +58,6 @@
         <label for="surname">Apellidos *</label>
         <input
           class="w-full rounded-xl border border-gray-400 p-1"
-          id="surname"
           name="surname"
           required
           type="text"
@@ -79,11 +73,10 @@
       <div>
         <label for="birth_date">Fecha de nacimiento *</label>
         <input
-          class="w-full rounded-xl border border-gray-400 p-1"
-          id="birth_date"
+          class="w-full rounded-xl border border-gray-400 p-1 flatpickr-birth"
           name="birth_date"
           required
-          type="date"
+          type="text"
           value="{{ old('birth_date') }}" />
         @error('birth_date')
         <span class="text-red-500 font-semibold"
@@ -97,7 +90,6 @@
         <label for="gender">Género</label>
         <select
           class="border-black-800 w-full rounded-xl border border-gray-400 p-1"
-          id="gender"
           name="gender">
           <option value="">Seleccione una opcion</option>
           <option @if(old('gender')=='male' ) selected @endif value="male">Masculino</option>
@@ -111,7 +103,6 @@
         <label for="phone">Telefono</label>
         <input
           class="w-full rounded-xl border border-gray-400 p-1"
-          id="phone"
           name="phone"
           type="number"
           value="{{ old('phone') }}" />
@@ -127,7 +118,6 @@
         <label for="contact_name">Nombre de contacto</label>
         <input
           class="w-full rounded-xl border border-gray-400 p-1"
-          id="contact_name"
           name="contact_name"
           type="text"
           value="{{ old('contact_name') }}" />
@@ -144,7 +134,6 @@
 
         <input
           class="w-full rounded-xl border border-gray-400 p-1"
-          id="contact_phone"
           name="contact_phone"
           type="number"
           value="{{ old('contact_phone') }}" />
@@ -155,5 +144,4 @@
         @enderror
       </div>
     </div>
-  </form>
 </div>
