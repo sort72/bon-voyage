@@ -13,6 +13,7 @@ class ExternalController extends Controller
 
     public function flights(Request $request)
     {
+        dd($request->all());
         return view('pages.external.flights');
     }
 
@@ -22,5 +23,10 @@ class ExternalController extends Controller
 
     public function editProfile(Request $request){
         return view('pages.external.user.edit-profile');
+    }
+
+    public function changeSeat()
+    {
+        return view('pages.external.seat');
     }
 }
