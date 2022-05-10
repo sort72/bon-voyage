@@ -32,7 +32,6 @@
             </div>
 
             <!-- Origen -->
-            <!-- //TODO: Reviar como mandar el id de origen o renombrar el campo-->
             <div>
               <label class="font-medium text-sky-800" for="origin_id">Origen</label>
               <select class=" mt-1 w-full border border-gray-300 rounded-md p-1" name="origin_id">
@@ -47,7 +46,6 @@
             </div>
 
             <!-- Destino -->
-            <!-- //TODO: Reviar como mandar el id de destino o renombrar el campo-->
             <div>
               <label class="font-medium text-sky-800" for="destination_id">Destino</label>
               <select class=" mt-1 w-full border border-gray-300 rounded-md p-1" name="destination_id">
