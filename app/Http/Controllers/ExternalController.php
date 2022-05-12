@@ -13,6 +13,7 @@ class ExternalController extends Controller
 
     public function flights(Request $request)
     {
+        dd($request->all());
         return view('pages.external.flights');
     }
 
