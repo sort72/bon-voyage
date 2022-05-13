@@ -1,3 +1,4 @@
+@props(['adultNumber' => 1])
 <!-- TODO: Revisar los campos requeridos y como poner los name correspondientes -->
 <div class="overflow-hidden py-4">
     <!-- Campos -->
@@ -5,7 +6,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 px-12 py-6 rounded-xl border-2 font-semibold bg-white border-gray-400 overflow-hidden">
 
       <div class="md:col-span-2 -mb-4">
-        <h1 class="mb-3 text-xl text-sky-700">Adulto #</h1>
+        <h1 class="mb-3 text-xl text-sky-700">Adulto {{ $adultNumber }}</h1>
       </div>
       <!-- Documento -->
       <div>

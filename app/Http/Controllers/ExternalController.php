@@ -18,7 +18,7 @@ class ExternalController extends Controller
     }
 
     public function booking(Request $request){
-        return view('pages.external.booking');
+        return view('pages.external.booking', ['number_of_adults' => 5]);
     }
 
     public function editProfile(Request $request){

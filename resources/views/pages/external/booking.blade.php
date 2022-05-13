@@ -5,24 +5,22 @@
 @section('content')
 
 <div class="container mx-auto md:flex md:flex-wrap mt-8">
-  <!-- TODO: Recibir los parametros desde el controlador para mostrar la información correcto -->
 
   <!-- contenedor información de reserva -->
-  <div class="md:w-3/5 px-12">
+  <div class="md:w-3/5 px-12 mb-12">
     <h1 class="text-xl truncate font-bold text-sky-700">
       Complete la siguiente información de reserva
     </h1>
     <form action="" class="overflow-hidden grid gap-3">
-      <!-- TODO: Recibir en la vista la cantidad de formularios que se van a mostrar -->
-      <x-ticket-form-fields />
+      @for ($index = 1; $index <= $number_of_adults; $index++)
+      <x-ticket-form-fields :adultNumber="$index"/>
+      @endfor
 
-      <!-- TODO: añadir la pestaña de aceptar terminos y condiciones -->
       <div class="flex justify-self-center items-center">
         <input class="rounded-md" name="agreement" require type="checkbox">
         <label for="agreement" class="block text-sm ml-3">Leí y acepto las condiciones de compra, políticas de privacidad y políticas de cambio y cancelaciones.</label>
       </div>
 
-      <!-- TODO: añadir el botón de envio -->
       <button class="rounded-xl bg-red-500 hover:bg-red-600 text-2xl p-2 text-white justify-self-center mt-2" type="submit">Realizar reserva</button>
     </form>
   </div>
@@ -82,7 +80,6 @@
         </div>
 
 
-        <!-- TODO: Mejorar la vista para dispositivos pequeños -->
         <!-- Información de hora de salia tipo de vuelo hora de llegada y duración -->
         <div>
           <div class="grid grid-cols-2 items-center -mt-2 mb-4">
