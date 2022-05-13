@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
-class DestinationSelect extends LivewireSelect
+class DestinationSelect extends LivewireSelectExternal
 {
     public function options($searchTerm = null) : Collection
 	{

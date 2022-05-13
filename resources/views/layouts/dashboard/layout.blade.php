@@ -20,12 +20,12 @@
 
 </head>
 
-<body>
+<body class="bg-gray-50 text-base pt-14 lg:pl-60">
 
-    <div id="app">
+    <div id="app" class="w-screen transition-all lg:w-auto">
         @include('layouts.dashboard.navigation')
 
-        <section class="is-title-bar">
+        <section class="p-6">
             <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
                 <p class="text-3xl font-bold ml-3 text-sky-700">@yield('header')</p>
             </div>
