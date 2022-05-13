@@ -9,7 +9,7 @@
     <title>@yield('header') - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Tailwind is included -->
-    <link rel="stylesheet" href="{{ mix('css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>

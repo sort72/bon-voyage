@@ -52,6 +52,7 @@
                                         :value="old('destination_id')"
                                         :searchable="true"
                                         placeholder=""
+                                        :depends-on="['origin_id']"
                                     />
                                 </div>
                             </div>
