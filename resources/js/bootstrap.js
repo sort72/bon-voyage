@@ -33,6 +33,11 @@ flatpickr('.flatpickr-birth', {
     maxDate: new Date(new Date().setFullYear(new Date().getFullYear() - 17))
 })
 
+flatpickr('.flatpickr-birth-children', {
+    locale: Spanish,
+    minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 17)),
+    maxDate: new Date(new Date().setFullYear(new Date().getFullYear()))
+})
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
