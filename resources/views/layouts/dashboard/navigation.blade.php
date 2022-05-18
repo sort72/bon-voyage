@@ -8,8 +8,9 @@
     </div>
 @endif
 
-<nav id="navbar-main" class="navbar is-fixed-top">
-    <div class="navbar-brand">
+<nav id="navbar-main" class="lg:flex lg:items-stretch top-0 left-0 right-0 fixed flex bg-white h-14 border-b border-gray-100 z-30 w-screen transition-all
+lg:pl-60 lg:w-auto is-fixed-top">
+    <div class="flex-1 items-stretch flex h-14">
         <button type="button" class="lg:hidden mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 focus:text-sky-500 hover:text-sky-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
 
@@ -40,7 +41,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a href="#" class="flex block py-2 px-3 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onclick="event.preventDefault(); this.closest('form').submit();" title="Cerrar sesión">
-                        <span class="icon"><i class="mdi mdi-logout"></i></span>
+                        <span class="inline-flex justify-center items-center w-6 h-6"><i class="mdi mdi-logout"></i></span>
                         <span>Cerrar sesión</span>
                     </a>
                 </form>
@@ -50,47 +51,47 @@
       </button>
     </div>
 </nav>
-<aside class="aside self-start lg:inline-block hidden">
-    <div class="aside-tools">
+<aside class="w-60 left-60 fixed top-0 z-40 h-screen bg-sky-500 transition-all md:left-0 self-start lg:inline-block hidden">
+    <div class="flex flex-row w-full bg-white text-white flex-1 px-3 h-14 items-center">
         <div class="font-black text-lg text-center">
             <img class="block h-10 w-auto" src="{{asset('images/logo.png')}}" alt="logo_bon_voyage">
         </div>
     </div>
     <div class="menu is-menu-main">
-        <p class="menu-label">General</p>
-        <ul class="menu-list">
-            <li class="{{Route::is('dashboard.index') ? 'active' : ''}}">
-                <a href="{{route('dashboard.index')}}">
-                    <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
-                    <span class="menu-item-label">Dashboard</span>
+        <p class="p-3 text-xs uppercase text-white">General</p>
+        <ul>
+            <li class="{{Route::is('dashboard.index') ? 'active' : ''}} active:bg-sky-400">
+                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.index')}}">
+                    <span class="inline-flex justify-center items-center w-6 h-6 px-6"><i class="mdi mdi-desktop-mac"></i></span>
+                    <span class="flex-grow">Dashboard</span>
                 </a>
             </li>
 
             @if(Auth()->user()->role === 'root')
-            <li class="{{Route::is('dashboard.list-admin') || Route::is('dashboard.create-admin') ? 'active' : ''}}">
-                <a href="{{route('dashboard.list-admin')}}">
-                    <span class="icon"><i class="mdi mdi-shield-crown"></i></span>
-                    <span class="menu-item-label">Administradores</span>
+            <li class="{{Route::is('dashboard.list-admin') || Route::is('dashboard.create-admin') ? 'active' : ''}}  active:bg-sky-400">
+                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.list-admin')}}">
+                    <span class="inline-flex justify-center items-center w-6 h-6 px-6"><i class="mdi mdi-shield-crown"></i></span>
+                    <span class="flex-grow">Administradores</span>
                 </a>
             </li>
             @else
-            <li class="{{Route::is('dashboard.destination*') ? 'active' : ''}}">
-                <a href="{{route('dashboard.destination.index')}}">
-                    <span class="icon"><i class="mdi mdi-map-marker"></i></span>
-                    <span class="menu-item-label">Destinos</span>
+            <li class="{{Route::is('dashboard.destination*') ? 'active'  : ''}} active:bg-sky-400">
+                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.destination.index')}}">
+                    <span class="inline-flex justify-center items-center w-6 h-6 px-6"><i class="mdi mdi-map-marker"></i></span>
+                    <span class="flex-grow">Destinos</span>
                 </a>
             </li>
 
-            <li class="{{Route::is('dashboard.flight*') ? 'active' : ''}}">
-                <a href="{{route('dashboard.flight.index')}}">
-                    <span class="icon"><i class="mdi mdi-airplane"></i></span>
-                    <span class="menu-item-label">Vuelos</span>
+            <li class="{{Route::is('dashboard.flight*') ? 'active' : ''  }} active:bg-sky-400">
+                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.flight.index')}}">
+                    <span class="inline-flex justify-center items-center w-6 h-6 px-6"><i class="mdi mdi-airplane"></i></span>
+                    <span class="flex-grow">Vuelos</span>
                 </a>
             </li>
-            {{-- <li class="{{Route::is('dashboard.inbox*') ? 'active' : ''}}">
-                <a href="{{route('dashboard.inbox.index')}}">
-                    <span class="icon"><i class="mdi mdi-message-bulleted"></i></span>
-                    <span class="menu-item-label">Mensajes privados</span>
+            {{-- <li class="{{Route::is('dashboard.inbox*') ? 'active' : ''}  }">
+                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.inbox.index')}}">
+                    <span class="inline-flex justify-center items-center w-6 h-6"><i class="mdi mdi-message-bulleted"></i></span>
+                    <span class="flex-grow">Mensajes privados</span>
                 </a>
             </li> --}}
             @endif
@@ -103,39 +104,39 @@
 <div class="hidden mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1 bg-sky-500">
         <p class="text-xl text-white">General</p>
-        <ul class="menu-list">
-            <li class="{{Route::is('dashboard.index') ? 'active' : ''}} rounded">
-                <a href="{{route('dashboard.index')}}">
-                    <span class="icon"><i class="mdi mdi-desktop-mac text-white"></i></span>
+        <ul>
+            <li class="{{Route::is('dashboard.index') ? 'active' : ''}} active:bg-sky-400 rounded">
+                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.index')}}">
+                    <span class="inline-flex justify-center items-center w-6 h-6 px-6"><i class="mdi mdi-desktop-mac text-white"></i></span>
                     <span class="text-base text-white">Dashboard</span>
                 </a>
             </li>
 
             @if(Auth()->user()->role === 'root')
-            <li class="{{Route::is('dashboard.list-admin') || Route::is('dashboard.create-admin') ? 'active' : ''}} rounded">
-                <a href="{{route('dashboard.list-admin')}}">
-                    <span class="icon"><i class="mdi mdi-shield-crown text-white"></i></span>
+            <li class="{{Route::is('dashboard.list-admin') || Route::is('dashboard.create-admin') ? 'active' : ''}} active:bg-sky-400 rounded">
+                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.list-admin')}}">
+                    <span class="inline-flex justify-center items-center w-6 h-6 px-6"><i class="mdi mdi-shield-crown text-white"></i></span>
                     <span class="text-base text-white">Administradores</span>
                 </a>
             </li>
             @else
-            <li class="{{Route::is('dashboard.destination*') ? 'active' : ''}} rounded">
-                <a href="{{route('dashboard.destination.index')}}">
-                    <span class="icon"><i class="mdi mdi-map-marker text-white"></i></span>
+            <li class="{{Route::is('dashboard.destination*') ? 'active'   : ''}} active:bg-sky-400 rounded">
+                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.destination.index')}}">
+                    <span class="inline-flex justify-center items-center w-6 h-6 px-6"><i class="mdi mdi-map-marker text-white"></i></span>
                     <span class="text-base text-white">Destinos</span>
                 </a>
             </li>
 
-            <li class="{{Route::is('dashboard.flight*') ? 'active' : ''}} rounded">
-                <a href="{{route('dashboard.flight.index')}}">
-                    <span class="icon"><i class="mdi mdi-airplane text-white"></i></span>
+            <li class="{{Route::is('dashboard.flight*') ? 'active' : ''  }} active:bg-sky-400 rounded">
+                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.flight.index')}}">
+                    <span class="inline-flex justify-center items-center w-6 h-6 px-6"><i class="mdi mdi-airplane text-white"></i></span>
                     <span class="text-base text-white">Vuelos</span>
                 </a>
             </li>
-            {{-- <li class="{{Route::is('dashboard.inbox*') ? 'active' : ''}}">
+            {{-- <li class="{{Route::is('dashboard.inbox*') ? 'active' : ''}  }">
                 <a href="{{route('dashboard.inbox.index')}}">
-                    <span class="icon"><i class="mdi mdi-message-bulleted"></i></span>
-                    <span class="menu-item-label">Mensajes privados</span>
+                    <span class="inline-flex justify-center items-center w-6 h-6"><i class="mdi mdi-message-bulleted"></i></span>
+                    <span class="flex-grow">Mensajes privados</span>
                 </a>
             </li> --}}
             @endif

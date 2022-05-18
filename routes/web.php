@@ -26,9 +26,14 @@ Route::as('external.')->middleware(['validate_client_guest'])->group(function(){
         return view('welcome',compact('flights'));
     });
 
+
     Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
     Route::get('/editar-perfil', [UserController::class, 'editProfile'])->name('edit-profile');
     Route::patch('/editar-perfil', [UserController::class, 'updateProfile'])->name('update-profile');
+
+    Route::get('/reservar', [ExternalController::class, 'booking'])->name('booking');
+
+    Route::post('/reservar-datos', [ExternalController::class, 'bookingData'])->name('booking-data');
 
     Route::get('/checkin/cambio-silla', [ExternalController::class, 'changeSeat'])->name('change-seat');
 
