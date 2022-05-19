@@ -23,10 +23,13 @@ class CreateTicketsTable extends Migration
             $table->double('price')->nullable();
             $table->string('seat', 8)->nullable();
             $table->string('passenger_document')->nullable();
+            $table->string('passenger_email')->nullable();
             $table->string('passenger_name')->nullable();
             $table->string('passenger_surname')->nullable();
-            $table->string('passenger_gender')->nullable();
             $table->string('passenger_birth_date')->nullable();
+            $table->string('passenger_gender')->nullable();
+            $table->string('passenger_phone')->nullable();
+            $table->string('emergency_name')->nullable();
             $table->string('emergency_contact')->nullable();
             $table->timestamps();
             $table->softDeletes();

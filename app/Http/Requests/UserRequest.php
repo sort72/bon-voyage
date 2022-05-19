@@ -48,7 +48,7 @@ class UserRequest extends FormRequest
             $rules = array_merge($rules, $client_rules);
         }
 
-        Log::info($rules);
+        // Log::info($rules);
         return $rules;
     }
 }
