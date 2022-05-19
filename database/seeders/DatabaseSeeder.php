@@ -23,6 +23,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@bon-voyage.com'
         ]);
 
+        \App\Models\User::factory()->create([
+            'email' => 'cliente@bon-voyage.com'
+        ]);
+
         $this->call(WorldTablesSeeder::class);
         $this->call(DestinationSeeder::class);
         $this->call(FlightSeeder::class);
