@@ -26,15 +26,17 @@ class FlightHelper
         if($is_international) {
             return collect([
                 'first_class' => 50,
-                'economy_class' => 150,
-                'total' => 200
+                'economy_class' => 200,
+                'total' => 250,
+                'international' => true
             ]);
         }
 
         return collect([
             'first_class' => 25,
             'economy_class' => 125,
-            'total' => 150
+            'total' => 150,
+            'international' => false
         ]);
     }
 
