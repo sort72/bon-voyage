@@ -44,6 +44,8 @@ Route::as('external.')->group(function(){
             Route::patch('/editar-perfil', [UserController::class, 'updateProfile'])->name('update');
 
             Route::get('/reservas', [UserController::class, 'bookingList'])->name('booking-list');
+            Route::get('/carrito', [UserController::class, 'cart'])->name('cart');
+
 
             Route::resource('card', CardController::class);
         });

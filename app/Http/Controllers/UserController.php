@@ -43,4 +43,9 @@ class UserController extends Controller
         return view('pages.external.user.booking-list');
     }
 
+    public function cart()
+    {
+
+    }
+
 }
