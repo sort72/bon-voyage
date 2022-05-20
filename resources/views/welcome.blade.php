@@ -3,6 +3,7 @@
 @section('header', 'Bon Voyage')
 
 @section('content')
+{{-- {{ $errors }} --}}
 @include('layouts.external.search')
 <div class="lg:flex mb-6">
     @include('layouts.external.carousel')

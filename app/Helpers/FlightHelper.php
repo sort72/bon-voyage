@@ -100,9 +100,7 @@ class FlightHelper
             },
             'tickets as occupied_first_class_seats' => function(Builder $query) {
                 $query->where('type', 'first_class')
-                        ->where(function($query) {
-                            $query->where('status', 'paid')
-                                ->whereIn('status', ['paid', 'reserved']);
+                        ->whereIn('status', ['paid', 'reserved']);
             },
         ]);
 

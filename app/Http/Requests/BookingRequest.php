@@ -64,7 +64,7 @@ class BookingRequest extends FormRequest
 
         $rules = [
             'flight_id' => ['required', 'exists:flights,id'],
-            'inbound_flight_id' => ['sometimes', 'exists:flights,id', 'different:flight_id'],
+            'inbound_flight_id' => ['nullable', 'exists:flights,id', 'different:flight_id'],
             'flight_class' => ['required', 'in:first_class,economy_class'],
         ];
 
