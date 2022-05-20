@@ -7,7 +7,7 @@
 <div class="container mx-auto mt-8">
 
     <div class="py-2">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto sm:px-6 lg:px-8">
             <h3 class="text-2xl font-semibold text-blue-500 px-1">Mis compras</h3>
             <p>Puedes realizar el checkin de tu vuelo 24 horas antes del mismo y modificar la silla.</p>
             <p class="px-1 mb-4">

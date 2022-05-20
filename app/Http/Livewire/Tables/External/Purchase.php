@@ -27,6 +27,7 @@ class Purchase extends LivewireDatatable
             ->leftJoin('world_cities as origCity', 'origCity.id', '=', 'orig.city_id')
             ->whereIn('cart_id', [$carts])
             ->where('status', 'paid')
+            ->withTrashed()
             ->orderBy('flights.departure_time', 'desc');
 
     }
@@ -67,7 +68,8 @@ class Purchase extends LivewireDatatable
                 return DateHelper::beautify($created_at, 'short_complete_with_time');
             })->label('Fecha reservación')->searchable(),
 
-            Column::callback(['id', 'reservation_code', 'passenger_document', 'flights.departure_time'], function ($id, $confirmation_code, $dni, $departure_time) {
+            Column::callback(['id', 'reservation_code', 'passenger_document', 'flights.departure_time', 'deleted_at'], function ($id, $confirmation_code, $dni, $departure_time, $deleted_at) {
+                if($deleted_at) return '<b>CANCELADA</b>';
                 return view('components.table-purchases-actions', ['id' => $id, 'confirmation_code' => $confirmation_code, 'dni' => $dni, 'departure_time' => $departure_time]);
             })->unsortable()
         ];

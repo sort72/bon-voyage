@@ -17,4 +17,9 @@ class Ticket extends Model
         return $this->belongsTo(Flight::class);
     }
 
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
 }
