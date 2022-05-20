@@ -197,6 +197,10 @@ class ExternalController extends Controller
         // Redireccionar a cambiar silla si no la ha cambiado.
     }
 
+    public function activeBookings(){
+        return view('pages.external.active-bookings', ['total_results' => 3]);
+    }
+
     public function changeSeat()
     {
         $flight_info = FlightHelper::getTotalSeats(true);
