@@ -120,7 +120,7 @@ class ExternalController extends Controller
     }
 
     public function activeBookings(){
-        return view('pages.external.active-bookings');
+        return view('pages.external.active-bookings', ['total_results' => 3]);
     }
 
     public function editProfile(Request $request){
