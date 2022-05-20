@@ -51,7 +51,7 @@ class Flight extends LivewireDatatable
 
             Column::callback(['id'], function ($id) {
                 $model = ModelsFlight::find($id);
-                return view('components.table-actions', ['id' => $id, 'resource' => 'flight', 'model' => $model]);
+                return view('components.table-actions', ['id' => $id, 'resource' => 'flight', 'model' => $model, 'section' => 'dashboard']);
             })->unsortable()
         ];
     }

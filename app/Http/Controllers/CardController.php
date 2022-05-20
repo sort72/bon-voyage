@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CardRequest;
+use App\Models\Card;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
@@ -23,7 +25,7 @@ class CardController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.external.profile.card.create');
     }
 
     /**
@@ -32,9 +34,19 @@ class CardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CardRequest $request)
     {
-        //
+        Card::create([
+            'client_id' => Auth()->user()->id,
+            'type' => 'credit',
+            'holder_name' => $request->holder_name,
+            'number' => $request->number,
+            'expiration_date' => $request->expiration_date,
+            'cvc' => $request->cvc,
+            'amount' => $request->amount,
+        ]);
+
+        return redirect()->route('external.profile.card.index')->with('success', 'Tarjeta añadida con éxito');
     }
 
     /**
@@ -54,9 +66,9 @@ class CardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Card $card)
     {
-        //
+        return view('pages.external.profile.card.edit', compact('card'));
     }
 
     /**
@@ -66,9 +78,17 @@ class CardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CardRequest $request, Card $card)
     {
-        //
+        $card->update([
+            'holder_name' => $request->holder_name,
+            'number' => $request->number,
+            'expiration_date' => $request->expiration_date,
+            'cvc' => $request->cvc,
+            'amount' => $request->amount,
+        ]);
+
+        return redirect()->route('external.profile.card.index')->with('success', 'Tarjeta actualizada con éxito');
     }
 
     /**

@@ -34,7 +34,7 @@ class Card extends LivewireDatatable
             DateColumn::name('created_at')->label('Fecha creación')->searchable(),
 
             Column::callback(['id'], function ($id) {
-                return view('components.table-actions', ['id' => $id, 'resource' => 'card']);
+                return view('components.table-actions', ['id' => $id, 'resource' => 'card', 'section' => 'external.profile']);
             })->unsortable()
         ];
     }

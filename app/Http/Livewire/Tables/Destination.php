@@ -22,7 +22,7 @@ class Destination extends LivewireDatatable
             DateColumn::name('created_at')->label('Fecha de creación'),
 
             Column::callback(['id'], function ($id) {
-                return view('components.table-actions', ['id' => $id, 'resource' => 'destination']);
+                return view('components.table-actions', ['id' => $id, 'resource' => 'destination', 'section' => 'dashboard']);
             })->unsortable()
         ];
     }

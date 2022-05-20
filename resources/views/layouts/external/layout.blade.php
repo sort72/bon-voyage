@@ -27,6 +27,15 @@
 
         @include('layouts.external.navigation')
         <section class="section main-section">
+            @if (session('success'))
+                <div class="bg-green-600 h-12 w-full py-3 px-2 text-center text-white">
+                    {{ session('success') }}
+                </div>
+            @elseif (session('danger'))
+                <div class="bg-red-600 h-12 w-full py-3 px-2 text-center text-white">
+                    {{ session('danger') }}
+                </div>
+            @endif
             @yield('content')
         </section>
 
