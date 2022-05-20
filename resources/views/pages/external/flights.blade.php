@@ -53,7 +53,7 @@
                                             <div class="form-check">
                                                 <input
                                                     class="form-check-input float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white align-top transition duration-200 checked:border-slate-600 checked:bg-blue-600 focus:outline-none"
-                                                    type="radio" onclick="changePrices({{$flight->economy_class_price}},{{$flight->first_class_price}},this)" />
+                                                    type="radio" onclick="changePrices({{$flight->id}},{{$flight->economy_class_price}},{{$flight->first_class_price}},this)" />
                                                 <label class="form-check-label inline-block text-slate-800"> Bon voyage </label>
                                             </div>
                                         </div>
@@ -128,7 +128,7 @@
                                                 <div class="form-check">
                                                     <input
                                                         class="form-check-input float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white align-top transition duration-200 checked:border-slate-600 checked:bg-blue-600 focus:outline-none"
-                                                        type="radio" onclick="changePrices({{$flight->economy_class_price}},{{$flight->first_class_price}},this)" />
+                                                        type="radio" onclick="changePrices({{$flight->id}},{{$flight->economy_class_price}},{{$flight->first_class_price}},this)" />
                                                     <label class="form-check-label inline-block text-slate-800"> Bon voyage </label>
                                                 </div>
                                             </div>
@@ -195,8 +195,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-between flex-wrap">
-                                <button
-                                    class="m-2 w-full rounded-full bg-sky-600 p-2 font-semibold hover:bg-sky-500 text-white">Reservar</button>
+                                <a href="#" id="reservation" class="text-center m-2 w-full rounded-full bg-sky-600 p-2 font-semibold hover:bg-sky-500 text-white">Reservar</a>
                                 <button
                                 class="m-2 w-full rounded-full bg-green-600 hover:bg-green-500 p-2 font-semibold text-white">Comprar</button>
                             </div>
@@ -216,25 +215,38 @@
     </div>
 @push('scripts')
 <script>
-    function changePrices(economy_class_price,first_class_price,input){
+    function changePrices(flight_id,economy_class_price,first_class_price,input,inbound_flight_id=null){
 
         adult_price_input = document.getElementById('adult_price');
         total_adults_input = document.getElementById('total_adults');
         kid_price_input = document.getElementById('kid_price');
         total_kids_input = document.getElementById('total_kids');
         total_input = document.getElementById('total');
+        reservation = document.getElementById('reservation');
 
-        var flight_price = {{$flight_class == 'economy_class'}} ? economy_class_price : first_class_price;
+        var flight_class = '{{$flight_class}}'
+        var flight_price = (flight_class == 'economy_class') ? economy_class_price : first_class_price;
         var adults_total = {{$adults_count}};
         var total_adults = flight_price * adults_total;
         var kids_total = {{$kids_count}};
         var total_kids = flight_price * kids_total;
+        var total_passengers = adults_total + kids_total
 
         adult_price_input.value = flight_price
         total_adults_input.value = total_adults
         kid_price_input.value = flight_price
         total_kids_input.value = total_kids
         total_input.value = total_adults + total_kids
+
+        var url = "{{ route('external.booking', [':id',':adults_count',':kids_count',':flight_class',':passengers',':inbound_flight_id']) }}"
+        url = url.replace(':id', flight_id)
+        url = url.replace(':adults_count', adults_total)
+        url = url.replace(':kids_count', kids_total)
+        url = url.replace(':flight_class', flight_class)
+        url = url.replace(':passengers', total_passengers)
+        url = url.replace(':inbound_flight_id', inbound_flight_id)
+        reservation.href = url
+        console.log(reservation.href)
     }
 </script>
 
