@@ -33,27 +33,27 @@ class FlightHelper
     public static function getAvailableSeat(Flight $flight, $class)
     {
         if($flight->is_international) {
-            if($class == 'economy_class') {
+            if($class == 'first_class') {
                 $number_min = 1;
                 $number_max = 50;
-                $letter_max = 9;
+                $letter_max = 8;
             }
             else {
                 $number_min = 51;
-                $number_max = 70;
-                $letter_max = 6;
+                $number_max = 250;
+                $letter_max = 8;
             }
         }
         else {
-            if($class == 'economy_class') {
+            if($class == 'first_class') {
                 $number_min = 1;
-                $number_max = 30;
+                $number_max = 25;
                 $letter_max = 6;
             }
             else {
-                $number_min = 31;
-                $number_max = 40;
-                $letter_max = 3;
+                $number_min = 26;
+                $number_max = 150;
+                $letter_max = 6;
             }
         }
 
