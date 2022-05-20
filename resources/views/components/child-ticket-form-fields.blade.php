@@ -74,10 +74,13 @@
           class="border-black-800 w-full rounded-xl border border-gray-400 p-1 overflow-hidden"
           name="child_gender[]">
           <option value="">Seleccione una opcion</option>
-          <option @if(old('child_gender')=='male' ) selected @endif value="male">Masculino</option>
-          <option @if(old('child_gender')=='female' ) selected @endif value="female">Femenino</option>
-          <option @if(old('child_gender')=='others' ) selected @endif value="others">Otros</option>
+          <option @if(old('child_gender.' . $childNumber)=='male' ) selected @endif value="male">Masculino</option>
+          <option @if(old('child_gender.' . $childNumber)=='female' ) selected @endif value="female">Femenino</option>
+          <option @if(old('child_gender.' . $childNumber)=='others' ) selected @endif value="others">Otros</option>
         </select>
+        @error('child_gender.' . $childNumber)
+          <span class="text-red-500 font-semibold">{{$errors->first('child_gender.' . $childNumber)}}</span>
+        @enderror
       </div>
 
       <!-- Nombre de contacto -->
