@@ -15,7 +15,7 @@ class CardController extends Controller
      */
     public function index()
     {
-        return view('pages.external.profile.card.index');
+        return view('pages.external.user.card.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class CardController extends Controller
      */
     public function create()
     {
-        return view('pages.external.profile.card.create');
+        return view('pages.external.user.card.create');
     }
 
     /**
@@ -68,7 +68,7 @@ class CardController extends Controller
      */
     public function edit(Card $card)
     {
-        return view('pages.external.profile.card.edit', compact('card'));
+        return view('pages.external.user.card.edit', compact('card'));
     }
 
     /**

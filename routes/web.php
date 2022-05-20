@@ -40,12 +40,11 @@ Route::as('external.')->group(function(){
 
     Route::middleware(['auth', 'role:client'])->group(function() {
         Route::as('profile.')->prefix('perfil')->group(function() {
+            Route::get('/editar-perfil', [UserController::class, 'editProfile'])->name('edit');
+            Route::patch('/editar-perfil', [UserController::class, 'updateProfile'])->name('update');
+
             Route::resource('card', CardController::class);
-
-    Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
-    Route::get('/editar-perfil', [UserController::class, 'editProfile'])->name('edit-profile');
-    Route::patch('/editar-perfil', [UserController::class, 'updateProfile'])->name('update-profile');
-
+        });
     });
 
 });
@@ -57,7 +56,7 @@ Route::middleware(['auth', 'role:root,admin'])->as('dashboard.')->prefix('dashbo
         return view('dashboard');
     })->name('index');
 
-	
+
 
     Route::middleware(['role:root'])->group(function() {
         Route::get('administrator', [RootController::class, 'listAdmin'] )->name('list-admin');
@@ -77,3 +76,5 @@ Route::middleware(['auth', 'role:root,admin'])->as('dashboard.')->prefix('dashbo
 
 
 require __DIR__.'/auth.php';
+
+

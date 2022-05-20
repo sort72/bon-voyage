@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="h-12 w-2/5 self-start justify-center rounded-bl bg-gray-200 md:flex items-center hidden">
-            <a href="{{ route('login') }}" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <a href="@if(auth()->user()) {{route('external.profile.edit')}} @else {{ route('login') }} @endif" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <i class="fa-solid fa-user mt-1 mr-2"></i>
                 <span class="">@if(auth()->user()) {{auth()->user()->name}} {{auth()->user()->surname}} @else Iniciar sesión @endif</span>
             </a>
@@ -149,7 +149,7 @@
             </form>
         @else
 
-            <a href="{{ route('login') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> Iniciar sesión</a>
+            <a href="@if(auth()->user()) {{route('external.profile.edit')}} @else {{ route('login') }} @endif" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> Iniciar sesión</a>
 
             <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-suitcase mt-1 mr-2"></i> Mis viajes</a>
 
