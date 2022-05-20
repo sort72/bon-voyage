@@ -32,4 +32,9 @@ class Flight extends Model
     {
         return $this->departure_time->diffInMinutes($this->arrival_time);
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class)->withTrashed();
+    }
 }

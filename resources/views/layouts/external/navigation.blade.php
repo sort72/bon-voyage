@@ -83,7 +83,7 @@
                 </div>
             </a>
             @if(auth()->user())
-                <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <a href="{{ route('external.profile.card.index') }}" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
                     <div class="text-center">
                         <i class="block fa-solid fa-credit-card"></i>
                         <span class="block w-full">Mis tarjetas</span>
@@ -127,7 +127,7 @@
         <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-suitcase"></i> Check-in</a>
         @if(auth()->user())
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-credit-card"></i> Mis tarjetas</a>
+            <a href="{{ route('external.profile.card.index') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-credit-card"></i> Mis tarjetas</a>
 
             <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-couch"></i> Mis reservas</a>
 

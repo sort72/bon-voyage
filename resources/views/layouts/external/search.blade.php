@@ -58,27 +58,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex lg:w-1/3 lg:mr-3 mb-2 lg:mb-0" x-show="show">
-                        <div class="w-1/2">
-                            <div class="grid grid-cols-3 rounded-l border-r-2 border-gray-600 bg-white items-center p-2 h-16">
-                                <i class="ml-2 mr-0 fa-solid fa-calendar-days"></i>
-                                <label id="label2" class="col-span-2 ml-2 text-xs leading-4">Fecha ida</label>
-                                <input type="text"  placeholder="Ida" class="departure_date col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
-                            </div>
-                        </div>
-                        <div class="w-1/2">
-                            <div class="grid grid-cols-3 rounded-r bg-white items-center p-2 h-16">
-                                <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Fecha vuelta</label>
-                                <input type="text" placeholder="Vuelta" class="back_date col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex lg:w-1/3 lg:mr-3 mb-2 lg:mb-0" x-show="!show">
+                    <div class="flex lg:w-1/3 lg:mr-3 mb-2 lg:mb-0" >
                         <div class="w-full">
                             <div class="grid grid-cols-3 rounded bg-white items-center p-2 h-16">
                                 <i class="ml-2 mr-0 fa-solid fa-calendar-days"></i>
                                 <label id="label2" class="col-span-2 ml-2 text-xs leading-4">Fecha ida</label>
-                                <input type="text"  placeholder="Ida" class="departure_date col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
+                                <input type="text" name="departure_time" value="{{ old('departure_time') }}" placeholder="Ida" class="departure_date col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
+                            </div>
+                        </div>
+                        <div class="w-full" x-show="show">
+                            <div class="grid grid-cols-3 rounded-r bg-white items-center p-2 h-16">
+                                <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Fecha vuelta</label>
+                                <input type="text" name="back_time" value="{{ old('back_time') }}" placeholder="Vuelta" class="back_date col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
                             </div>
                         </div>
                     </div>
