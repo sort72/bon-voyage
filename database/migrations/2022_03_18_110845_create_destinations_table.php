@@ -17,6 +17,7 @@ class CreateDestinationsTable extends Migration
             $table->id();
             $table->foreignId('city_id')->constrained('world_cities')->cascadeOnDelete();
             $table->string('timezone')->default('UTC');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
