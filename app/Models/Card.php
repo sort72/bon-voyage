@@ -9,4 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Card extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $guarded = ['id'];
+
+    protected $casts = [
+        'expiration_date' => 'date',
+    ];
 }

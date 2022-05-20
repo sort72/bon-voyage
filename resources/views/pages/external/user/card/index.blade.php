@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container mx-auto md:flex md:flex-wrap mt-8">
+<div class="container mx-auto mt-8">
 
     <div class="py-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

@@ -18,19 +18,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'surname',
-        'email',
-        'password',
-        'dni',
-        'role',
-        'birth_date',
-        'birth_place',
-        'address',
-        'gender',
-        'profile_picture'
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -50,4 +38,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function cards()
+    {
+        return $this->hasMany(Card::class, 'client_id');
+    }
+
+    public function carts()
+    {
+        return $this->hasManyThrough(Cart::class, Card::class);
+    }
 }

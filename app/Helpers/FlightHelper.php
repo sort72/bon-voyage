@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\Flight;
+use App\Models\Ticket;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
@@ -19,6 +20,54 @@ class FlightHelper
 
         return $name;
 
+    }
+
+    public static function generateReservationCode()
+    {
+        $code = random_int(1, 9) . Str::upper(Str::random(4)) . random_int(1, 9);
+
+        return $code;
+
+    }
+
+    public static function getAvailableSeat(Flight $flight, $class)
+    {
+        if($flight->is_international) {
+            if($class == 'economy_class') {
+                $number_min = 1;
+                $number_max = 50;
+                $letter_max = 9;
+            }
+            else {
+                $number_min = 51;
+                $number_max = 70;
+                $letter_max = 6;
+            }
+        }
+        else {
+            if($class == 'economy_class') {
+                $number_min = 1;
+                $number_max = 30;
+                $letter_max = 6;
+            }
+            else {
+                $number_min = 31;
+                $number_max = 40;
+                $letter_max = 3;
+            }
+        }
+
+        $letter_min = 0;
+        $letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I" ];
+
+        do {
+            $seat = $letters[random_int($letter_min, $letter_max)] . random_int($number_min, $number_max);
+
+            $seat_taken = Ticket::where('seat', $seat)->first();
+
+        } while ($seat_taken);
+
+        return $seat;
     }
 
     public static function getTotalSeats($is_international)
