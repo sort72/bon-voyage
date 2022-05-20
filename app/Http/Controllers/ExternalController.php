@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\FlightHelper;
 use App\Http\Requests\BookFlightRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookingRequest;
 use App\Http\Requests\SearchFlightRequest;
+use App\Models\Cart;
 use App\Models\Flight;
+use App\Models\Ticket;
 
 class ExternalController extends Controller
 {
@@ -69,6 +72,51 @@ class ExternalController extends Controller
     // Controlador de prueba
     public function bookingData(BookingRequest $request){
         dump($request->all());
+
+        $cart = Cart::firstOrCreate(['user_id' => Auth()->user()->id, 'status' => 'opened']);
+        $flight = Flight::find($request->flight_id);
+        $price = $flight->economy_class_price;
+        if($request->flight_class == 'first_class') {
+            $price = $flight->first_class_price;
+        }
+
+        $inbound_flight = null;
+        $inbound_flight_price = 0;
+        if($request->inbound_flight_id) {
+            $inbound_flight = Flight::find($request->inbound_flight_id);
+            $inbound_flight_price = $inbound_flight->economy_class_price;
+            if($request->flight_class == 'first_class') {
+                $inbound_flight_price = $inbound_flight->first_class_price;
+            }
+        }
+
+        foreach ($request->adult_dni as $key => $adult) {
+            $data = [
+                'flight_id' => $request->flight_id,
+                'cart_id' => $cart->id,
+                'type' => $request->flight_class,
+                'reservation_code' => FlightHelper::generateReservationCode(),
+                'status' => 'reserved',
+                'price' => $price,
+                'seat' => FlightHelper::getAvailableSeat($flight, $request->flight_class),
+                'passenger_document' => $request->adult_dni[$key],
+                'passenger_email' => $request->adult_email[$key],
+                'passenger_name' => $request->adult_name[$key],
+                'passenger_surname' => $request->adult_surname[$key],
+                'passenger_birth_date' => $request->adult_birth_date[$key],
+                'passenger_gender' => $request->adult_gender[$key],
+                'passenger_phone' => $request->adult_phone[$key],
+                'emergency_name' => $request->adult_emergency_name[$key],
+                'emergency_contact' => $request->adult_emergency_contact[$key],
+            ];
+            dump($data);
+            // Ticket::create([
+            //     'flight_id'
+            // ]);
+            if($request->inbound_flight_id) {
+
+            }
+        }
     }
 
     public function editProfile(Request $request){

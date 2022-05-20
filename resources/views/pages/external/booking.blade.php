@@ -20,8 +20,12 @@
                     <x-child-ticket-form-fields :childNumber="$index" />
                 @endfor
 
+                <input hidden name="flight_id" value="{{ $flight->id }}">
+                <input hidden name="inbound_flight_id" value="{{ $inbound_flight ? $inbound_flight->id : '' }}">
+                <input hidden name="flight_class" value="{{ $class }}">
+
                 <div class="flex justify-self-center items-center">
-                    <input class="rounded-md" name="agreement" required type="checkbox">
+                    <input class="rounded-md" name="agreement" id="agreement" required type="checkbox">
                     <label for="agreement" class="block text-sm ml-3">Leí y acepto las condiciones de compra, políticas de
                         privacidad y políticas de cambio y cancelaciones.</label>
                 </div>

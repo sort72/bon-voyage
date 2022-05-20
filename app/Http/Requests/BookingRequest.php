@@ -62,6 +62,12 @@ class BookingRequest extends FormRequest
             'child_emergency_contact.*' => ['required', 'numeric', 'integer', 'min:100000', 'max:99999999999999'],
         ];
 
-        return array_merge($adults_rules, $children_rules);
+        $rules = [
+            'flight_id' => ['required', 'exists:flights,id'],
+            'inbound_flight_id' => ['sometimes', 'exists:flights,id', 'different:flight_id'],
+            'flight_class' => ['required', 'in:first_class,economy_class'],
+        ];
+
+        return array_merge($rules, $adults_rules, $children_rules);
     }
 }
