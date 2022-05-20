@@ -10,6 +10,9 @@ use App\Http\Requests\SearchFlightRequest;
 use App\Models\Cart;
 use App\Models\Flight;
 use App\Models\Ticket;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class ExternalController extends Controller
 {
@@ -158,6 +161,22 @@ class ExternalController extends Controller
         }
 
         return redirect()->route('external.profile.booking-list')->with('success', 'Reserva realizada con éxito. Tienes 24 horas para pagarla o será cancelada.');
+    }
+
+    public function checkin()
+    {
+        $dni = "";
+        $reservation_code = "";
+        if(Auth()->check()) {
+            $dni = Auth()->user()->dni;
+        };
+
+        return view('pages.external.checkin', compact('dni', 'reservation_code'));
+    }
+
+    public function validateCheckin(Request $request)
+    {
+
     }
 
     public function changeSeat()
