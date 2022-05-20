@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\BookingRequest;
+use App\Http\Requests\SearchFlightRequest;
+use App\Models\Flight;
 
 class ExternalController extends Controller
 {
@@ -12,10 +14,35 @@ class ExternalController extends Controller
         return view("pages.external.index");
     }
 
-    public function flights(Request $request)
+    public function flights(SearchFlightRequest $request)
     {
-        dd($request->all());
-        return view('pages.external.flights');
+        if($request->has('back_time') && $request->back_time) {
+
+            $flights = Flight::where(function($query) use ($request) {
+                            $query->where(function($query) use($request) {
+                                $query->where('origin_id', $request->origin_id)->where('destination_id', $request->destination_id);
+                            })
+                            ->orWhere(function($query) use($request) {
+                                $query->where('origin_id', $request->destination_id)->where('destination_id', $request->origin_id);
+                            });
+                        })
+                        ->where(function($query) use ($request) {
+                            $query->whereBetween('departure_time', [$request->departure_time . ' 00:00:00', $request->departure_time . ' 23:59:59'])
+                                ->orWhereBetween('departure_time', [$request->back_time . ' 00:00:00', $request->back_time . ' 23:59:59']);
+                        })
+                        ->get();
+        }
+        else {
+            $flights = Flight::where('origin_id', $request->origin_id)
+                        ->where('destination_id', $request->destination_id)
+                        ->whereBetween('departure_time', [$request->departure_time . ' 00:00:00', $request->departure_time . ' 23:59:59'])
+                        ->get();
+        }
+
+
+
+
+        return view('pages.external.flights', compact('flights'));
     }
 
     public function booking(Request $request){

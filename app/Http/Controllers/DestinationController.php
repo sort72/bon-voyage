@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DestinationRequest;
 use App\Models\Destination;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DestinationController extends Controller
 {
@@ -36,7 +37,13 @@ class DestinationController extends Controller
      */
     public function store(DestinationRequest $request)
     {
-        Destination::create($request->only(['city_id','timezone']));
+        $destination = Destination::create([
+            'city_id' => $request->city_id,
+            'timezone' => $request->timezone
+        ]);
+
+        $file = $request->file('image');
+        Storage::disk('public')->put('destinations/'.$destination->id,$file);
 
         return redirect()->route('dashboard.destination.index')->with('success', 'Destino ' . $request->name . ' creado con éxito');
     }
@@ -74,6 +81,13 @@ class DestinationController extends Controller
     public function update(DestinationRequest $request, Destination $destination)
     {
         $destination->update($request->only(['city_id','timezone']));
+
+        if($request->file('image'))
+        {
+            $file = $request->file('image');
+            Storage::disk('public')->put('destinations/'.$destination->id,$file);
+        }
+
 
         return redirect()->route('dashboard.destination.index')->with('success', 'Destino ' . $request->name . ' modificado con éxito');
     }
