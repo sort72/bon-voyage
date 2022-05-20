@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\ExternalController;
 use App\Http\Controllers\FlightController;
@@ -20,22 +21,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::as('external.')->middleware(['validate_client_guest'])->group(function(){
-    Route::get('/', function () {
-        $flights = Flight::with('destination.city','origin.city')->where('departure_time','>',Carbon::now())->get();
-        return view('welcome',compact('flights'));
+Route::as('external.')->group(function(){
+    Route::middleware(['validate_client_guest'])->group(function() {
+        Route::get('/', function () {
+            $flights = Flight::with('destination.city','origin.city')->where('departure_time','>',Carbon::now())->get();
+            return view('welcome',compact('flights'));
+        });
+
+
+        Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
+
+        Route::get('/reservar', [ExternalController::class, 'booking'])->name('booking');
+
+        Route::post('/reservar-datos', [ExternalController::class, 'bookingData'])->name('booking-data');
+
+        Route::get('/checkin/cambio-silla', [ExternalController::class, 'changeSeat'])->name('change-seat');
     });
 
+    Route::middleware(['auth', 'role:client'])->group(function() {
+        Route::as('profile.')->prefix('perfil')->group(function() {
+            Route::resource('card', CardController::class);
 
     Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
     Route::get('/editar-perfil', [UserController::class, 'editProfile'])->name('edit-profile');
     Route::patch('/editar-perfil', [UserController::class, 'updateProfile'])->name('update-profile');
 
-    Route::get('/reservar', [ExternalController::class, 'booking'])->name('booking');
-
-    Route::post('/reservar-datos', [ExternalController::class, 'bookingData'])->name('booking-data');
-
-    Route::get('/checkin/cambio-silla', [ExternalController::class, 'changeSeat'])->name('change-seat');
+    });
 
 });
 

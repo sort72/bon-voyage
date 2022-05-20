@@ -26,12 +26,18 @@ class DestinationRequest extends FormRequest
     public function rules()
     {
         $unique = Rule::unique('destinations', 'city_id');
-        if(isset($this->destination->id)) $unique = $unique->ignore($this->destination->id);
+        $required_image = 'required';
+        if(isset($this->destination->id))
+        {
+            $required_image = 'nullable';
+            $unique = $unique->ignore($this->destination->id);
+        }
 
         return [
             'country_id' => ['required', 'exists:world_countries,id'],
             'division_id' => ['nullable', 'exists:world_divisions,id'],
             'city_id' => ['required', 'exists:world_cities,id', $unique],
+            'image' => [$required_image, 'image','file|size:4000'],
             'timezone' => ['required', 'string', Rule::in(array_keys(LocationHelper::timezones()))]
         ];
     }

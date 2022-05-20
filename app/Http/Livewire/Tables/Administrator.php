@@ -14,7 +14,6 @@ class Administrator extends LivewireDatatable
 
     public function builder()
     {
-        // Aqui hay que hacerlo así porque al tener dos relaciones hacia destinations, LivewireDatatables muestra el mismo valor para ambos campos
         return User::query()
             ->where('role', 'admin');
     }

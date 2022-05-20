@@ -12,7 +12,7 @@
                     <button data-action="decrement" type="button" class="text-center bg-sky-400 text-white hover:bg-sky-500 h-8 w-8 rounded-l cursor-pointer outline-none">
                         <span class="place-items-center text-center text-2xl" >−</span>
                     </button>
-                    <input type="number" class="border-0 w-10 h-8 outline-none focus:outline-none text-center bg-sky-400 font-semibold text-md focus:text-black  md:text-basecursor-default flex items-center text-white outline-none" name="custom-input-number" id="adults" value="1"></input>
+                    <input type="number" class="border-0 w-10 h-8 focus:outline-none text-center bg-sky-400 font-semibold text-md focus:text-black  md:text-basecursor-default flex items-center text-white outline-none" name="custom-input-number" id="adults" value="1"></input>
                     <button data-action="increment" type="button" class="text-center bg-sky-400 text-white hover:bg-sky-500 h-8 w-8 rounded-r cursor-pointer">
                         <span class="text-2xl place-items-center text-center">+</span>
                     </button>
@@ -27,7 +27,7 @@
                     <button data-action="decrementKids" type="button" class="text-center bg-sky-400 text-white hover:bg-sky-500 h-8 w-8 rounded-l cursor-pointer outline-none">
                         <span class="place-items-center text-center text-2xl" >−</span>
                     </button>
-                    <input type="number" class="border-0 w-10 h-8 outline-none focus:outline-none text-center bg-sky-400 font-semibold text-md focus:text-black  md:text-basecursor-default flex items-center text-white outline-none" name="custom-input-number" id="kids" value="0"></input>
+                    <input type="number" class="border-0 w-10 h-8 outline-none focus:outline-none text-center bg-sky-400 font-semibold text-md focus:text-black  md:text-basecursor-default flex items-center text-white" name="custom-input-number" id="kids" value="0"></input>
                     <button data-action="incrementKids" type="button" class="text-center bg-sky-400 text-white hover:bg-sky-500 h-8 w-8 rounded-r cursor-pointer">
                         <span class="text-2xl place-items-center text-center">+</span>
                     </button>
@@ -44,131 +44,133 @@
         </div>
     </div>
 </div>
-<style>
-    input[type='number']::-webkit-inner-spin-button,
-    input[type='number']::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
+@push('scripts')
+    <style>
+        input[type='number']::-webkit-inner-spin-button,
+        input[type='number']::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
 
-    .custom-number-input input:focus {
-      outline: none !important;
-    }
+        .custom-number-input input:focus {
+        outline: none !important;
+        }
 
-    .custom-number-input button:focus {
-      outline: none !important;
-    }
-  </style>
+        .custom-number-input button:focus {
+        outline: none !important;
+        }
+    </style>
 
-  <script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('dropdown', () => ({
-            open: false,
-            toggle() {
-                this.open = ! this.open
-            }
-        }))
-    })
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('dropdown', () => ({
+                open: false,
+                toggle() {
+                    this.open = ! this.open
+                }
+            }))
+        })
 
-    function updateData(){
-      adults = document.getElementById('adults');
-      kids = document.getElementById('kids');
-      people = Number(adults.value) + Number(kids.value);
-      client_data = document.getElementById('client_data');
-      flight_class = document.getElementById('flight_class');
+        function updateData(){
+        adults = document.getElementById('adults');
+        kids = document.getElementById('kids');
+        people = Number(adults.value) + Number(kids.value);
+        client_data = document.getElementById('client_data');
+        flight_class = document.getElementById('flight_class');
 
-      document.getElementById('passengers').value = people;
+        document.getElementById('passengers').value = people;
 
-      final_client_data = people+' '
-      if(people > 1)
-        final_client_data += 'Personas'
-      else
-        final_client_data += 'Persona'
+        final_client_data = people+' '
+        if(people > 1)
+            final_client_data += 'Personas'
+        else
+            final_client_data += 'Persona'
 
-      if(flight_class.value == 'economy_class')
-        final_client_data += ', Económica'
-      else
-        final_client_data += ', Primera Clase'
+        if(flight_class.value == 'economy_class')
+            final_client_data += ', Económica'
+        else
+            final_client_data += ', Primera Clase'
 
-      client_data.value = final_client_data
-    }
+        client_data.value = final_client_data
+        }
 
 
-    function decrement(e) {
-      const btn = e.target.parentNode.parentElement.querySelector(
-        'button[data-action="decrement"]'
-      );
-      const target = btn.nextElementSibling;
-      let value = Number(target.value);
-      if(value !== 1)
-        value--;
-      target.value = value;
-      updateData();
-    }
+        function decrement(e) {
+        const btn = e.target.parentNode.parentElement.querySelector(
+            'button[data-action="decrement"]'
+        );
+        const target = btn.nextElementSibling;
+        let value = Number(target.value);
+        if(value !== 1)
+            value--;
+        target.value = value;
+        updateData();
+        }
 
-    function decrementKids(e) {
-      const btn = e.target.parentNode.parentElement.querySelector(
-        'button[data-action="decrementKids"]'
-      );
-      const target = btn.nextElementSibling;
-      let value = Number(target.value);
-      if(value !== 0)
-        value--;
-      target.value = value;
-      updateData();
-    }
+        function decrementKids(e) {
+        const btn = e.target.parentNode.parentElement.querySelector(
+            'button[data-action="decrementKids"]'
+        );
+        const target = btn.nextElementSibling;
+        let value = Number(target.value);
+        if(value !== 0)
+            value--;
+        target.value = value;
+        updateData();
+        }
 
-    function increment(e) {
-      const btn = e.target.parentNode.parentElement.querySelector(
-        'button[data-action="decrement"]'
-      );
-      const target = btn.nextElementSibling;
-      let value = Number(target.value);
-      value++;
-      target.value = value;
-      updateData();
-    }
+        function increment(e) {
+        const btn = e.target.parentNode.parentElement.querySelector(
+            'button[data-action="decrement"]'
+        );
+        const target = btn.nextElementSibling;
+        let value = Number(target.value);
+        value++;
+        target.value = value;
+        updateData();
+        }
 
-    function incrementKids(e) {
-      const btn = e.target.parentNode.parentElement.querySelector(
-        'button[data-action="decrementKids"]'
-      );
-      const target = btn.nextElementSibling;
-      let value = Number(target.value);
-      value++;
-      target.value = value;
-      updateData();
-    }
+        function incrementKids(e) {
+        const btn = e.target.parentNode.parentElement.querySelector(
+            'button[data-action="decrementKids"]'
+        );
+        const target = btn.nextElementSibling;
+        let value = Number(target.value);
+        value++;
+        target.value = value;
+        updateData();
+        }
 
-    const decrementButtons = document.querySelectorAll(
-      `button[data-action="decrement"]`
-    );
+        const decrementButtons = document.querySelectorAll(
+        `button[data-action="decrement"]`
+        );
 
-    const incrementButtons = document.querySelectorAll(
-      `button[data-action="increment"]`
-    );
+        const incrementButtons = document.querySelectorAll(
+        `button[data-action="increment"]`
+        );
 
-    decrementButtons.forEach(btn => {
-      btn.addEventListener("click", decrement);
-    });
+        decrementButtons.forEach(btn => {
+        btn.addEventListener("click", decrement);
+        });
 
-    incrementButtons.forEach(btn => {
-      btn.addEventListener("click", increment);
-    });
+        incrementButtons.forEach(btn => {
+        btn.addEventListener("click", increment);
+        });
 
-    const decrementKidsButtons = document.querySelectorAll(
-      `button[data-action="decrementKids"]`
-    );
+        const decrementKidsButtons = document.querySelectorAll(
+        `button[data-action="decrementKids"]`
+        );
 
-    const incrementKidsButtons = document.querySelectorAll(
-      `button[data-action="incrementKids"]`
-    );
+        const incrementKidsButtons = document.querySelectorAll(
+        `button[data-action="incrementKids"]`
+        );
 
-    decrementKidsButtons.forEach(btn => {
-      btn.addEventListener("click", decrementKids);
-    });
+        decrementKidsButtons.forEach(btn => {
+        btn.addEventListener("click", decrementKids);
+        });
 
-    incrementKidsButtons.forEach(btn => {
-      btn.addEventListener("click", incrementKids);
-    });
-  </script>
+        incrementKidsButtons.forEach(btn => {
+        btn.addEventListener("click", incrementKids);
+        });
+    </script>
+  @endpush

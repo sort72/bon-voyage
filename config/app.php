@@ -229,6 +229,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'DateHelper' => App\Helpers\DateHelper::class,
+        'FlightHelper' => App\Helpers\FlightHelper::class,
+        'LocationHelper' => App\Helpers\LocationHelper::class,
 
     ],
 

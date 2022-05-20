@@ -11,6 +11,8 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import flatpickr from "flatpickr";
+import monthSelectPlugin from "flatpickr/dist/plugins/monthSelect/index"
+import styles from "flatpickr/dist/plugins/monthSelect/style.css"
 import { Spanish } from "flatpickr/dist/l10n/es.js"
 
 window.flatpickr = flatpickr;
@@ -38,6 +40,22 @@ flatpickr('.flatpickr-birth-children', {
     minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 17)),
     maxDate: new Date(new Date().setFullYear(new Date().getFullYear()))
 })
+
+flatpickr(".flatpickr-month-select", {
+    "locale": Spanish,
+    "altInput": true,
+    "minDate": new Date(),
+    "plugins": [
+        new monthSelectPlugin({
+          shorthand: true, //defaults to false
+          altFormat: "F Y", //defaults to "F Y"
+          dateFormat: "Y-m-01", //defaults to "F Y"
+          theme: "light" // defaults to "light"
+        })
+    ]
+
+  });
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
