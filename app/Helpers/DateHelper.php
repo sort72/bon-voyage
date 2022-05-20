@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class DateHelper
 {
-    public static function beautify($date, $format = 'complete')
+    public static function beautify($date, $format = 'complete', $apply_timezone = true)
     {
         if (is_null($date)) return "";
 
@@ -17,7 +17,7 @@ class DateHelper
             $date = Carbon::parse($date);
         }
 
-        $date = $date->timezone('America/Bogota');
+        if($apply_timezone) $date = $date->timezone('America/Bogota');
 
         switch ($format) {
             case 'diff':

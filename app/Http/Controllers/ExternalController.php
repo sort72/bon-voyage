@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BookingRequest;
 use App\Http\Requests\SearchFlightRequest;
 use App\Models\Cart;
+use App\Models\Destination;
 use App\Models\Flight;
 use App\Models\Ticket;
 use App\Models\User;
@@ -23,33 +24,37 @@ class ExternalController extends Controller
 
     public function flights(SearchFlightRequest $request)
     {
-        if($request->has('back_time') && $request->back_time) {
+        $found = 1;
 
-            $flights = Flight::where(function($query) use ($request) {
-                            $query->where(function($query) use($request) {
-                                $query->where('origin_id', $request->origin_id)->where('destination_id', $request->destination_id);
-                            })
-                            ->orWhere(function($query) use($request) {
-                                $query->where('origin_id', $request->destination_id)->where('destination_id', $request->origin_id);
-                            });
-                        })
-                        ->where(function($query) use ($request) {
-                            $query->whereBetween('departure_time', [$request->departure_time . ' 00:00:00', $request->departure_time . ' 23:59:59'])
-                                ->orWhereBetween('departure_time', [$request->back_time . ' 00:00:00', $request->back_time . ' 23:59:59']);
-                        })
-                        ->get();
-        }
-        else {
-            $flights = Flight::where('origin_id', $request->origin_id)
+        $flights = Flight::where('origin_id', $request->origin_id)
                         ->where('destination_id', $request->destination_id)
                         ->whereBetween('departure_time', [$request->departure_time . ' 00:00:00', $request->departure_time . ' 23:59:59'])
                         ->get();
+
+        if(!$flights) $found = 0;
+
+        $flights_back = null;
+
+        if($request->has('back_time') && $request->back_time) {
+
+            $flights_back = Flight::where('origin_id', $request->destination_id)
+                            ->where('destination_id', $request->origin_id)
+                            ->whereBetween('departure_time', [$request->back_time . ' 00:00:00', $request->back_time . ' 23:59:59'])
+                            ->get();
+
+            if(!$flights_back) $found = 0;
         }
 
+        $departure_time = $request->departure_time;
+        $back_time = $request->back_time;
+        $adults_count = $request->adults_count;
+        $kids_count = $request->kids_count;
+        $flight_class = $request->flight_class;
+        $origin_name = Destination::where('id', $request->origin_id)->with('city')->first()->city->name;
+        $destination_name = Destination::where('id', $request->destination_id)->with('city')->first()->city->name;
 
-
-
-        return view('pages.external.flights', compact('flights'));
+        return view('pages.external.flights', compact('flights', 'flights_back', 'found', 'departure_time', 'back_time',
+            'adults_count', 'kids_count', 'flight_class', 'origin_name', 'destination_name'));
     }
 
     public function booking(BookFlightRequest $request){
