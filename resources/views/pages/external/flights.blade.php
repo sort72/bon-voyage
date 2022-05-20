@@ -237,9 +237,7 @@
         kid_price_input.value = flight_price
         total_kids_input.value = total_kids
         total_input.value = total_adults + total_kids
-
-        var url = '{!! route('external.booking', [':id',$adults_count,$kids_count,$flight_class,':passengers',':inbound_flight_id']) !!}'
-        url = url.replace(':id', flight_id)
+        var url =  '{!! route('external.booking') !!}?flight_id=' + flight_id + '&adults_count=' + total_number_adults + '&kids_count=' + total_number_kids + '&flight_class=' + flight_class+ '&passengers=' + total_passengers + '&inbound_flight_id=' +inbound_flight_id
         url = url.replace(':passengers', total_passengers)
         url = url.replace(':inbound_flight_id', inbound_flight_id)
         reservation.href = url
