@@ -34,6 +34,8 @@ Route::as('external.')->group(function(){
         Route::get('/reservar', [ExternalController::class, 'booking'])->name('booking');
 
         Route::post('/reservar-datos', [ExternalController::class, 'bookingData'])->name('booking-data');
+        
+        Route::get('/reservar-citas', [ExternalController::class, 'activeBookings']);
 
         Route::get('/checkin', [ExternalController::class, 'checkin'])->name('checkin');
         Route::patch('/checkin', [ExternalController::class, 'validateCheckin'])->name('validate-checkin');
@@ -52,7 +54,6 @@ Route::as('external.')->group(function(){
             Route::resource('card', CardController::class);
         });
     });
-
 });
 
 

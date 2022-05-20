@@ -174,9 +174,8 @@ class ExternalController extends Controller
         return view('pages.external.checkin', compact('dni', 'reservation_code'));
     }
 
-    public function validateCheckin(Request $request)
-    {
-
+    public function activeBookings(){
+        return view('pages.external.active-bookings', ['total_results' => 3]);
     }
 
     public function changeSeat()
