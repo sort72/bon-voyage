@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SearchFlightRequest extends FormRequest
+class BookFlightRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +25,12 @@ class SearchFlightRequest extends FormRequest
     public function rules()
     {
         return [
-            'destination_id' => ['required', 'exists:destinations,id', 'different:origin_id'],
-            'origin_id' => ['required', 'exists:destinations,id', 'different:destination_id'],
+            'flight_id' => ['required', 'exists:flights,id'],
+            'inbound_flight_id' => ['sometimes', 'exists:flights,id', 'different:flight_id'],
             'passengers' => ['required', 'numeric', 'min:0', 'max:10'],
             'adults_count' => ['required', 'numeric', 'min:1', 'max:10'],
             'kids_count' => ['required', 'numeric', 'min:0', 'max:10'],
             'flight_class' => ['required', 'in:first_class,economy_class'],
-            'departure_time' => ['required', 'date', 'after:' . Carbon::now('America/Bogota')->subDay()],
-            'back_time' => ['sometimes', 'required', 'date', 'after:departure_time'],
         ];
     }
 }

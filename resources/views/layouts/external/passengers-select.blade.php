@@ -12,7 +12,7 @@
                     <button data-action="decrement" type="button" class="text-center bg-sky-400 text-white hover:bg-sky-500 h-8 w-8 rounded-l cursor-pointer outline-none">
                         <span class="place-items-center text-center text-2xl" >−</span>
                     </button>
-                    <input type="number" class="border-0 w-10 h-8 focus:outline-none text-center bg-sky-400 font-semibold text-md focus:text-black  md:text-basecursor-default flex items-center text-white outline-none" name="custom-input-number" id="adults" value="1"></input>
+                    <input type="number" name="adults_count" class="border-0 w-10 h-8 focus:outline-none text-center bg-sky-400 font-semibold text-md focus:text-black  md:text-basecursor-default flex items-center text-white outline-none" name="custom-input-number" id="adults" value="1"></input>
                     <button data-action="increment" type="button" class="text-center bg-sky-400 text-white hover:bg-sky-500 h-8 w-8 rounded-r cursor-pointer">
                         <span class="text-2xl place-items-center text-center">+</span>
                     </button>
@@ -27,7 +27,7 @@
                     <button data-action="decrementKids" type="button" class="text-center bg-sky-400 text-white hover:bg-sky-500 h-8 w-8 rounded-l cursor-pointer outline-none">
                         <span class="place-items-center text-center text-2xl" >−</span>
                     </button>
-                    <input type="number" class="border-0 w-10 h-8 outline-none focus:outline-none text-center bg-sky-400 font-semibold text-md focus:text-black  md:text-basecursor-default flex items-center text-white" name="custom-input-number" id="kids" value="0"></input>
+                    <input type="number" name="kids_count" class="border-0 w-10 h-8 outline-none focus:outline-none text-center bg-sky-400 font-semibold text-md focus:text-black  md:text-basecursor-default flex items-center text-white" name="custom-input-number" id="kids" value="0"></input>
                     <button data-action="incrementKids" type="button" class="text-center bg-sky-400 text-white hover:bg-sky-500 h-8 w-8 rounded-r cursor-pointer">
                         <span class="text-2xl place-items-center text-center">+</span>
                     </button>
