@@ -14,7 +14,7 @@ class UserController extends Controller
         $city_id = $city ? $city->id : null;
         $division_id = $city ? $city->division_id : null;
         $country_id = $city ? $city->country_id : null; 
-        return view("pages.external.user.edit-profile", compact("user", "city_id", "division_id", "country_id"));
+        return view("pages.external.user.edit-profile", compact("user", "country_id", "division_id", "city_id"));
     }
 
     /**
@@ -26,7 +26,15 @@ class UserController extends Controller
     public function updateProfile (UserRequest $request){
         $user = auth()->user();
         $editPass = FALSE;
+        $user->update([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'city_id' => $request->city_id,
+            'address' => $request->address,
+            'gender' => $request->gender,
+        ]);
 
+        echo($request->password);
         if (!(empty($request->password))){
             if (checkPassword($request)){
                 if ($request->new_password == $request->password_confirmation){
