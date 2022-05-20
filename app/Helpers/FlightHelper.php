@@ -63,7 +63,7 @@ class FlightHelper
         do {
             $seat = $letters[random_int($letter_min, $letter_max)] . random_int($number_min, $number_max);
 
-            $seat_taken = Ticket::where('seat', $seat)->first();
+            $seat_taken = Ticket::where('flight_id', $flight->id)->where('seat', $seat)->first();
 
         } while ($seat_taken);
 

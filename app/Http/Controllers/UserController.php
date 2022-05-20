@@ -37,4 +37,10 @@ class UserController extends Controller
 
         return redirect()->route('external.profile.edit')->with('success', 'Información actualizada');
     }
+
+    public function bookingList()
+    {
+        return view('pages.external.user.booking-list');
+    }
+
 }
