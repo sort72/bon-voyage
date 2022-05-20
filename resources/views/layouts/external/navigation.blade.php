@@ -38,15 +38,11 @@
                 <i class="fa-solid fa-user mt-1 mr-2"></i>
                 <span class="">@if(auth()->user()) {{auth()->user()->name}} {{auth()->user()->surname}} @else Iniciar sesión @endif</span>
             </a>
-            <button type="button" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                <i class="fa-solid fa-suitcase mt-1 mr-2"></i>
-                <span class="">Mis viajes</span>
-            </button>
-            <button type="button" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                <i class="fa-solid fa-circle-question mt-1 mr-2"></i>
-                <span class="">Ayuda</span>
-            </button>
             @if(auth()->user())
+                <a href="{{ route('external.profile.purchases-list') }}" class="mr-2 flex p-1 rounded text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <i class="fa-solid fa-suitcase mt-1 mr-2"></i>
+                    <span class="">Mis viajes</span>
+                </a>
                 <form method="POST" action="{{ route('logout') }}" class="navbar-item desktop-icon-only">
                     @csrf
 

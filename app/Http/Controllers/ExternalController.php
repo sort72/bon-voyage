@@ -163,12 +163,16 @@ class ExternalController extends Controller
         return redirect()->route('external.profile.booking-list')->with('success', 'Reserva realizada con éxito. Tienes 24 horas para pagarla o será cancelada.');
     }
 
-    public function checkin()
+    public function checkin(Request $request)
     {
         $dni = "";
         $reservation_code = "";
         if(Auth()->check()) {
             $dni = Auth()->user()->dni;
+            if($request->has('reservation')) {
+                $reservation_code = $request->reservation;
+                $dni = $request->dni;
+            }
         };
 
         return view('pages.external.checkin', compact('dni', 'reservation_code'));
@@ -176,7 +180,21 @@ class ExternalController extends Controller
 
     public function validateCheckin(Request $request)
     {
+        $request->validate([
+            'dni' => ['required'],
+            'reservation_code' => ['required'],
+        ]);
 
+        $ticket = Ticket::where('passenger_document', $request->dni)
+                        ->where('reservation_code', $request->reservation_code)
+                        ->whereHas('flight', function(Builder $query) {
+                            $query->where('departure_time', '<=', now()->addHours(24))
+                                ->where('departure_time', '>', now()->subHour());
+                        })
+                        ->first();
+
+        if(!$ticket) return redirect()->back()->with('danger', 'No se ha podido encontrar la reserva.');
+        // Redireccionar a cambiar silla si no la ha cambiado.
     }
 
     public function changeSeat()

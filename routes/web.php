@@ -36,7 +36,7 @@ Route::as('external.')->group(function(){
         Route::post('/reservar-datos', [ExternalController::class, 'bookingData'])->name('booking-data');
 
         Route::get('/checkin', [ExternalController::class, 'checkin'])->name('checkin');
-        Route::patch('/checkin', [ExternalController::class, 'validateCheckin'])->name('validate-checkin');
+        Route::post('/checkin', [ExternalController::class, 'validateCheckin'])->name('validate-checkin');
         Route::get('/checkin/cambio-silla', [ExternalController::class, 'changeSeat'])->name('change-seat');
     });
 
@@ -46,6 +46,7 @@ Route::as('external.')->group(function(){
             Route::patch('/editar-perfil', [UserController::class, 'updateProfile'])->name('update');
 
             Route::get('/reservas', [UserController::class, 'bookingList'])->name('booking-list');
+            Route::get('/compras', [UserController::class, 'purchasesList'])->name('purchases-list');
             Route::get('/carrito', [UserController::class, 'cart'])->name('cart');
 
 

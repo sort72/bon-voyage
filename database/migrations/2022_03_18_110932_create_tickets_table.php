@@ -15,8 +15,8 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('flight_id')->cascadeOnDelete();
-            $table->foreignId('cart_id')->cascadeOnDelete();
+            $table->foreignId('flight_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('cart_id')->constrained()->cascadeOnDelete();
             $table->string('type')->nullable();
             $table->string('reservation_code')->nullable();
             $table->string('status')->nullable();

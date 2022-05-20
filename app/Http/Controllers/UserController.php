@@ -43,6 +43,11 @@ class UserController extends Controller
         return view('pages.external.user.booking-list');
     }
 
+    public function purchasesList()
+    {
+        return view('pages.external.user.purchase-list');
+    }
+
     public function cart()
     {
 
