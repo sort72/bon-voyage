@@ -11,4 +11,10 @@ class Ticket extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function flight()
+    {
+        return $this->belongsTo(Flight::class);
+    }
+
 }

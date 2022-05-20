@@ -76,7 +76,7 @@
                 </div>
             </a>
 
-            <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+            <a href="{{ route('external.checkin') }}" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
                 <div class="text-center">
                     <i class="block fa-solid fa-suitcase"></i>
                     <span class="block w-full">Check-in</span>
@@ -90,7 +90,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <a href="{{ route('external.profile.booking-list') }}" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
                     <div class="text-center">
                         <i class="block fa-solid fa-couch"></i>
                         <span class="block w-full">Mis reservas</span>
@@ -104,7 +104,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <a href="{{ route('external.profile.cart') }}" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
                     <div class="text-center">
                         <i class="block fa-solid fa-cart-plus"></i>
                         <span class="block w-full">Carrito de compras</span>
@@ -124,16 +124,16 @@
 
         <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-fire"></i> Ofertas</a>
 
-        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-suitcase"></i> Check-in</a>
+        <a href="{{ route('external.checkin') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-suitcase"></i> Check-in</a>
         @if(auth()->user())
 
             <a href="{{ route('external.profile.card.index') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-credit-card"></i> Mis tarjetas</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-couch"></i> Mis reservas</a>
+            <a href="{{ route('external.profile.booking-list') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-couch"></i> Mis reservas</a>
 
             <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-message"></i> Mi muro</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-cart-plus"></i> Carrito de compras</a>
+            <a href="{{ route('external.profile.cart') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-cart-plus"></i> Carrito de compras</a>
 
             <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> {{auth()->user()->name}} {{auth()->user()->surname}}</a>
 

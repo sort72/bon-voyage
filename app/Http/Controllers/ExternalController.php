@@ -10,6 +10,9 @@ use App\Http\Requests\SearchFlightRequest;
 use App\Models\Cart;
 use App\Models\Flight;
 use App\Models\Ticket;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class ExternalController extends Controller
 {
@@ -71,7 +74,7 @@ class ExternalController extends Controller
 
     // Controlador de prueba
     public function bookingData(BookingRequest $request){
-        dump($request->all());
+        // dump($request->all());
 
         $cart = Cart::firstOrCreate(['user_id' => Auth()->user()->id, 'status' => 'opened']);
         $flight = Flight::find($request->flight_id);
@@ -109,26 +112,75 @@ class ExternalController extends Controller
                 'emergency_name' => $request->adult_emergency_name[$key],
                 'emergency_contact' => $request->adult_emergency_contact[$key],
             ];
-            dump($data);
-            // Ticket::create([
-            //     'flight_id'
-            // ]);
-            if($request->inbound_flight_id) {
+            // dump($data);
+            Ticket::create($data);
 
+            if($request->inbound_flight_id) {
+                $data['flight_id'] = $request->inbound_flight_id;
+                $data['price'] = $inbound_flight_price;
+                $data['reservation_code'] = FlightHelper::generateReservationCode();
+                $data['seat'] = FlightHelper::getAvailableSeat($inbound_flight, $request->flight_class);
+                // dump($data);
+                Ticket::create($data);
             }
         }
+
+        if($request->child_dni) {
+            // dump('CHILD');
+            foreach ($request->child_dni as $key => $child) {
+                $data = [
+                    'flight_id' => $request->flight_id,
+                    'cart_id' => $cart->id,
+                    'type' => $request->flight_class,
+                    'reservation_code' => FlightHelper::generateReservationCode(),
+                    'status' => 'reserved',
+                    'price' => $price,
+                    'seat' => FlightHelper::getAvailableSeat($flight, $request->flight_class),
+                    'passenger_document' => $request->child_dni[$key],
+                    'passenger_email' => $request->adult_email[0],
+                    'passenger_name' => $request->child_name[$key],
+                    'passenger_surname' => $request->child_surname[$key],
+                    'passenger_birth_date' => $request->child_birth_date[$key],
+                    'passenger_gender' => $request->child_gender[$key],
+                    'passenger_phone' => $request->adult_phone[0],
+                    'emergency_name' => $request->child_emergency_name[$key],
+                    'emergency_contact' => $request->child_emergency_contact[$key],
+                ];
+                // dump($data);
+                Ticket::create($data);
+
+                if($request->inbound_flight_id) {
+                    $data['flight_id'] = $request->inbound_flight_id;
+                    $data['price'] = $inbound_flight_price;
+                    $data['reservation_code'] = FlightHelper::generateReservationCode();
+                    $data['seat'] = FlightHelper::getAvailableSeat($inbound_flight, $request->flight_class);
+                    // dump($data);
+                    Ticket::create($data);
+                }
+            }
+        }
+
+        return redirect()->route('external.profile.booking-list')->with('success', 'Reserva realizada con éxito. Tienes 24 horas para pagarla o será cancelada.');
+    }
+
+    public function checkin()
+    {
+        $dni = "";
+        $reservation_code = "";
+        if(Auth()->check()) {
+            $dni = Auth()->user()->dni;
+        };
+
+        return view('pages.external.checkin', compact('dni', 'reservation_code'));
     }
 
     public function activeBookings(){
         return view('pages.external.active-bookings', ['total_results' => 3]);
     }
 
-    public function editProfile(Request $request){
-        return view('pages.external.user.edit-profile');
-    }
-
     public function changeSeat()
     {
-        return view('pages.external.seat');
+        $flight_info = FlightHelper::getTotalSeats(true);
+        return view('pages.external.seat',compact('flight_info'));
     }
 }
