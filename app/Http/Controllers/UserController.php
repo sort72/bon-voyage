@@ -50,7 +50,7 @@ class UserController extends Controller
 
     public function cart()
     {
-
+        return view('pages.external.user.cart');
     }
 
 }

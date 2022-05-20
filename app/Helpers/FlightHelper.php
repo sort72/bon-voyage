@@ -2,9 +2,11 @@
 
 namespace App\Helpers;
 
+use App\Models\Cart;
 use App\Models\Flight;
 use App\Models\Ticket;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class FlightHelper
@@ -93,10 +95,14 @@ class FlightHelper
     {
         $flight->loadCount([
             'tickets as occupied_economy_seats' => function(Builder $query) {
-                $query->where('type', 'economy_class');
+                $query->where('type', 'economy_class')
+                        ->whereIn('status', ['paid', 'reserved']);
             },
             'tickets as occupied_first_class_seats' => function(Builder $query) {
-                $query->where('type', 'first_class');
+                $query->where('type', 'first_class')
+                        ->where(function($query) {
+                            $query->where('status', 'paid')
+                                ->whereIn('status', ['paid', 'reserved']);
             },
         ]);
 
@@ -108,5 +114,91 @@ class FlightHelper
 
         return $available_seats;
 
+    }
+
+    public static function createTickets(Request $request, Cart $cart, $status)
+    {
+        $flight = Flight::find($request->flight_id);
+        $price = $flight->economy_class_price;
+        if($request->flight_class == 'first_class') {
+            $price = $flight->first_class_price;
+        }
+
+        $inbound_flight = null;
+        $inbound_flight_price = 0;
+        if($request->inbound_flight_id) {
+            $inbound_flight = Flight::find($request->inbound_flight_id);
+            $inbound_flight_price = $inbound_flight->economy_class_price;
+            if($request->flight_class == 'first_class') {
+                $inbound_flight_price = $inbound_flight->first_class_price;
+            }
+        }
+
+        foreach ($request->adult_dni as $key => $adult) {
+            $data = [
+                'flight_id' => $request->flight_id,
+                'cart_id' => $cart->id,
+                'type' => $request->flight_class,
+                'reservation_code' => FlightHelper::generateReservationCode(),
+                'status' => $status,
+                'price' => $price,
+                'seat' => FlightHelper::getAvailableSeat($flight, $request->flight_class),
+                'passenger_document' => $request->adult_dni[$key],
+                'passenger_email' => $request->adult_email[$key],
+                'passenger_name' => $request->adult_name[$key],
+                'passenger_surname' => $request->adult_surname[$key],
+                'passenger_birth_date' => $request->adult_birth_date[$key],
+                'passenger_gender' => $request->adult_gender[$key],
+                'passenger_phone' => $request->adult_phone[$key],
+                'emergency_name' => $request->adult_emergency_name[$key],
+                'emergency_contact' => $request->adult_emergency_contact[$key],
+            ];
+            // dump($data);
+            Ticket::create($data);
+
+            if($request->inbound_flight_id) {
+                $data['flight_id'] = $request->inbound_flight_id;
+                $data['price'] = $inbound_flight_price;
+                $data['reservation_code'] = FlightHelper::generateReservationCode();
+                $data['seat'] = FlightHelper::getAvailableSeat($inbound_flight, $request->flight_class);
+                // dump($data);
+                Ticket::create($data);
+            }
+        }
+
+        if($request->child_dni) {
+            // dump('CHILD');
+            foreach ($request->child_dni as $key => $child) {
+                $data = [
+                    'flight_id' => $request->flight_id,
+                    'cart_id' => $cart->id,
+                    'type' => $request->flight_class,
+                    'reservation_code' => FlightHelper::generateReservationCode(),
+                    'status' => $status,
+                    'price' => $price,
+                    'seat' => FlightHelper::getAvailableSeat($flight, $request->flight_class),
+                    'passenger_document' => $request->child_dni[$key],
+                    'passenger_email' => $request->adult_email[0],
+                    'passenger_name' => $request->child_name[$key],
+                    'passenger_surname' => $request->child_surname[$key],
+                    'passenger_birth_date' => $request->child_birth_date[$key],
+                    'passenger_gender' => $request->child_gender[$key],
+                    'passenger_phone' => $request->adult_phone[0],
+                    'emergency_name' => $request->child_emergency_name[$key],
+                    'emergency_contact' => $request->child_emergency_contact[$key],
+                ];
+                // dump($data);
+                Ticket::create($data);
+
+                if($request->inbound_flight_id) {
+                    $data['flight_id'] = $request->inbound_flight_id;
+                    $data['price'] = $inbound_flight_price;
+                    $data['reservation_code'] = FlightHelper::generateReservationCode();
+                    $data['seat'] = FlightHelper::getAvailableSeat($inbound_flight, $request->flight_class);
+                    // dump($data);
+                    Ticket::create($data);
+                }
+            }
+        }
     }
 }

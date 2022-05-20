@@ -31,10 +31,6 @@ Route::as('external.')->group(function(){
 
         Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
 
-        Route::get('/reservar', [ExternalController::class, 'booking'])->name('booking');
-
-        Route::post('/reservar-datos', [ExternalController::class, 'bookingData'])->name('booking-data');
-        
         Route::get('/reservar-citas', [ExternalController::class, 'activeBookings']);
 
         Route::get('/checkin', [ExternalController::class, 'checkin'])->name('checkin');
@@ -43,6 +39,13 @@ Route::as('external.')->group(function(){
     });
 
     Route::middleware(['auth', 'role:client'])->group(function() {
+
+        Route::get('/reservar', [ExternalController::class, 'booking'])->name('booking');
+        Route::post('/reservar-datos', [ExternalController::class, 'bookingData'])->name('booking-data');
+
+        Route::get('/comprar', [ExternalController::class, 'purchase'])->name('purchase');
+        Route::post('/comprar', [ExternalController::class, 'purchaseData'])->name('purchase-data');
+
         Route::as('profile.')->prefix('perfil')->group(function() {
             Route::get('/editar-perfil', [UserController::class, 'editProfile'])->name('edit');
             Route::patch('/editar-perfil', [UserController::class, 'updateProfile'])->name('update');

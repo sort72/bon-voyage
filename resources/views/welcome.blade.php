@@ -1,6 +1,6 @@
 @extends('layouts.external.layout')
 
-@section('header', 'External')
+@section('header', 'Bon Voyage')
 
 @section('content')
 @include('layouts.external.search')
