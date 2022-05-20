@@ -26,7 +26,7 @@ class BookFlightRequest extends FormRequest
     {
         return [
             'flight_id' => ['required', 'exists:flights,id'],
-            'inbound_flight_id' => ['sometimes', 'exists:flights,id', 'different:flight_id'],
+            'inbound_flight_id' => ['nullable', 'exists:flights,id', 'different:flight_id'],
             'passengers' => ['required', 'numeric', 'min:0', 'max:10'],
             'adults_count' => ['required', 'numeric', 'min:1', 'max:10'],
             'kids_count' => ['sometimes', 'numeric', 'min:0', 'max:10'],
