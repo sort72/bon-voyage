@@ -1,6 +1,6 @@
 @extends('layouts.external.layout')
 
-@section('header', 'Gestionar reserva')
+@section('header', 'Añadir compra al carrito')
 
 @section('content')
 
@@ -8,9 +8,9 @@
         <!-- contenedor información de reserva -->
         <div class="md:w-3/5 px-12 mb-12">
             <h1 class="text-xl truncate font-bold text-sky-700">
-                Complete la siguiente información de reserva
+                Complete la siguiente información de compra
             </h1>
-            <form method="POST" action="{{ route('external.booking-data') }}" class="overflow-hidden grid gap-3">
+            <form method="POST" action="{{ route('external.purchase-data') }}" class="overflow-hidden grid gap-3">
                 @csrf
                 @for ($index = 0; $index < $number_of_adults; $index++)
                     <x-adult-ticket-form-fields :adultNumber="$index" />
@@ -30,8 +30,8 @@
                         privacidad y políticas de cambio y cancelaciones.</label>
                 </div>
 
-                <button class="rounded-xl bg-red-500 hover:bg-red-600 text-2xl p-2 text-white justify-self-center mt-2"
-                    type="submit">Realizar reserva</button>
+                <button class="rounded-xl bg-green-500 hover:bg-green-600 text-2xl p-2 text-white justify-self-center mt-2"
+                    type="submit">Añadir al carrito</button>
             </form>
         </div>
 
@@ -50,7 +50,7 @@
                             <span>Valor por persona</span>
                             <span class="justify-self-end">{{ currency_format($one_person_value) }}</span>
                         </div>
-
+                        {{ $errors }}
                     </div>
 
                     <hr class="border-gray-400 my-3" />
@@ -62,11 +62,22 @@
                 </div>
             </div>
 
+            <div class="mb-6">
+                <div>
+                    <h1 class="mb-3 text-xl font-bold text-sky-700">Medio de pago</h1>
+                </div>
+
+                <!-- Cuadro informacion -->
+                <div class="border-2 border-gray-400 bg-white rounded-xl shadow-md p-4 overflow-hidden">
+                    <p>Podrás seleccionarlo en el carrito</p>
+                </div>
+            </div>
+
             <!-- Contenedor detalle de la compra -->
             <div>
                 <div>
                     <h1 class="mb-3 text-xl font-bold text-sky-700">
-                        Detalle de la reserva
+                        Detalle de la compra
                     </h1>
                 </div>
 

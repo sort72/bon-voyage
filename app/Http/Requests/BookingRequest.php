@@ -46,19 +46,19 @@ class BookingRequest extends FormRequest
         ];
 
         $children_rules = [
-            'child_dni' => ['required', 'array'],
+            'child_dni' => ['sometimes', 'required', 'array'],
             'child_dni.*' => ['required', 'string', 'distinct', 'min:3','max:20',],
-            'child_name' => ['required', 'array'],
+            'child_name' => ['sometimes', 'required', 'array'],
             'child_name.*' => ['required', 'string', 'max:255'],
-            'child_surname' => ['required', 'array'],
+            'child_surname' => ['sometimes', 'required', 'array'],
             'child_surname.*' => ['required', 'string', 'max:255'],
-            'child_birth_date' => ['required', 'array'],
+            'child_birth_date' => ['sometimes', 'required', 'array'],
             'child_birth_date.*' => ['required', 'date', 'after:-18 years'],
-            'child_gender' => ['required', 'array'],
+            'child_gender' => ['sometimes', 'required', 'array'],
             'child_gender.*' => ['required', Rule::in(['male', 'female', 'others'])],
-            'child_emergency_name' => ['required', 'array'],
+            'child_emergency_name' => ['sometimes', 'required', 'array'],
             'child_emergency_name.*' => ['required', 'string', 'max:255'],
-            'child_emergency_contact' => ['required', 'array'],
+            'child_emergency_contact' => ['sometimes', 'required', 'array'],
             'child_emergency_contact.*' => ['required', 'numeric', 'integer', 'min:100000', 'max:99999999999999'],
         ];
 
