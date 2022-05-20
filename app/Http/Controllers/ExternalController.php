@@ -45,6 +45,10 @@ class ExternalController extends Controller
         dump($request->all());
     }
 
+    public function activeBookings(){
+        return view('pages.external.active-bookings');
+    }
+
     public function editProfile(Request $request){
         return view('pages.external.user.edit-profile');
     }

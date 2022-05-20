@@ -32,6 +32,8 @@ Route::as('external.')->middleware(['validate_client_guest'])->group(function(){
 
     Route::post('/reservar-datos', [ExternalController::class, 'bookingData'])->name('booking-data');
 
+    Route::get('/reservas-activas', [ExternalController::class, 'activeBookings'])->name('active-bookings');
+
     Route::get('/checkin/cambio-silla', [ExternalController::class, 'changeSeat'])->name('change-seat');
 
 });
