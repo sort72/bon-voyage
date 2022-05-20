@@ -181,6 +181,7 @@ class ExternalController extends Controller
 
     public function changeSeat()
     {
-        return view('pages.external.seat');
+        $flight_info = FlightHelper::getTotalSeats(true);
+        return view('pages.external.seat',compact('flight_info'));
     }
 }
