@@ -27,6 +27,7 @@ class Booking extends LivewireDatatable
             ->leftJoin('world_cities as origCity', 'origCity.id', '=', 'orig.city_id')
             ->where('cart_id', $cart->id)
             ->where('status', 'reserved')
+            ->withTrashed()
             ->orderBy('tickets.id', 'desc');
 
     }
@@ -65,7 +66,8 @@ class Booking extends LivewireDatatable
                 return DateHelper::beautify($created_at, 'short_complete_with_time');
             })->label('Fecha reservación')->searchable(),
 
-            Column::callback(['id'], function ($id) {
+            Column::callback(['id', 'deleted_at'], function ($id, $deleted_at) {
+                if($deleted_at) return '<b>CANCELADA</b>';
                 return view('components.table-booking-actions', ['id' => $id]);
             })->unsortable()
         ];
