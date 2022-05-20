@@ -14,6 +14,7 @@ use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ExternalController extends Controller
 {
@@ -31,18 +32,18 @@ class ExternalController extends Controller
                         ->whereBetween('departure_time', [$request->departure_time . ' 00:00:00', $request->departure_time . ' 23:59:59'])
                         ->get();
 
-        if(!$flights) $found = 0;
+        if(is_null($flights)) $found = 0;
 
         $flights_back = null;
 
-        if($request->has('back_time') && $request->back_time) {
+        if($request->has('back_time') && $request->back_time !='') {
 
             $flights_back = Flight::where('origin_id', $request->destination_id)
                             ->where('destination_id', $request->origin_id)
                             ->whereBetween('departure_time', [$request->back_time . ' 00:00:00', $request->back_time . ' 23:59:59'])
                             ->get();
 
-            if(!$flights_back) $found = 0;
+            if(is_null($flights_back)) $found = 0;
         }
 
         $departure_time = $request->departure_time;
