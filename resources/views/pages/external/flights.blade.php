@@ -225,12 +225,12 @@
         reservation = document.getElementById('reservation');
 
         var flight_class = '{{$flight_class}}'
-        var flight_price = (flight_class == 'economy_class') ? economy_class_price : first_class_price;
-        var adults_total = {{$adults_count}};
-        var total_adults = flight_price * adults_total;
-        var kids_total = {{$kids_count}};
-        var total_kids = flight_price * kids_total;
-        var total_passengers = adults_total + kids_total
+        var flight_price = (flight_class== 'economy_class') ? economy_class_price : first_class_price;
+        var total_number_adults = {{$adults_count}};
+        var total_adults = flight_price * total_number_adults;
+        var total_number_kids = {{$kids_count}};
+        var total_kids = flight_price * total_number_kids;
+        var total_passengers = total_number_adults + total_number_kids
 
         adult_price_input.value = flight_price
         total_adults_input.value = total_adults
@@ -238,15 +238,11 @@
         total_kids_input.value = total_kids
         total_input.value = total_adults + total_kids
 
-        var url = "{{ route('external.booking', [':id',':adults_count',':kids_count',':flight_class',':passengers',':inbound_flight_id']) }}"
+        var url = '{!! route('external.booking', [':id',$adults_count,$kids_count,$flight_class,':passengers',':inbound_flight_id']) !!}'
         url = url.replace(':id', flight_id)
-        url = url.replace(':adults_count', adults_total)
-        url = url.replace(':kids_count', kids_total)
-        url = url.replace(':flight_class', flight_class)
         url = url.replace(':passengers', total_passengers)
         url = url.replace(':inbound_flight_id', inbound_flight_id)
         reservation.href = url
-        console.log(reservation.href)
     }
 </script>
 
