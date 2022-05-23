@@ -57,6 +57,8 @@ Route::as('external.')->group(function(){
 
             Route::resource('card', CardController::class);
         });
+
+        Route::get('/responder-mensaje', [UserController::class, 'replyMessage'])->name('reply-mesaage');
     });
 });
 
