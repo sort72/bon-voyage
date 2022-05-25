@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules;
 
-class MessageRequest extends FormRequest
+class ConversationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,16 +23,17 @@ class MessageRequest extends FormRequest
      */
     public function rules()
     {
-        $unique = Rule::unique('messages', 'id');
-        if(isset($this->message->id))
+        $unique = Rule::unique('conversations', 'id');
+        if(isset($this->conversation->id))
         {
-            $unique = $unique->ignore($this->message->id);
+            $unique = $unique->ignore($this->conversation->id);
         }
 
         return [
-            'conversation_id' => ['required', 'exists:conversations,id'],
-            'admin_id' => ['nullable', 'exists:users,id'],
-            'message_body' => ['required', 'string'],
+            'client_id' => ['required', 'exists:users,id'],
+            'status' => ['required', 'string'],
+            'unread_messages_by_client' => ['required', 'integer'],
+            'unread_messages_by_admin' => ['required', 'integer'],
             'created_at' => ['nullable'],
             'updated_at' => ['nullable'],
             'created_at' => ['nullable']
