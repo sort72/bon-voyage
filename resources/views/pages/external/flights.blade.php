@@ -196,8 +196,7 @@
                             </div>
                             <div class="flex justify-between flex-wrap">
                                 <a href="#" id="reservation" class="text-center m-2 w-full rounded-full bg-sky-600 p-2 font-semibold hover:bg-sky-500 text-white">Reservar</a>
-                                <button
-                                class="m-2 w-full rounded-full bg-green-600 hover:bg-green-500 p-2 font-semibold text-white">Comprar</button>
+                                <a href="#" id="purchase" class="m-2 w-full rounded-full bg-green-600 hover:bg-green-500 p-2 font-semibold text-white">Comprar</a>
                             </div>
                         </div>
                     </div>
@@ -215,7 +214,7 @@
     </div>
 @push('scripts')
 <script>
-    function changePrices(flight_id,economy_class_price,first_class_price,input,inbound_flight_id=null){
+    function changePrices(flight_id,economy_class_price,first_class_price,input,inbound_flight_id=''){
 
         adult_price_input = document.getElementById('adult_price');
         total_adults_input = document.getElementById('total_adults');
@@ -223,6 +222,7 @@
         total_kids_input = document.getElementById('total_kids');
         total_input = document.getElementById('total');
         reservation = document.getElementById('reservation');
+        purchase = document.getElementById('purchase');
 
         var flight_class = '{{$flight_class}}'
         var flight_price = (flight_class== 'economy_class') ? economy_class_price : first_class_price;
@@ -234,13 +234,20 @@
 
         adult_price_input.value = flight_price
         total_adults_input.value = total_adults
-        kid_price_input.value = flight_price
-        total_kids_input.value = total_kids
-        total_input.value = total_adults + total_kids
-        var url =  '{!! route('external.booking') !!}?flight_id=' + flight_id + '&adults_count=' + total_number_adults + '&kids_count=' + total_number_kids + '&flight_class=' + flight_class+ '&passengers=' + total_passengers + '&inbound_flight_id=' +inbound_flight_id
-        url = url.replace(':passengers', total_passengers)
-        url = url.replace(':inbound_flight_id', inbound_flight_id)
-        reservation.href = url
+
+        if(total_number_kids)
+        {
+            kid_price_input.value = flight_price
+            total_kids_input.value = total_kids
+            total_input.value = total_adults + total_kids
+        }
+
+
+        var url_reservation =  '{!! route('external.booking') !!}?flight_id=' + flight_id + '&adults_count=' + total_number_adults + '&kids_count=' + total_number_kids + '&flight_class=' + flight_class+ '&passengers=' + total_passengers + '&inbound_flight_id=' +inbound_flight_id
+        reservation.href = url_reservation
+
+        var url_purchase =  '{!! route('external.purchase') !!}?flight_id=' + flight_id + '&adults_count=' + total_number_adults + '&kids_count=' + total_number_kids + '&flight_class=' + flight_class+ '&passengers=' + total_passengers + '&inbound_flight_id=' +inbound_flight_id
+        purchase.href = url_purchase
     }
 </script>
 
