@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\DateHelper;
 use App\Helpers\FlightHelper;
 use App\Http\Requests\BookFlightRequest;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use App\Models\Destination;
 use App\Models\Flight;
 use App\Models\Ticket;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -27,10 +29,9 @@ class ExternalController extends Controller
     public function flights(SearchFlightRequest $request)
     {
         $found = 1;
-
         $flights = Flight::where('origin_id', $request->origin_id)
                         ->where('destination_id', $request->destination_id)
-                        ->whereBetween('departure_time', [$request->departure_time . ' 00:00:00', $request->departure_time . ' 23:59:59'])
+                        ->whereBetween('departure_time', [DateHelper::addColombiaDifference($request->departure_time . ' 00:00:00'), DateHelper::addColombiaDifference($request->departure_time . ' 23:59:59')])
                         ->get();
 
         if(is_null($flights)) $found = 0;
@@ -41,7 +42,7 @@ class ExternalController extends Controller
 
             $flights_back = Flight::where('origin_id', $request->destination_id)
                             ->where('destination_id', $request->origin_id)
-                            ->whereBetween('departure_time', [$request->back_time . ' 00:00:00', $request->back_time . ' 23:59:59'])
+                            ->whereBetween('departure_time', [DateHelper::addColombiaDifference($request->back_time . ' 00:00:00'), DateHelper::addColombiaDifference($request->back_time . ' 23:59:59')])
                             ->get();
 
             if(is_null($flights_back)) $found = 0;
