@@ -168,6 +168,7 @@ return [
         'first_class_price' => 'precio primera clase',
         'duration' => 'duración del vuelo',
         'discount' => 'descuento',
+        'message' => 'mensaje'
     ],
 
 ];

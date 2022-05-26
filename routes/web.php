@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\ClientConversationController;
+use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\ExternalController;
 use App\Http\Controllers\FlightController;
@@ -47,22 +49,22 @@ Route::as('external.')->group(function(){
         Route::post('/comprar', [ExternalController::class, 'purchaseData'])->name('purchase-data');
 
         Route::as('profile.')->prefix('perfil')->group(function() {
-        Route::get('/editar-perfil', [UserController::class, 'editProfile'])->name('edit');
-        Route::patch('/editar-perfil', [UserController::class, 'updateProfile'])->name('update');
+            Route::get('/editar-perfil', [UserController::class, 'editProfile'])->name('edit');
+            Route::patch('/editar-perfil', [UserController::class, 'updateProfile'])->name('update');
 
-        Route::get('/reservas', [UserController::class, 'bookingList'])->name('booking-list');
-        Route::get('/compras', [UserController::class, 'purchasesList'])->name('purchases-list');
-        Route::get('/carrito', [UserController::class, 'cart'])->name('cart');
-        Route::get('/conversaciones', [ConversationController::class, 'conversation'])->name('conversation.index');
-        Route::get('/conversaciones/crear', [ConversationController::class, 'conversation'])->name('conversation.create');
-        Route::post('/conversaciones/crear', [ConversationController::class, 'conversation'])->name('conversation.store');
-        Route::get('/conversaciones/{conversation}', [ConversationController::class, 'conversation'])->name('conversation.show');
-        Route::post('/conversaciones/{conversation}', [ConversationController::class, 'conversation'])->name('conversation.new-message');
+            Route::get('/reservas', [UserController::class, 'bookingList'])->name('booking-list');
+            Route::get('/compras', [UserController::class, 'purchasesList'])->name('purchases-list');
+            Route::get('/carrito', [UserController::class, 'cart'])->name('cart');
+            Route::get('/conversaciones', [ClientConversationController::class, 'index'])->name('conversation.index');
+            Route::get('/conversaciones/crear', [ClientConversationController::class, 'create'])->name('conversation.create');
+            Route::post('/conversaciones/crear', [ClientConversationController::class, 'store'])->name('conversation.store');
+            Route::get('/conversaciones/{conversation}', [ClientConversationController::class, 'show'])->name('conversation.show');
+            Route::post('/conversaciones/{conversation}', [ClientConversationController::class, 'newMessage'])->name('conversation.new-message');
+            Route::patch('/conversaciones/{conversation}/cerrar', [ClientConversationController::class, 'close'])->name('conversation.close');
 
-        Route::resource('card', CardController::class);
+            Route::resource('card', CardController::class);
         });
 
-        Route::get('/responder-mensaje', [UserController::class, 'replyMessage'])->name('reply-mesaage');
     });
 });
 
@@ -84,7 +86,9 @@ Route::middleware(['auth', 'role:root,admin'])->as('dashboard.')->prefix('dashbo
     Route::middleware(['role:admin'])->group(function() {
         Route::resource('destination', DestinationController::class);
         Route::resource('flight', FlightController::class);
-        Route::resource('inbox', DestinationController::class);
+
+        // update is used to add new message
+        Route::resource('conversation', ConversationController::class)->only(['index', 'show', 'update']);
     });
 
 

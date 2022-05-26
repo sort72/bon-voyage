@@ -93,7 +93,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <a href="{{ route('external.profile.conversation.index') }}" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
                     <div class="text-center">
                         <i class="block fa-solid fa-message"></i>
                         <span class="block w-full">Mi muro</span>
@@ -127,13 +127,13 @@
 
             <a href="{{ route('external.profile.booking-list') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-couch"></i> Mis reservas</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-message"></i> Mi muro</a>
+            <a href="{{ route('external.profile.conversation.index') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-message"></i> Mi muro</a>
 
             <a href="{{ route('external.profile.cart') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-cart-plus"></i> Carrito de compras</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> {{auth()->user()->name}} {{auth()->user()->surname}}</a>
+            <a href="{{route('external.profile.edit')}}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> {{auth()->user()->name}} {{auth()->user()->surname}}</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-suitcase mt-1 mr-2"></i> Mis viajes</a>
+            <a href="{{ route('external.profile.purchases-list') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-suitcase mt-1 mr-2"></i> Mis viajes</a>
 
             <form method="POST" action="{{ route('logout') }}" class="navbar-item desktop-icon-only">
                 @csrf
@@ -147,10 +147,10 @@
 
             <a href="@if(auth()->user()) {{route('external.profile.edit')}} @else {{ route('login') }} @endif" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> Iniciar sesión</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-suitcase mt-1 mr-2"></i> Mis viajes</a>
+            <a href="{{ route('external.profile.purchases-list') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-suitcase mt-1 mr-2"></i> Mis viajes</a>
 
         @endif
-        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-circle-question mt-1 mr-2"></i> Ayuda</a>
+        {{-- <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-circle-question mt-1 mr-2"></i> Ayuda</a> --}}
       </div>
     </div>
   </nav>
