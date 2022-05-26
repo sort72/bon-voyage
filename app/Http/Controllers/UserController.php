@@ -53,4 +53,7 @@ class UserController extends Controller
         return view('pages.external.user.cart');
     }
 
+    public function replyMessage(){
+        return view('pages.external.user.reply-message');
+    }
 }
