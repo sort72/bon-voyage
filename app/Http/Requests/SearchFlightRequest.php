@@ -32,7 +32,7 @@ class SearchFlightRequest extends FormRequest
             'kids_count' => ['required', 'numeric', 'min:0', 'max:10'],
             'flight_class' => ['required', 'in:first_class,economy_class'],
             'departure_time' => ['required', 'date', 'after:' . Carbon::now('America/Bogota')->subDay()],
-            'back_time' => ['sometimes', 'required', 'date', 'after:departure_time'],
+            'back_time' => ['nullable', 'date', 'after_or_equal:departure_time'],
         ];
     }
 }

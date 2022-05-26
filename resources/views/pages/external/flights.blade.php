@@ -1,21 +1,5 @@
 @extends('layouts.external.layout')
 @section('header', 'Resultados de búsqueda')
-@php
-    $outbound_date = 'jue. 2 abr 2022';
-    $departure_city = 'Pereira';
-    $abbr_departure_city = 'PEI';
-    $arrival_city = 'Cartagena de indias';
-    $abbr_arrival_city = 'CTG';
-    $outbound_departure_time = '17:31';
-    $outbound_arrival_time = '19:31';
-    $inbound_date = 'jue. 2 jun 2022';
-    $inbound_departure_time = '13:31';
-    $inbound_arrival_time = '18:31';
-    $adult_price = '$201.001';
-    $total_adults_price = '$201.001';
-    $taxes = '$68.001';
-    $total_price = '$268.202';
-@endphp
 
 @section('content')
     <!-- <div class="w-auto h-auto bg-slate-100 overflow-hidden"> -->
@@ -23,7 +7,7 @@
         <!-- Titulo  -->
         <h1 class="text-sky-700 text-2xl font-bold text-center">Resultados de la búsqueda</h1>
 
-        @if ($found)
+        @if ($found == 1)
             <div class="container my-8 mx-auto bg-slate-100 overflow-hidden">
                 <form action="#" method="get">
                     <div
@@ -69,7 +53,7 @@
                                             <div class="form-check">
                                                 <input
                                                     class="form-check-input float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white align-top transition duration-200 checked:border-slate-600 checked:bg-blue-600 focus:outline-none"
-                                                    type="radio" checked />
+                                                    type="radio" onclick="changePrices({{$flight->id}},{{$flight->economy_class_price}},{{$flight->first_class_price}},this)" />
                                                 <label class="form-check-label inline-block text-slate-800"> Bon voyage </label>
                                             </div>
                                         </div>
@@ -98,20 +82,6 @@
                                                     <i class="fa-solid fa-suitcase-rolling hover:text-sky-700"></i>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <!-------------------------------------------------->
-                                    <div class="hover:bg-slate-300x rounded-lg">
-                                        <div class="p-4">
-                                            <br />
-                                            <button class="m-2 ml-10 w-full font-semibold text-slate-500">
-                                                <svg class="h-4 w-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M19 9l-7 7-7-7"></path>
-                                                </svg>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +128,7 @@
                                                 <div class="form-check">
                                                     <input
                                                         class="form-check-input float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white align-top transition duration-200 checked:border-slate-600 checked:bg-blue-600 focus:outline-none"
-                                                        type="radio" checked />
+                                                        type="radio" onclick="changePrices({{$flight->id}},{{$flight->economy_class_price}},{{$flight->first_class_price}},this)" />
                                                     <label class="form-check-label inline-block text-slate-800"> Bon voyage </label>
                                                 </div>
                                             </div>
@@ -189,53 +159,44 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!-------------------------------------------------->
-                                        <div class="hover:bg-slate-300x rounded-lg">
-                                            <div class="p-4">
-                                                <br />
-                                                <button class="m-2 ml-10 w-full font-semibold text-slate-500">
-                                                    <svg class="h-4 w-4" fill="none" stroke="currentColor"
-                                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M19 9l-7 7-7-7"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </div>
                                     </div>
                                 @endforeach
                             @endif
                         </div>
-
-                        <!-------------------------Precios----------------------------------->
                         <div class="p-4">
-                            <h1 class="text-right text-slate-600">Precio por adulto</h1>
-                            <h1 class="text-right text-2xl text-slate-600">{{ $adult_price }}</h1>
-                            <div class="grid grid-cols-2 content-center gap-2 mt-4">
-                                <div class="text-left text-sm text-slate-500">1 Adulto</div>
-                                <div class="text-right text-sm text-slate-500">{{ $total_adults_price }}</div>
-
-                                <div class="text-left text-sm text-slate-500">Impuesto, tasas y cargos</div>
-                                <div class="text-right text-sm text-slate-500">{{ $taxes }}</div>
-
+                            <div class="grid justify-items-stretch">
+                                <h1 class="text-right text-slate-600">Precio por adulto</h1>
+                                <input class="justify-self-end text-right text-2xl text-slate-600 focus:outline-none w-1/2 " readonly id="adult_price"/></input>
                             </div>
 
+                            <div class="grid grid-cols-2 content-center gap-2 mt-4">
+                                <div class="text-left text-sm text-slate-500">{{$adults_count}} Adulto @if($adults_count > 1) s @endif</div>
+                                <input class="text-right text-sm text-slate-500 focus:outline-none" id="total_adults"/>
+                            </div>
+                            @if($kids_count>0)
+                            <div class="grid justify-items-stretch">
+                                <h1 class="text-right text-slate-600">Precio por Niño</h1>
+                                <input class="justify-self-end text-right text-2xl text-slate-600 focus:outline-none w-1/2 " readonly id="kid_price"/></input>
+                            </div>
+
+                            <div class="grid grid-cols-2 content-center gap-2 mt-4">
+                                <div class="text-left text-sm text-slate-500">{{$kids_count}} Niño @if($adults_count > 1) s @endif</div>
+                                <input class="text-right text-sm text-slate-500 focus:outline-none" id="total_kids"/>
+                            </div>
+                            @endif
                             <hr class="mt-2" />
 
-                            <div class="mt-10 grid grid-cols-2 content-center gap-2">
+                            <div class="my-6 grid grid-cols-2 content-center gap-2">
                                 <div class="text-left text-lg text-slate-600">
                                     <strong> Precio final </strong>
                                 </div>
-                                <div class="text-right text-lg text-slate-600">
-                                    <strong>{{ $total_price }}</strong>
+                                <div class="">
+                                    <strong><input class="text-right text-2xl text-slate-600 focus:outline-none w-full" readonly id="total"/></strong>
                                 </div>
                             </div>
                             <div class="flex justify-between flex-wrap">
-                                <button
-                                    class="m-2 w-full rounded-full bg-blue-600 p-2 font-semibold text-white">Reservar</button>
-                                <button
-                                class="m-2 w-full rounded-full bg-green-600 p-2 font-semibold text-white">Comprar</button>
+                                <a href="#" id="reservation" class="text-center m-2 w-full rounded-full bg-sky-600 p-2 font-semibold hover:bg-sky-500 text-white">Reservar</a>
+                                <a href="#" id="purchase" class="m-2 w-full rounded-full bg-green-600 hover:bg-green-500 p-2 font-semibold text-white">Comprar</a>
                             </div>
                         </div>
                     </div>
@@ -243,11 +204,52 @@
 
             </div>
         @else
-            <h3 class="text-red-500 text-xl font-semibold text-center">
-                No se han encontrado vuelos. Por favor, inténtalo de nuevo utilizando otros criterios de búsqueda.
-            </h3>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative my-8 mx-auto w-1/2" role="alert">
+                <strong class="font-bold">Lo sentimos!</strong>
+                <span class="block sm:inline">No se han encontrado vuelos. Por favor, inténtalo de nuevo utilizando otros criterios de búsqueda.</span>
+            </div>
         @endif
 
 
     </div>
+@push('scripts')
+<script>
+    function changePrices(flight_id,economy_class_price,first_class_price,input,inbound_flight_id=''){
+
+        adult_price_input = document.getElementById('adult_price');
+        total_adults_input = document.getElementById('total_adults');
+        kid_price_input = document.getElementById('kid_price');
+        total_kids_input = document.getElementById('total_kids');
+        total_input = document.getElementById('total');
+        reservation = document.getElementById('reservation');
+        purchase = document.getElementById('purchase');
+
+        var flight_class = '{{$flight_class}}'
+        var flight_price = (flight_class== 'economy_class') ? economy_class_price : first_class_price;
+        var total_number_adults = {{$adults_count}};
+        var total_adults = flight_price * total_number_adults;
+        var total_number_kids = {{$kids_count}};
+        var total_kids = flight_price * total_number_kids;
+        var total_passengers = total_number_adults + total_number_kids
+
+        adult_price_input.value = flight_price
+        total_adults_input.value = total_adults
+
+        if(total_number_kids)
+        {
+            kid_price_input.value = flight_price
+            total_kids_input.value = total_kids
+            total_input.value = total_adults + total_kids
+        }
+
+
+        var url_reservation =  '{!! route('external.booking') !!}?flight_id=' + flight_id + '&adults_count=' + total_number_adults + '&kids_count=' + total_number_kids + '&flight_class=' + flight_class+ '&passengers=' + total_passengers + '&inbound_flight_id=' +inbound_flight_id
+        reservation.href = url_reservation
+
+        var url_purchase =  '{!! route('external.purchase') !!}?flight_id=' + flight_id + '&adults_count=' + total_number_adults + '&kids_count=' + total_number_kids + '&flight_class=' + flight_class+ '&passengers=' + total_passengers + '&inbound_flight_id=' +inbound_flight_id
+        purchase.href = url_purchase
+    }
+</script>
+
+@endpush
 @endsection
