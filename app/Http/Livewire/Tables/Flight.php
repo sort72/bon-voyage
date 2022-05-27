@@ -37,7 +37,7 @@ class Flight extends LivewireDatatable
                 return Carbon::parse($departure_time)->timezone($timezone)->format('Y-m-d H:m:s');
             })->label('Fecha del vuelo')->searchable(),
 
-            Column::callback(['arrival_time', 'orig.timezone'], function ($arrival_time, $timezone) {
+            Column::callback(['arrival_time', 'dest.timezone'], function ($arrival_time, $timezone) {
                 return Carbon::parse($arrival_time)->timezone($timezone)->format('Y-m-d H:m:s');
             })->label('Fecha de aterrizaje')->searchable(),
 
