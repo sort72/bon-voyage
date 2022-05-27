@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 class BookingRequest extends FormRequest
 {
@@ -24,15 +25,22 @@ class BookingRequest extends FormRequest
      */
     public function rules()
     {
+        $flight_id = [$this->flight_id];
+        if($this->inbound_flight_id) $flight_id[] = $this->inbound_flight_id;
+
+        $unique_dni = Rule::unique('tickets', 'passenger_document')->where(function ($query) use($flight_id) {
+            return $query->whereIn('flight_id', $flight_id);
+        });
+
         $adults_rules = [
             'adult_dni' => ['required', 'array'],
-            'adult_dni.*' => ['required', 'string', 'distinct', 'min:3','max:20',],
+            'adult_dni.*' => ['required', 'string', 'distinct', 'min:3','max:20', $unique_dni],
             'adult_name' => ['required', 'array'],
             'adult_name.*' => ['required', 'string', 'max:255'],
             'adult_surname' => ['required', 'array'],
             'adult_surname.*' => ['required', 'string', 'max:255'],
             'adult_email' => ['required', 'array'],
-            'adult_email.*' => ['required', 'string', 'distinct','email:rfc,dns', 'max:255',],
+            'adult_email.*' => ['required', 'string', 'email:rfc,dns', 'max:255',],
             'adult_birth_date' => ['required', 'array'],
             'adult_birth_date.*' => ['required', 'date', 'before:-18 years', 'after:-85 years'],
             'adult_gender' => ['required', 'array'],
@@ -47,7 +55,7 @@ class BookingRequest extends FormRequest
 
         $children_rules = [
             'child_dni' => ['sometimes', 'required', 'array'],
-            'child_dni.*' => ['required', 'string', 'distinct', 'min:3','max:20',],
+            'child_dni.*' => ['required', 'string', 'distinct', 'min:3','max:20', $unique_dni],
             'child_name' => ['sometimes', 'required', 'array'],
             'child_name.*' => ['required', 'string', 'max:255'],
             'child_surname' => ['sometimes', 'required', 'array'],

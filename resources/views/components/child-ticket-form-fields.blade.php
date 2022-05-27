@@ -69,11 +69,11 @@
 
       <!-- Género -->
       <div>
-        <label for="child_gender">Género</label>
+        <label for="child_gender">Género *</label>
         <select
           class="border-black-800 w-full rounded-xl border border-gray-400 p-1 overflow-hidden"
           name="child_gender[]">
-          <option value="">Seleccione una opcion</option>
+          {{-- <option value="">Seleccione una opcion</option> --}}
           <option @if(old('child_gender.' . $childNumber)=='male' ) selected @endif value="male">Masculino</option>
           <option @if(old('child_gender.' . $childNumber)=='female' ) selected @endif value="female">Femenino</option>
           <option @if(old('child_gender.' . $childNumber)=='others' ) selected @endif value="others">Otros</option>

@@ -90,7 +90,7 @@
                         </div>
                         <span class="block font-bold text-xl">{{ $flight->origin->city->name }} ->
                             {{ $flight->destination->city->name }}</span>
-                        <span class="font-semibold text-sm text-gray-400">Ida y vuelta, {{ $number_of_adults }} adulto(s)
+                        <span class="font-semibold text-sm text-gray-400">{{ $inbound_flight ? 'Ida y vuelta' : 'Sólo ida' }}, {{ $number_of_adults }} adulto(s)
                             @if ($number_of_children > 0)
                                 y {{ $number_of_children }} niño(s)
                             @endif
