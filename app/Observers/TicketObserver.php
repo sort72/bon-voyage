@@ -45,7 +45,7 @@ class TicketObserver
             if($card) $card->increment('amount', $ticket->price);
         }
 
-        if($ticket->is_adult && ($ticket->status == 'paid' || $ticket->status == 'reserved')) {
+        if($ticket->is_adult && ($ticket->status == 'paid' || $ticket->status == 'reserved' || $ticket->status == 'unpaid')) {
             $user = $ticket->cart->user_id;
 
             $carts = Cart::where('user_id', $user)->get()->pluck('id');
