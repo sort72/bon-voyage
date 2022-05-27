@@ -53,6 +53,26 @@
 
                     </div>
 
+                    @if ($flight->discount)
+
+                        <div class="font-semibold text-xs text-gray-900 bg-yellow-400 p-1 px-3 rounded shadow">
+                            <div class="grid grid-cols-2">
+                                <span>Descuento aplicado automáticamente</span>
+                                <span class="justify-self-end">{{ $flight->discount }}% en el vuelo de ida</span>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($inbound_flight && $inbound_flight->discount)
+
+                        <div class="font-semibold text-xs text-gray-900 bg-yellow-400 p-1 px-3 rounded shadow">
+                            <div class="grid grid-cols-2 mb-3">
+                                <span>Descuento aplicado automáticamente</span>
+                                <span class="justify-self-end">{{ $inbound_flight->discount }}% en el vuelo de regreso</span>
+                            </div>
+                        </div>
+                    @endif
+
                     <hr class="border-gray-400 my-3" />
 
                     <div class="grid grid-cols-2 -mb-2 text-gray-600">

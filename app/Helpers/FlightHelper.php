@@ -148,18 +148,18 @@ class FlightHelper
     public static function createTickets(Request $request, Cart $cart, $status)
     {
         $flight = Flight::find($request->flight_id);
-        $price = $flight->economy_class_price;
+        $price = $flight->discounted_economy;
         if($request->flight_class == 'first_class') {
-            $price = $flight->first_class_price;
+            $price = $flight->discounted_business;
         }
 
         $inbound_flight = null;
         $inbound_flight_price = 0;
         if($request->inbound_flight_id) {
             $inbound_flight = Flight::find($request->inbound_flight_id);
-            $inbound_flight_price = $inbound_flight->economy_class_price;
+            $inbound_flight_price = $inbound_flight->discounted_economy;
             if($request->flight_class == 'first_class') {
-                $inbound_flight_price = $inbound_flight->first_class_price;
+                $inbound_flight_price = $inbound_flight->discounted_business;
             }
         }
 

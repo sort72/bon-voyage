@@ -20,7 +20,7 @@
             <form method="POST"
             action="{{ route('external.profile.payCart') }}">
             @csrf
-            <div class="px-10 my-10 grid grid-cols-4">
+            <div class="px-10 mt-10 grid grid-cols-4">
                 <div class="bg-sky-500 rounded grid grid-cols-2 py-8 col-span-4">
                     <div class="flex flex-wrap items-center mx-6 text-xl">
                         <i class="fa-solid fa-dollar-sign rounded-full bg-white text-sky-500  py-2 px-3"></i>
@@ -51,8 +51,10 @@
                     </select>
                 </div>
             </div>
-            <button class="rounded-xl bg-green-500 hover:bg-green-600 text-2xl p-2 text-white justify-self-center mt-2"
-            type="submit">Añadir al carrito</button>
+            <div class="flex justify-center">
+                <button class="rounded-xl bg-green-500 hover:bg-green-600 text-2xl p-2 text-white mt-2 mb-6"
+                type="submit">Realizar pago</button>
+            </div>
             </form>
 
 

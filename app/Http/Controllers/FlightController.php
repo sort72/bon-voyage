@@ -80,12 +80,17 @@ class FlightController extends Controller
      */
     public function edit(Flight $flight)
     {
-        if($flight->departure_time < now() || $flight->tickets()->count()) return redirect()->route('dashboard.flight.index')->with('danger', 'Este vuelo ya no se puede modificar');
+        if($flight->departure_time < now()) return redirect()->route('dashboard.flight.index')->with('danger', 'Este vuelo ya no se puede modificar');
+
+        $cant_edit= false;
+        if(!$flight->tickets()->count()) {
+            $cant_edit = true;
+        }
 
         $destinations = Destination::all();
         $flight->departure_time = $flight->departure_time->timezone('America/Bogota');
         $flight->arrival_time = $flight->arrival_time->timezone('America/Bogota');
-        return view('pages.dashboard.flight.edit', compact('flight','destinations'));
+        return view('pages.dashboard.flight.edit', compact('flight','destinations', 'cant_edit'));
     }
 
     /**
