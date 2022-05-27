@@ -48,6 +48,10 @@ class DateHelper
                 $beauty = $date->translatedFormat('l j \d\e F');
                 break;
 
+            case 'weekday_month_year':
+                $beauty = $date->translatedFormat('l j \d\e F \d\e Y');
+                break;
+
             case 'month_year':
                 $beauty = $date->translatedFormat('F \d\e Y');
                 break;

@@ -52,9 +52,10 @@
                                         <div class="m-4 p-4 tracking-wide">
                                             <div class="form-check">
                                                 <input
+                                                    id="flight_{{ $flight->id }}"
                                                     class="form-check-input float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white align-top transition duration-200 checked:border-slate-600 checked:bg-blue-600 focus:outline-none"
-                                                    type="radio" onclick="changePrices({{$flight->id}},{{$flight->economy_class_price}},{{$flight->first_class_price}},this)" />
-                                                <label class="form-check-label inline-block text-slate-800"> Bon voyage </label>
+                                                    type="radio" onclick="changePrices({{$flight->id}},{{$flight->discounted_economy}},{{$flight->discounted_business}}, {{ $flight->discount }},this)" />
+                                                <label for="flight_{{ $flight->id }}" class="form-check-label inline-block text-slate-800"> Bon voyage </label>
                                             </div>
                                         </div>
                                     </div>
@@ -127,9 +128,10 @@
                                             <div class="m-4 p-4 tracking-wide">
                                                 <div class="form-check">
                                                     <input
+                                                        id="flight_{{ $flight->id }}"
                                                         class="form-check-input float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white align-top transition duration-200 checked:border-slate-600 checked:bg-blue-600 focus:outline-none"
-                                                        type="radio" onclick="changePrices({{$flight->id}},{{$flight->economy_class_price}},{{$flight->first_class_price}},this)" />
-                                                    <label class="form-check-label inline-block text-slate-800"> Bon voyage </label>
+                                                        type="radio" onclick="changePrices({{$flight->id}},{{$flight->discounted_economy}},{{$flight->discounted_business}}, {{ $flight->discount }},this)" />
+                                                    <label for="flight_{{ $flight->id }}" class="form-check-label inline-block text-slate-800"> Bon voyage </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -194,6 +196,10 @@
                                     <strong><input class="text-right text-2xl text-slate-600 focus:outline-none w-full" readonly id="total"/></strong>
                                 </div>
                             </div>
+
+                            <div class="my-6 content-center bg-yellow-400 text-gray-900 py-2 px-3 shadow rounded hidden" id="has_discount">
+                                ¡Este trayecto tiene un descuento aplicado!
+                            </div>
                             <div class="flex justify-between flex-wrap">
                                 <a href="#" id="reservation" class="text-center m-2 w-full rounded-full bg-sky-600 p-2 font-semibold hover:bg-sky-500 text-white">Reservar</a>
                                 <a href="#" id="purchase" class="text-center m-2 w-full rounded-full bg-green-600 hover:bg-green-500 p-2 font-semibold text-white">Comprar</a>
@@ -214,7 +220,7 @@
     </div>
 @push('scripts')
 <script>
-    function changePrices(flight_id,economy_class_price,first_class_price,input,inbound_flight_id=''){
+    function changePrices(flight_id,economy_class_price,first_class_price,discount,input,inbound_flight_id=''){
 
         adult_price_input = document.getElementById('adult_price');
         total_adults_input = document.getElementById('total_adults');
@@ -223,6 +229,7 @@
         total_input = document.getElementById('total');
         reservation = document.getElementById('reservation');
         purchase = document.getElementById('purchase');
+        has_discount = document.getElementById('has_discount');
 
         var flight_class = '{{$flight_class}}'
         var flight_price = (flight_class== 'economy_class') ? economy_class_price : first_class_price;
@@ -241,6 +248,14 @@
             total_kids_input.value = total_kids
             total_input.value = total_adults + total_kids
         }
+
+        if(discount > 0)
+        {
+            has_discount.classList.remove("hidden")
+        }
+        else has_discount.classList.add("hidden")
+
+
 
 
         var url_reservation =  '{!! route('external.booking') !!}?flight_id=' + flight_id + '&adults_count=' + total_number_adults + '&kids_count=' + total_number_kids + '&flight_class=' + flight_class+ '&passengers=' + total_passengers + '&inbound_flight_id=' +inbound_flight_id

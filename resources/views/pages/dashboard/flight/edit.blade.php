@@ -16,7 +16,7 @@
               <!-- Fecha de vuelo -->
               <div class="col-span-2">
                 <label class="font-semibold" for="departure_time">Fecha de vuelo (Hora Colombia) [Fecha actual: {{ now()->timezone('America/Bogota') }}]</label>
-                <input class="mt-1 w-full border border-black-800 rounded-md p-1 flatpickr-datetime" id="departure_time" name="departure_time" type="text" value="{{old('departure_time', $flight->departure_time)}}" />
+                <input {{ $cant_edit ? 'readonly' : '' }} class="mt-1 w-full border border-black-800 rounded-md p-1 {{ $cant_edit ? '' : 'flatpickr-datetime' }} " id="departure_time" name="departure_time" type="text" value="{{old('departure_time', $flight->departure_time)}}" />
                 <p>La fecha y hora debe ser en hora de Colombia aunque el origen o el destino sean de otro país. El vuelo se mostrará en la zona horaria del origen y del destino automáticamente.</p>
                 @error('departure_time')
                   <span class="text-red-500 font-semibold">{{$errors->first('departure_time')}}</span>
@@ -26,7 +26,7 @@
               <!-- Tiempo o duración -->
               <div class="col-span-2">
                 <label class="font-medium text-sky-800" for="duration">Duración del vuelo</label>
-                <input class="mt-1 w-full border border-gray-300 rounded-md p-1" id="duration" min="0" name="duration" placeholder="Duración en minutos" required step="1" type="number" value="{{old('duration', $flight->duration)}}" />
+                <input {{ $cant_edit ? 'readonly' : '' }} class="mt-1 w-full border border-gray-300 rounded-md p-1" id="duration" min="0" name="duration" placeholder="Duración en minutos" required step="1" type="number" value="{{old('duration', $flight->duration)}}" />
                 @error('duration')
                 <span class="text-red-500 font-semibold">{{$errors->first('duration')}}</span>
                 @enderror
@@ -36,10 +36,14 @@
               <div>
                 <label class="font-medium text-sky-800" for="origin_id">Origen</label>
                 <select class=" mt-1 w-full border border-gray-300 rounded-md p-1" name="origin_id">
-                  <option val="">Seleccione...</option>
-                  @foreach ($destinations as $destination)
-                      <option @if(old('origin_id', $flight->origin_id) == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->city->name}}</option>
-                  @endforeach
+                    @if ($cant_edit)
+                        <option value="{{$flight->origin_id}}">{{$flight->origin->city->name}}</option>
+                    @else
+                        <option val="">Seleccione...</option>
+                        @foreach ($destinations as $destination)
+                            <option @if(old('origin_id', $flight->origin_id) == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->city->name}}</option>
+                        @endforeach
+                    @endif
                 </select>
                 @error('origin_id')
                 <span class="text-red-500 font-semibold">{{$errors->first('origin_id')}}</span>
@@ -50,10 +54,14 @@
               <div>
                 <label class="font-medium text-sky-800" for="destination_id">Destino</label>
                 <select class=" mt-1 w-full border border-gray-300 rounded-md p-1" name="destination_id">
-                  <option val="">Seleccione...</option>
-                  @foreach ($destinations as $destination)
-                      <option @if(old('destination_id', $flight->destination_id) == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->city->name}}</option>
-                  @endforeach
+                    @if ($cant_edit)
+                        <option value="{{$flight->destination_id}}">{{$flight->destination->city->name}}</option>
+                    @else
+                        <option val="">Seleccione...</option>
+                        @foreach ($destinations as $destination)
+                            <option @if(old('origin_id', $flight->origin_id) == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->city->name}}</option>
+                        @endforeach
+                    @endif
                 </select>
                 @error('destination_id')
                 <span class="text-red-500 font-semibold">{{$errors->first('destination_id')}}</span>
@@ -63,14 +71,14 @@
               <!-- Precio -->
               <div>
                 <label class="font-medium text-sky-800" for="economy_class_price">Precio clase económica</label>
-                <input class="mt-1 w-full border border-gray-300 rounded-md p-1" name="economy_class_price" min="0" placeholder="Precio" required step="1" type="number" value="{{old('economy_class_price', $flight->economy_class_price)}}" />
+                <input {{ $cant_edit ? 'readonly' : '' }} class="mt-1 w-full border border-gray-300 rounded-md p-1" name="economy_class_price" min="0" placeholder="Precio" required step="1" type="number" value="{{old('economy_class_price', $flight->economy_class_price)}}" />
                 @error('economy_class_price')
                   <span class="text-red-500 font-semibold">{{$errors->first('economy_class_price')}}</span>
                 @enderror
               </div>
               <div>
                 <label class="font-medium text-sky-800" for="first_class_price">Precio primera clase</label>
-                <input class="mt-1 w-full border border-gray-300 rounded-md p-1" name="first_class_price" min="0" placeholder="Precio" required step="1" type="number" value="{{old('first_class_price', $flight->first_class_price)}}" />
+                <input {{ $cant_edit ? 'readonly' : '' }} class="mt-1 w-full border border-gray-300 rounded-md p-1" name="first_class_price" min="0" placeholder="Precio" required step="1" type="number" value="{{old('first_class_price', $flight->first_class_price)}}" />
                 @error('first_class_price')
                   <span class="text-red-500 font-semibold">{{$errors->first('first_class_price')}}</span>
                 @enderror

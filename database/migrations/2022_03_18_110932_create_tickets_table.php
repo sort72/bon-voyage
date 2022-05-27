@@ -22,6 +22,7 @@ class CreateTicketsTable extends Migration
             $table->string('status')->nullable();
             $table->double('price')->nullable();
             $table->string('seat', 8)->nullable();
+            $table->boolean('checkin_done')->default(0);
             $table->string('passenger_document')->nullable();
             $table->string('passenger_email')->nullable();
             $table->string('passenger_name')->nullable();

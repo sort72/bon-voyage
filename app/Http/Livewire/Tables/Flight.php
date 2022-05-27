@@ -51,9 +51,7 @@ class Flight extends LivewireDatatable
 
             Column::callback(['id'], function ($id) {
                 $model = ModelsFlight::find($id);
-                if(!$model->tickets()->count()) {
-                    return view('components.table-actions', ['id' => $id, 'resource' => 'flight', 'model' => $model, 'section' => 'dashboard']);
-                }
+                return view('components.table-actions', ['id' => $id, 'resource' => 'flight', 'model' => $model, 'section' => 'dashboard']);
             })->unsortable()
         ];
     }

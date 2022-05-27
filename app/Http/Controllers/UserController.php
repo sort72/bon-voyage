@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Mail\TicketPaid;
 use App\Models\Card;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\City;
 use App\Models\Ticket;
+use Illuminate\Support\Facades\Mail;
 
 use function PHPUnit\Framework\lessThanOrEqual;
 
@@ -77,10 +79,12 @@ class UserController extends Controller
             $card->amount -= $request->total;
             $card->save();
 
-            $tickets = auth()->user()->tickets;
+            $tickets = auth()->user()->activeCart()->tickets;
             foreach($tickets as $ticket){
                 $ticket->status = 'paid';
                 $ticket->save();
+
+                Mail::to($ticket->passenger_email)->send(new TicketPaid($ticket));
             }
 
             $cart = auth()->user()->activeCart();
@@ -91,8 +95,9 @@ class UserController extends Controller
         }
         else
         {
-            return "saldo insuficiente";
+            return redirect()->route('external.profile.cart')->with('danger', 'No tienes dinero suficiente en el método de pago seleccionado para pagar estos vuelos!');
         }
 
     }
 }
+

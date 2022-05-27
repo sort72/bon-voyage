@@ -7,13 +7,15 @@
     "require": {
         "php": "^7.3|^8.0",
         "asantibanez/livewire-select": "^2.1",
+        "barryvdh/laravel-dompdf": "^1.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.10",
-        "mediconesystems/livewire-datatables": "^0.8.0"
+        "mediconesystems/livewire-datatables": "^0.8.0",
+        "simplesoftwareio/simple-qrcode": "~4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

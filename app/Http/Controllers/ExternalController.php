@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BookingRequest;
 use App\Http\Requests\ChangeSeatRequest;
 use App\Http\Requests\SearchFlightRequest;
+use App\Mail\BoardingPass;
 use App\Models\Cart;
 use App\Models\Card;
 use App\Models\Destination;
@@ -16,10 +17,12 @@ use App\Models\Flight;
 use App\Models\SearchSuggestion;
 use App\Models\Ticket;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ExternalController extends Controller
 {
@@ -48,7 +51,7 @@ class ExternalController extends Controller
                         ->whereBetween('departure_time', [DateHelper::addColombiaDifference($request->departure_time . ' 00:00:00'), DateHelper::addColombiaDifference($request->departure_time . ' 23:59:59')])
                         ->get();
 
-        if(is_null($flights)) $found = 0;
+        if(!$flights->count()) $found = 0;
 
         $flights_back = null;
 
@@ -59,8 +62,9 @@ class ExternalController extends Controller
                             ->whereBetween('departure_time', [DateHelper::addColombiaDifference($request->back_time . ' 00:00:00'), DateHelper::addColombiaDifference($request->back_time . ' 23:59:59')])
                             ->get();
 
-            if(is_null($flights_back)) $found = 0;
+            if(!$flights_back->count()) $found = 0;
         }
+
 
         $departure_time = $request->departure_time;
         $back_time = $request->back_time;
@@ -94,7 +98,7 @@ class ExternalController extends Controller
             'number_of_adults' => $request->adults_count,
             'number_of_children' => $request->kids_count,
             'passengers' => $request->passengers,
-            'one_person_value' => $request->flight_class =='first_class' ? $flight->first_class_price : $flight->economy_class_price,
+            'one_person_value' => $request->flight_class =='first_class' ? $flight->discounted_business : $flight->discounted_economy,
             'class' => $request->flight_class,
             'flight' => $flight,
             'inbound_flight' => $inbound_flight,
@@ -125,7 +129,7 @@ class ExternalController extends Controller
             'number_of_adults' => $request->adults_count,
             'number_of_children' => $request->kids_count,
             'passengers' => $request->passengers,
-            'one_person_value' => $request->flight_class =='first_class' ? $flight->first_class_price : $flight->economy_class_price,
+            'one_person_value' => $request->flight_class =='first_class' ? $flight->discounted_business : $flight->discounted_economy,
             'class' => $request->flight_class,
             'flight' => $flight,
             'inbound_flight' => $inbound_flight,
@@ -229,5 +233,16 @@ class ExternalController extends Controller
         $ticket->seat = $seat;
         $ticket->save();
         return redirect()->route('external.checkin')->with('success', 'Silla actualizada correctamente.');
+    }
+
+    public function cancelExpired()
+    {
+        return Ticket::where('status', 'reserved')->where('created_at', '<', now()->subHours(24))->delete();
+    }
+
+    public function testBoardingPass(Request $request, Ticket $ticket)
+    {
+        // return PDF::loadView('boarding-pass-pdf', ['ticket' => $ticket])->stream();
+        Mail::to($ticket->passenger_email)->send(new BoardingPass($ticket));
     }
 }
