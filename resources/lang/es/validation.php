@@ -139,7 +139,35 @@ return [
         ],
         'duration' => [
             'min' => 'La :attribute debe ser de al menos :min minutos.'
-        ]
+        ],
+        'adult_dni.*' => [
+            'unique' => 'Este documento ya está siendo utilizado por otro pasajero en el vuelo',
+            'distinct' => 'Registraste este :documento en otro pasajero en esta reserva'
+        ],
+        'adult_birth_date.*' => [
+            'before' => 'El usuario debe ser mayor de edad',
+            'after' => 'La edad máxima permitida es de 85 años'
+        ],
+        'adult_phone.*' => [
+            'min' => 'Introduce un número de teléfono válido',
+            'max' => 'Introduce un número de teléfono válido',
+        ],
+        'adult_emergency_contact.*' => [
+            'min' => 'Introduce un número de teléfono válido',
+            'max' => 'Introduce un número de teléfono válido',
+        ],
+        'child_dni.*' => [
+            'unique' => 'Este documento ya está siendo utilizado por otro pasajero en el vuelo',
+            'distinct' => 'Registraste este :documento en otro pasajero en esta reserva'
+        ],
+        'child_birth_date.*' => [
+            'before' => 'La edad mpinima permitida es de 1 año',
+            'after' => 'El usuario debe ser menor de edad',
+        ],
+        'child_emergency_contact.*' => [
+            'min' => 'Introduce un número de teléfono válido',
+            'max' => 'Introduce un número de teléfono válido',
+        ],
     ],
 
     /*
@@ -168,6 +196,21 @@ return [
         'first_class_price' => 'precio primera clase',
         'duration' => 'duración del vuelo',
         'discount' => 'descuento',
+        'message' => 'mensaje',
+        'adult_dni.*' => 'documento',
+        'adult_email.*' => 'correo electrónico',
+        'adult_name.*' => 'nombre',
+        'adult_surname.*' => 'apellidos',
+        'adult_birth_date.*' => 'fecha de nacimiento',
+        'adult_phone.*' => 'número de teléfono',
+        'adult_emergency_name.*' => 'contacto de emergencia',
+        'adult_emergency_contact.*' => 'teléfono de emergencia',
+        'child_dni.*' => 'documento',
+        'child_name.*' => 'nombre',
+        'child_surname.*' => 'apellidos',
+        'child_birth_date.*' => 'fecha de nacimiento',
+        'child_emergency_name.*' => 'contacto de emergencia',
+        'child_emergency_contact.*' => 'teléfono de emergencia',
     ],
 
 ];

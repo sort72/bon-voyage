@@ -56,8 +56,6 @@ class FlightController extends Controller
             'departure_time' => $departure_time,
             'arrival_time' => $arrival_time,
             'is_international' => ! LocationHelper::areDestinationsFromTheSameCountry($request->origin_id, $request->destination_id),
-            'price_tourist' => $request->price_tourist,
-            'price_business' => $request->price_vip
         ]);
 
         return redirect()->route('dashboard.flight.index')->with('success', 'Vuelo ' . $request->name . ' creado con éxito');
@@ -82,7 +80,7 @@ class FlightController extends Controller
      */
     public function edit(Flight $flight)
     {
-        if($flight->departure_time < now()) return redirect()->route('dashboard.flight.index')->with('danger', 'Este vuelo ya no se puede modificar');
+        if($flight->departure_time < now() || $flight->tickets()->count()) return redirect()->route('dashboard.flight.index')->with('danger', 'Este vuelo ya no se puede modificar');
 
         $destinations = Destination::all();
         $flight->departure_time = $flight->departure_time->timezone('America/Bogota');
@@ -110,8 +108,6 @@ class FlightController extends Controller
             'departure_time' => $departure_time,
             'arrival_time' => $arrival_time,
             'is_international' => ! LocationHelper::areDestinationsFromTheSameCountry($request->origin_id, $request->destination_id),
-            'price_tourist' => $request->price_tourist,
-            'price_business' => $request->price_vip,
             'discount' => $request->discount
         ]);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\DateHelper;
 use App\Helpers\FlightHelper;
 use App\Http\Requests\BookFlightRequest;
 use Illuminate\Http\Request;
@@ -11,8 +12,10 @@ use App\Models\Cart;
 use App\Models\Card;
 use App\Models\Destination;
 use App\Models\Flight;
+use App\Models\SearchSuggestion;
 use App\Models\Ticket;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -21,16 +24,27 @@ class ExternalController extends Controller
 {
     public function index()
     {
-        return view("pages.external.index");
+        $flights = Flight::with('destination.city','origin.city')->where('departure_time','>',Carbon::now())->orderBy('discount', 'desc')->orderBy('created_at', 'desc')->paginate(12);
+
+        $recommendations = [];
+        if(auth()->check()) {
+            $interests = SearchSuggestion::where('user_id', auth()->user()->id)->get()->pluck('destination_id');
+            if($interests)
+                $recommendations = Flight::with('destination.city','origin.city')
+                                    ->where('departure_time','>',Carbon::now())
+                                    ->whereIn('destination_id', $interests)
+                                    ->orderBy('discount', 'desc')->inRandomOrder()->get();
+        }
+
+        return view('welcome',compact('flights', 'recommendations'));
     }
 
     public function flights(SearchFlightRequest $request)
     {
         $found = 1;
-
         $flights = Flight::where('origin_id', $request->origin_id)
                         ->where('destination_id', $request->destination_id)
-                        ->whereBetween('departure_time', [$request->departure_time . ' 00:00:00', $request->departure_time . ' 23:59:59'])
+                        ->whereBetween('departure_time', [DateHelper::addColombiaDifference($request->departure_time . ' 00:00:00'), DateHelper::addColombiaDifference($request->departure_time . ' 23:59:59')])
                         ->get();
 
         if(is_null($flights)) $found = 0;
@@ -41,7 +55,7 @@ class ExternalController extends Controller
 
             $flights_back = Flight::where('origin_id', $request->destination_id)
                             ->where('destination_id', $request->origin_id)
-                            ->whereBetween('departure_time', [$request->back_time . ' 00:00:00', $request->back_time . ' 23:59:59'])
+                            ->whereBetween('departure_time', [DateHelper::addColombiaDifference($request->back_time . ' 00:00:00'), DateHelper::addColombiaDifference($request->back_time . ' 23:59:59')])
                             ->get();
 
             if(is_null($flights_back)) $found = 0;
@@ -54,6 +68,13 @@ class ExternalController extends Controller
         $flight_class = $request->flight_class;
         $origin_name = Destination::where('id', $request->origin_id)->with('city')->first()->city->name;
         $destination_name = Destination::where('id', $request->destination_id)->with('city')->first()->city->name;
+
+        if(auth()->check())
+        {
+            $user = User::find(auth()->user()->id);
+            $user->suggestions()->firstOrCreate(['destination_id' => $request->origin_id]);
+            $user->suggestions()->firstOrCreate(['destination_id' => $request->destination_id]);
+        }
 
         return view('pages.external.flights', compact('flights', 'flights_back', 'found', 'departure_time', 'back_time',
             'adults_count', 'kids_count', 'flight_class', 'origin_name', 'destination_name'));
@@ -164,5 +185,10 @@ class ExternalController extends Controller
     {
         $flight_info = FlightHelper::getTotalSeats(true);
         return view('pages.external.seat',compact('flight_info'));
+    }
+
+    public function updateSeat(Request $request)
+    {
+
     }
 }

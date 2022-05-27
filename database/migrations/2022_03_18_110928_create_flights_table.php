@@ -21,6 +21,7 @@ class CreateFlightsTable extends Migration
             $table->foreignId('destination_id')->constrained();
             $table->foreignId('origin_id')->constrained('destinations');
             $table->boolean('is_international')->default(false);
+            $table->double('discount')->default(0);
             $table->timestamp('departure_time');
             $table->timestamp('arrival_time')->nullable();
             $table->timestamps();

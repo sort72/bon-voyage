@@ -11,7 +11,7 @@
                 <a class="text-white py-2 px-5 rounded bg-sky-500 hover:bg-sky-700" href="{{route('dashboard.flight.index')}}">Volver al listado</a>
             </div>
             <div class="p-5 border-b bg-white max-w-lg mx-auto border-gray-200 sm:rounded-lg shadow-md">
-                <form method="POST" action="{{route('dashboard.destination.update', $destination->id)}}">
+                <form method="POST" action="{{route('dashboard.destination.update', $destination->id)}}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="flex justify-center flex-col">
@@ -57,9 +57,10 @@
                                         </div>
                                         <img class="h-24" id="output"/>
                                     </div>
-                                    <input accept="image/*" type="file" class="opacity-0" required id="image" name="image" value="" onchange="updateData(event)" />
+                                    <input accept="image/*" type="file" class="opacity-0" id="image" name="image" value="" onchange="updateData(event)" />
                                 </label>
                             </div>
+                            @error('image') <span class="text-red-500 font-semibold">{{$errors->first('image')}}</span> @enderror
                         </div>
 
                         <div class="mt-5 text-center">

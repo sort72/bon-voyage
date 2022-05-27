@@ -1,4 +1,4 @@
-<div class="lg:w-1/2 w-full overflow-hidden lg:m-6 p-6 lg:p-0">
+<div class="w-full overflow-hidden lg:m-6 p-6 lg:p-0">
     <h3 class="text-xl text-gray-600 font-semibold mr-6 mb-6">Top de destinos</h3>
     <div id="carouselExampleCrossfade" class="carousel slide carousel-fade relative" data-bs-ride="carousel">
     <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">

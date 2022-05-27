@@ -88,7 +88,7 @@
         <select
           class="border-black-800 w-full rounded-xl border border-gray-400 p-1 overflow-hidden"
           name="adult_gender[]">
-          <option value="">Seleccione una opcion</option>
+          {{-- <option value="">Seleccione una opcion</option> --}}
           <option @if(old('adult_gender.' . $adultNumber)=='male' ) selected @endif value="male">Masculino</option>
           <option @if(old('adult_gender.' . $adultNumber)=='female' ) selected @endif value="female">Femenino</option>
           <option @if(old('adult_gender.' . $adultNumber)=='others' ) selected @endif value="others">Otros</option>

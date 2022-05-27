@@ -93,7 +93,8 @@
                     </div>
                 </a>
 
-                <a href="#" class="{{ Route::is('external.wall') ? 'border-b-2 border-sky-500 text-sky-500' : 'text-gray-400 rounded-md' }} hover:bg-sky-500 hover:text-white hover:rounded px-2 py-2  text-sm font-medium" aria-current="page">
+
+                <a href="{{ route('external.profile.conversation.index') }}" class="{{ Route::is('external.profile.conversation.index') ? 'border-b-2 border-sky-500 text-sky-500' : 'text-gray-400 rounded-md' }} hover:bg-sky-500 hover:text-white hover:rounded px-2 py-2  text-sm font-medium" aria-current="page">
                     <div class="text-center">
                         <i class="block fa-solid fa-message"></i>
                         <span class="block w-full">Mi muro</span>
@@ -116,7 +117,7 @@
     <div class="hidden mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1">
 
-        <a href="{{ route('external.index') }}" class="{{ Route::is('external.index') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-plane-up mt-1 mr-2"></i>  Vuelos</a>
+        <a href="{{ route('external.index') }}" class="{{ Route::is('external.index') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-plane-up mt-1 mr-2"></i> Vuelos</a>
 
         <a href="#" class="{{ Route::is('external.sale') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-fire mt-1 mr-2"></i> Ofertas</a>
 
@@ -127,7 +128,7 @@
 
             <a href="{{ route('external.profile.booking-list') }}" class="{{ Route::is('external.profile.booking-list') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-couch mt-1 mr-2"></i> Mis reservas</a>
 
-            <a href="#" class="{{ Route::is('external.wall') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-message mt-1 mr-2"></i> Mi muro</a>
+            <a href="{{ route('external.profile.conversation.index') }}" class="{{ Route::is('external.profile.conversation.index') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-message mt-1 mr-2"></i> Mi muro</a>
 
             <a href="{{ route('external.profile.cart') }}" class="{{ Route::is('external.profile.cart') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-cart-plus mt-1 mr-2"></i> Carrito de compras</a>
 

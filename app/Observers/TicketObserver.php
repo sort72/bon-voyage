@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Card;
+use App\Models\Cart;
 use App\Models\Ticket;
 
 class TicketObserver
@@ -42,6 +43,21 @@ class TicketObserver
             else $card = Card::where('client_id', $ticket->cart->user_id)->first();
 
             if($card) $card->increment('amount', $ticket->price);
+        }
+
+        if($ticket->is_adult && ($ticket->status == 'paid' || $ticket->status == 'reserved')) {
+            $user = $ticket->cart->user_id;
+
+            $carts = Cart::where('user_id', $user)->get()->pluck('id');
+            $tickets = Ticket::where('flight_id', $ticket->flight_id)->whereIn('cart_id', $carts)->orderBy('passenger_birth_date', 'ASC')->get();
+            $adults = 0;
+            foreach ($tickets as $Ticket) {
+                if($Ticket->is_adult) $adults ++;
+                else if(!$adults) {
+                    $Ticket->delete();
+                }
+            }
+
         }
     }
 

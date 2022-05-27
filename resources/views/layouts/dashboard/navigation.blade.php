@@ -88,12 +88,12 @@ lg:pl-60 lg:w-auto is-fixed-top">
                     <span class="flex-grow">Vuelos</span>
                 </a>
             </li>
-            {{-- <li class="{{Route::is('dashboard.inbox*') ? 'active' : ''}  }">
-                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.inbox.index')}}">
-                    <span class="inline-flex justify-center items-center w-6 h-6"><i class="mdi mdi-message-bulleted"></i></span>
+            <li class="{{Route::is('dashboard.inbox*') ? 'active' : ''}} active:bg-sky-400">
+                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.conversation.index')}}">
+                    <span class="inline-flex justify-center items-center w-6 h-6 px-6"><i class="mdi mdi-message-bulleted"></i></span>
                     <span class="flex-grow">Mensajes privados</span>
                 </a>
-            </li> --}}
+            </li>
             @endif
 
 
@@ -133,12 +133,13 @@ lg:pl-60 lg:w-auto is-fixed-top">
                     <span class="text-base text-white">Vuelos</span>
                 </a>
             </li>
-            {{-- <li class="{{Route::is('dashboard.inbox*') ? 'active' : ''}  }">
-                <a href="{{route('dashboard.inbox.index')}}">
-                    <span class="inline-flex justify-center items-center w-6 h-6"><i class="mdi mdi-message-bulleted"></i></span>
-                    <span class="flex-grow">Mensajes privados</span>
+
+            <li class="{{Route::is('dashboard.inbox*') ? 'active' : ''  }} active:bg-sky-400 rounded">
+                <a class="py-2 flex text-white hover:bg-sky-400" href="{{route('dashboard.conversation.index')}}">
+                    <span class="inline-flex justify-center items-center w-6 h-6 px-6"><i class="mdi mdi-message-bulleted text-white"></i></span>
+                    <span class="text-base text-white">Mensajes privados</span>
                 </a>
-            </li> --}}
+            </li>
             @endif
 
 

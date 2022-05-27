@@ -32,12 +32,12 @@ flatpickr('.flatpickr', {
 flatpickr('.flatpickr-birth', {
     locale: Spanish,
     minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 85)),
-    maxDate: new Date(new Date().setFullYear(new Date().getFullYear() - 17))
+    maxDate: new Date(new Date().setFullYear(new Date().getFullYear() - 18))
 })
 
 flatpickr('.flatpickr-birth-children', {
     locale: Spanish,
-    minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 17)),
+    minDate: new Date(new Date().setFullYear(new Date().getFullYear() - 18)),
     maxDate: new Date(new Date().setFullYear(new Date().getFullYear()))
 })
 

@@ -18,7 +18,7 @@ class Cart extends LivewireDatatable
     {
         $cart = ModelsCart::where(['user_id' => Auth()->user()->id])
                     ->where('status', 'opened')
-                    ->first()->id;
+                    ->firstOrCreate()->id;
 
         return Ticket::query()
             ->leftJoin('flights', 'flights.id', '=', 'tickets.flight_id')

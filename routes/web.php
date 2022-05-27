@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\ClientConversationController;
+use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\ExternalController;
 use App\Http\Controllers\FlightController;
@@ -23,10 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::as('external.')->group(function(){
     Route::middleware(['validate_client_guest'])->group(function() {
-        Route::get('/', function () {
-            $flights = Flight::with('destination.city','origin.city')->where('departure_time','>',Carbon::now())->get();
-            return view('welcome',compact('flights'));
-        })->name('index');
+        Route::get('/', [ExternalController::class, 'index'])->name('index');
 
 
         Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');
@@ -55,9 +54,16 @@ Route::as('external.')->group(function(){
             Route::get('/carrito', [UserController::class, 'cart'])->name('cart');
             Route::delete('/delete/{id}', [UserController::class, 'deleteItem'])->name('deleteItem');
             Route::post('/carrito/pagar', [UserController::class, 'payCart'])->name('payCart');
+            Route::get('/conversaciones', [ClientConversationController::class, 'index'])->name('conversation.index');
+            Route::get('/conversaciones/crear', [ClientConversationController::class, 'create'])->name('conversation.create');
+            Route::post('/conversaciones/crear', [ClientConversationController::class, 'store'])->name('conversation.store');
+            Route::get('/conversaciones/{conversation}', [ClientConversationController::class, 'show'])->name('conversation.show');
+            Route::post('/conversaciones/{conversation}', [ClientConversationController::class, 'newMessage'])->name('conversation.new-message');
+            Route::patch('/conversaciones/{conversation}/cerrar', [ClientConversationController::class, 'close'])->name('conversation.close');
 
             Route::resource('card', CardController::class);
         });
+
     });
 });
 
@@ -79,7 +85,9 @@ Route::middleware(['auth', 'role:root,admin'])->as('dashboard.')->prefix('dashbo
     Route::middleware(['role:admin'])->group(function() {
         Route::resource('destination', DestinationController::class);
         Route::resource('flight', FlightController::class);
-        Route::resource('inbox', DestinationController::class);
+
+        // update is used to add new message
+        Route::resource('conversation', ConversationController::class)->only(['index', 'show', 'update']);
     });
 
 

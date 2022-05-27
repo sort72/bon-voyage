@@ -17,8 +17,6 @@ class CreateConversationsTable extends Migration
             $table->id();
             $table->foreignId('client_id')->constrained('users')->cascadeOnDelete();
             $table->string('status');
-            $table->unsignedTinyInteger('unread_messages_by_client');
-            $table->unsignedTinyInteger('unread_messages_by_admin');
             $table->timestamps();
             $table->softDeletes();
         });

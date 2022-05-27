@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(Ticket::class, Cart::class);
     }
+
+    public function suggestions()
+    {
+        return $this->hasMany(SearchSuggestion::class);
+    }
 }
