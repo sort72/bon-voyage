@@ -58,7 +58,9 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $cards = $user->cards;
-        $cart = $user->activeCart() ?? [];
+        $cart = ModelsCart::where(['user_id' => Auth()->user()->id])
+                ->where('status', 'opened')
+                ->firstOrCreate();
         return view('pages.external.user.cart', compact('cards','cart'));
     }
 
