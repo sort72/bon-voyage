@@ -7,6 +7,7 @@ use App\Helpers\FlightHelper;
 use App\Http\Requests\BookFlightRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookingRequest;
+use App\Http\Requests\ChangeSeatRequest;
 use App\Http\Requests\SearchFlightRequest;
 use App\Mail\BoardingPass;
 use App\Models\Cart;
@@ -177,19 +178,22 @@ class ExternalController extends Controller
                         ->where('status', 'paid')
                         ->first();
 
-        if(!$ticket) return redirect()->back()->with('danger', 'No se ha podido encontrar la reserva o no está paga.');
-        // Redireccionar a cambiar silla si no la ha cambiado.
+        if(!$ticket)
+            return redirect()->back()->with('danger', 'No se ha podido encontrar la reserva o no está paga.');
+        else
+            return redirect()->route('external.change-seat',$ticket);
+
     }
 
     public function activeBookings(){
         return view('pages.external.active-bookings', ['total_results' => 3]);
     }
 
-    public function changeSeat()
+    public function changeSeat(Ticket $ticket)
     {
-        $flight = Flight::find(5);
-        $lettersI = ["A", "B", "C", "D", "E", "F", "G", "H", "I" ];
-        $lettersN = ["A", "B", "C", "D", "E", "F", "G"];
+        $flight = Flight::find($ticket->flight_id);
+        $lettersI = ["A", "B", "C", "D", "E", "F", "G", "H"];
+        $lettersN = ["A", "B", "C", "D", "E", "F"];
         $seats=[];
 
         if($flight->is_international)
@@ -220,12 +224,30 @@ class ExternalController extends Controller
             }
         }
 
-        return view('pages.external.seat',compact('flight','seats'));
+        Log::alert($seats);
+        return view('pages.external.seat',compact('flight','seats','ticket'));
     }
 
-    public function updateSeat(Request $request)
+    public function updateSeat(ChangeSeatRequest $request)
     {
+        $seat = $request->seat;
+        $ticket = Ticket::find($request->ticket);
+        $ticket->seat = $seat;
+        $ticket->checkin_done = 1;
+        $ticket->save();
 
+        Mail::to($ticket->passenger_email)->send(new BoardingPass($ticket));
+        return redirect()->route('external.profile.purchases-list')->with('success', 'Silla actualizada correctamente.');
+    }
+
+    public function confirmCheckin($id)
+    {
+        $ticket = Ticket::find($id);
+        $ticket->checkin_done = 1;
+        $ticket->save();
+
+        //Mail::to($ticket->passenger_email)->send(new BoardingPass($ticket));
+        return redirect()->route('external.profile.purchases-list')->with('success', 'Check in realizado!.');
     }
 
     public function cancelExpired()

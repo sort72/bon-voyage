@@ -65,13 +65,6 @@
                 </div>
             </a>
 
-            <a href="#" class="{{ Route::is('external.sale') ? 'border-b-2 border-sky-500 text-sky-500' : 'text-gray-400 rounded-md' }} hover:bg-sky-500 hover:text-white hover:rounded px-2 py-2  text-sm font-medium" aria-current="page">
-                <div class="text-center">
-                    <i class="block fa-solid fa-fire"></i>
-                    <span class="block w-full">Ofertas</span>
-                </div>
-            </a>
-
             <a href="{{ route('external.checkin') }}" class="{{ Route::is('external.checkin') ? 'border-b-2 border-sky-500 text-sky-500' : 'text-gray-400 rounded-md' }} hover:bg-sky-500 hover:text-white hover:rounded px-2 py-2  text-sm font-medium" aria-current="page">
                 <div class="text-center">
                     <i class="block fa-solid fa-suitcase"></i>
@@ -118,8 +111,6 @@
       <div class="px-2 pt-2 pb-3 space-y-1">
 
         <a href="{{ route('external.index') }}" class="{{ Route::is('external.index') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-plane-up mt-1 mr-2"></i> Vuelos</a>
-
-        <a href="#" class="{{ Route::is('external.sale') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-fire mt-1 mr-2"></i> Ofertas</a>
 
         <a href="{{ route('external.checkin') }}" class="{{ Route::is('external.checkin') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-suitcase mt-1 mr-2"></i> Check-in</a>
         @if(auth()->user())
