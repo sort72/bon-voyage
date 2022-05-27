@@ -25,7 +25,7 @@ class Purchase extends LivewireDatatable
             ->leftJoin('destinations as orig', 'orig.id', '=', 'flights.origin_id')
             ->leftJoin('world_cities as destCity', 'destCity.id', '=', 'dest.city_id')
             ->leftJoin('world_cities as origCity', 'origCity.id', '=', 'orig.city_id')
-            ->whereIn('cart_id', [$carts])
+            ->whereIn('cart_id', $carts)
             ->where('status', 'paid')
             ->withTrashed()
             ->orderBy('flights.departure_time', 'desc');
