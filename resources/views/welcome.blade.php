@@ -3,7 +3,19 @@
 @section('header', 'Bon Voyage')
 
 @section('content')
-{{-- {{ $errors }} --}}
+
+@if ($errors->any())
+    <div class="w-full bg-red-600 text-white shadow-md text-center py-2">
+        <h3 class="text-white text-lg font-semibold">¡Ups! Ha ocurrido un problema al realizar la búsqueda. Por favor, valida la información suministrada:</h3>
+        <ul class="list-disc">
+            @foreach ($errors->all() as $error)
+                <li>
+                    {{ $error }}
+                </li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 @include('layouts.external.search')
 
 @if ($recommendations)

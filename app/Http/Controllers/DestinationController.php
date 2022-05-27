@@ -42,8 +42,8 @@ class DestinationController extends Controller
             'timezone' => $request->timezone
         ]);
 
-        $file = $request->file('image');
-        Storage::disk('public')->put('destinations/'.$destination->id,$file);
+        $file = $request->file('image')->getContent();
+        Storage::disk('public')->put('destinations/'.$destination->id . '.png',$file);
 
         return redirect()->route('dashboard.destination.index')->with('success', 'Destino ' . $request->name . ' creado con éxito');
     }
@@ -84,8 +84,8 @@ class DestinationController extends Controller
 
         if($request->file('image'))
         {
-            $file = $request->file('image');
-            Storage::disk('public')->put('destinations/'.$destination->id,$file);
+            $file = $request->file('image')->getContent();
+            Storage::disk('public')->put('destinations/'.$destination->id . '.png', $file);
         }
 
 

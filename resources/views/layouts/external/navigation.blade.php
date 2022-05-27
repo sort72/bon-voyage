@@ -65,13 +65,6 @@
                 </div>
             </a>
 
-            <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
-                <div class="text-center">
-                    <i class="block fa-solid fa-fire"></i>
-                    <span class="block w-full">Ofertas</span>
-                </div>
-            </a>
-
             <a href="{{ route('external.checkin') }}" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
                 <div class="text-center">
                     <i class="block fa-solid fa-suitcase"></i>
@@ -117,8 +110,6 @@
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <a href="{{ route('external.index') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-plane-up"></i>  Vuelos</a>
-
-        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-fire"></i> Ofertas</a>
 
         <a href="{{ route('external.checkin') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-suitcase"></i> Check-in</a>
         @if(auth()->user())

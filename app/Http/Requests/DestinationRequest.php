@@ -29,7 +29,7 @@ class DestinationRequest extends FormRequest
         $required_image = 'required';
         if(isset($this->destination->id))
         {
-            $required_image = 'nullable';
+            $required_image = 'sometimes';
             $unique = $unique->ignore($this->destination->id);
         }
 
@@ -37,7 +37,7 @@ class DestinationRequest extends FormRequest
             'country_id' => ['required', 'exists:world_countries,id'],
             'division_id' => ['nullable', 'exists:world_divisions,id'],
             'city_id' => ['required', 'exists:world_cities,id', $unique],
-            'image' => [$required_image, 'image','file|size:4000'],
+            'image' => [$required_image, 'image', 'file', 'max:4000'],
             'timezone' => ['required', 'string', Rule::in(array_keys(LocationHelper::timezones()))]
         ];
     }

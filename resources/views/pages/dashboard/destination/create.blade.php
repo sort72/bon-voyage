@@ -54,6 +54,7 @@
                                     <input accept="image/*" type="file" class="opacity-0" required id="image" name="image" value="" onchange="updateData(event)" />
                                 </label>
                             </div>
+                            @error('image') <span class="text-red-500 font-semibold">{{$errors->first('image')}}</span> @enderror
                         </div>
                         <div class="mt-5 text-center">
                             <button type="submit" class=" my-2 w-24 text-white py-2 px-5 rounded bg-sky-500 hover:bg-sky-600">Crear</button>
