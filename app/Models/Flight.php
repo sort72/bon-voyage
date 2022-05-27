@@ -37,4 +37,14 @@ class Flight extends Model
     {
         return $this->hasMany(Ticket::class)->withTrashed();
     }
+
+    public function getDiscountedEconomyAttribute()
+    {
+        return $this->economy_class_price * ((100 - $this->discount) / 100);
+    }
+
+    public function getDiscountedBusinessAttribute()
+    {
+        return $this->economy_class_price * ((100 - $this->discount) / 100);
+    }
 }

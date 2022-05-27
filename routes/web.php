@@ -25,10 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::as('external.')->group(function(){
     Route::middleware(['validate_client_guest'])->group(function() {
-        Route::get('/', function () {
-            $flights = Flight::with('destination.city','origin.city')->where('departure_time','>',Carbon::now())->get();
-            return view('welcome',compact('flights'));
-        })->name('index');
+        Route::get('/', [ExternalController::class, 'index'])->name('index');
 
 
         Route::get('/vuelos', [ExternalController::class, 'flights'])->name('flights');

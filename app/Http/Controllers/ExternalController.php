@@ -12,6 +12,7 @@ use App\Models\Cart;
 use App\Models\Card;
 use App\Models\Destination;
 use App\Models\Flight;
+use App\Models\SearchSuggestion;
 use App\Models\Ticket;
 use App\Models\User;
 use Carbon\Carbon;
@@ -23,7 +24,19 @@ class ExternalController extends Controller
 {
     public function index()
     {
-        return view("pages.external.index");
+        $flights = Flight::with('destination.city','origin.city')->where('departure_time','>',Carbon::now())->orderBy('discount', 'desc')->orderBy('created_at', 'desc')->paginate(12);
+
+        $recommendations = [];
+        if(auth()->check()) {
+            $interests = SearchSuggestion::where('user_id', auth()->user()->id)->get()->pluck('destination_id');
+            if($interests)
+                $recommendations = Flight::with('destination.city','origin.city')
+                                    ->where('departure_time','>',Carbon::now())
+                                    ->whereIn('destination_id', $interests)
+                                    ->orderBy('discount', 'desc')->inRandomOrder()->get();
+        }
+
+        return view('welcome',compact('flights', 'recommendations'));
     }
 
     public function flights(SearchFlightRequest $request)
@@ -55,6 +68,13 @@ class ExternalController extends Controller
         $flight_class = $request->flight_class;
         $origin_name = Destination::where('id', $request->origin_id)->with('city')->first()->city->name;
         $destination_name = Destination::where('id', $request->destination_id)->with('city')->first()->city->name;
+
+        if(auth()->check())
+        {
+            $user = User::find(auth()->user()->id);
+            $user->suggestions()->firstOrCreate(['destination_id' => $request->origin_id]);
+            $user->suggestions()->firstOrCreate(['destination_id' => $request->destination_id]);
+        }
 
         return view('pages.external.flights', compact('flights', 'flights_back', 'found', 'departure_time', 'back_time',
             'adults_count', 'kids_count', 'flight_class', 'origin_name', 'destination_name'));
