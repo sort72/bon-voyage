@@ -196,7 +196,7 @@
                             </div>
                             <div class="flex justify-between flex-wrap">
                                 <a href="#" id="reservation" class="text-center m-2 w-full rounded-full bg-sky-600 p-2 font-semibold hover:bg-sky-500 text-white">Reservar</a>
-                                <a href="#" id="purchase" class="m-2 w-full rounded-full bg-green-600 hover:bg-green-500 p-2 font-semibold text-white">Comprar</a>
+                                <a href="#" id="purchase" class="text-center m-2 w-full rounded-full bg-green-600 hover:bg-green-500 p-2 font-semibold text-white">Comprar</a>
                             </div>
                         </div>
                     </div>

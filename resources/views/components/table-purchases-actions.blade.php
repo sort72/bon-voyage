@@ -8,5 +8,4 @@
         </a>
         @include('datatables::delete', ['value' => $id])
     @endif
-
 </div>

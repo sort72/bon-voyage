@@ -37,24 +37,24 @@ class FlightHelper
         if($flight->is_international) {
             if($class == 'first_class') {
                 $number_min = 1;
-                $number_max = 50;
+                $number_max = 6;
                 $letter_max = 8;
             }
             else {
-                $number_min = 51;
-                $number_max = 250;
+                $number_min = 7;
+                $number_max = 31;
                 $letter_max = 8;
             }
         }
         else {
             if($class == 'first_class') {
                 $number_min = 1;
-                $number_max = 25;
+                $number_max = 4;
                 $letter_max = 6;
             }
             else {
-                $number_min = 26;
-                $number_max = 150;
+                $number_min = 5;
+                $number_max = 25;
                 $letter_max = 6;
             }
         }
@@ -63,7 +63,38 @@ class FlightHelper
         $letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I" ];
 
         do {
-            $seat = $letters[random_int($letter_min, $letter_max)] . random_int($number_min, $number_max);
+            $letter = $letters[random_int($letter_min, $letter_max)];
+            $number = 0;
+            if($flight->is_international)
+            {
+                if($letter =='A' || $letter =='B')
+                {
+                    if($class == 'first_class')
+                        $number = random_int($number_min, 7);
+                    else
+                        $number = random_int(8,32);
+                }
+                else
+                {
+                    $number = random_int($number_min, $number_max);
+                }
+            }
+            else
+            {
+                if($letter =='A')
+                {
+                    if($class == 'first_class')
+                        $number = random_int($number_min, 5);
+                    else
+                        $number = random_int(6,$number_max);
+                }
+                else
+                {
+                    $number = random_int($number_min, $number_max);
+                }
+            }
+
+            $seat = $letter.$number;
 
             $seat_taken = Ticket::where('flight_id', $flight->id)->where('seat', $seat)->first();
 
@@ -74,7 +105,7 @@ class FlightHelper
 
     public static function getTotalSeats($is_international)
     {
-        if($is_international) {
+        if($is_international == 1) {
             return collect([
                 'first_class' => 50,
                 'economy_class' => 200,

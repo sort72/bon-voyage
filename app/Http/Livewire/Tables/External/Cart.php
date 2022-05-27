@@ -72,6 +72,11 @@ class Cart extends LivewireDatatable
                 return DateHelper::beautify($created_at, 'short_complete_with_time');
             })->label('Fecha reservación')->searchable(),
 
+            Column::callback(['id', 'deleted_at','flights.departure_time'], function ($id, $deleted_at,$departure_time) {
+                if($deleted_at) return '<b>CANCELADA</b>';
+                return view('components.table-purchases-actions', ['id' => $id, 'departure_time'=>$departure_time]);
+            })->unsortable()
+
         ];
     }
 }

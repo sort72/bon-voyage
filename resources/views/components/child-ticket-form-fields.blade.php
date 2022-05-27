@@ -85,7 +85,7 @@
 
       <!-- Nombre de contacto -->
       <div>
-        <label for="child_emergency_name" class="block text-truncate">Nombre de contacto</label>
+        <label for="child_emergency_name" class="block text-truncate">Nombre de contacto *</label>
         <input
           class="w-full rounded-xl border border-gray-400 p-1"
           name="child_emergency_name[]"
@@ -99,7 +99,7 @@
 
       <!-- Telefono de contacto -->
       <div class="md:col-span-2 md:justify-self-center ">
-        <label class="block text-truncate" for="child_emergency_contact"> Teléfono de contacto </label>
+        <label class="block text-truncate" for="child_emergency_contact"> Teléfono de contacto *</label>
 
         <input
           class="w-full rounded-xl border border-gray-400 p-1"

@@ -52,6 +52,8 @@ Route::as('external.')->group(function(){
             Route::get('/reservas', [UserController::class, 'bookingList'])->name('booking-list');
             Route::get('/compras', [UserController::class, 'purchasesList'])->name('purchases-list');
             Route::get('/carrito', [UserController::class, 'cart'])->name('cart');
+            Route::delete('/delete/{id}', [UserController::class, 'deleteItem'])->name('deleteItem');
+            Route::post('/carrito/pagar', [UserController::class, 'payCart'])->name('payCart');
             Route::get('/conversaciones', [ClientConversationController::class, 'index'])->name('conversation.index');
             Route::get('/conversaciones/crear', [ClientConversationController::class, 'create'])->name('conversation.create');
             Route::post('/conversaciones/crear', [ClientConversationController::class, 'store'])->name('conversation.store');
