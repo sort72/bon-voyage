@@ -33,6 +33,12 @@
                             Enviar mensaje
                         </button>
                     </div>
+
+                    <div class="w-4/5 flex justify-self-center justify-around mt-4">
+                        <button id="end_conversation" type="button" class="w-1/3 p-2 border-2 rounded-md bg-sky-400 text-white">
+                            Finalizar conversación
+                        </button>
+                    </div>
                 @endif
             </form>
 
