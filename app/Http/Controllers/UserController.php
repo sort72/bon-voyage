@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Mail\TicketPaid;
 use App\Models\Card;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\City;
@@ -58,7 +59,9 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $cards = $user->cards;
-        $cart = $user->activeCart();
+        $cart = Cart::where(['user_id' => Auth()->user()->id])
+                ->where('status', 'opened')
+                ->firstOrCreate();
         return view('pages.external.user.cart', compact('cards','cart'));
     }
 

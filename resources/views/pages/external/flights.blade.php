@@ -14,7 +14,7 @@
                         class="md:grid md:grid-cols-4 divide-y-2 md:divide-y-0 md:divide-x-2 divide-solid content-center gap-4 py-4 px-4 shadow-md rounded-lg bg-white">
                         <!-- Información de vuelos -->
                         <div class="col-span-3">
-                            <div class="m-2 grid grid-cols-5 content-center gap-4 px-4">
+                            <div class="m-2 grid grid-cols-2 md:grid-cols-5 content-center gap-4 px-4">
                                 <!-----------------Parte superior-------------------->
                                 <div class="rounded-lg bg-slate-200">
                                     <div class="p-4 tracking-wide">
@@ -46,7 +46,7 @@
                             <!-- Borde morado -->
                             @foreach ($flights as $flight)
                                 <div
-                                    class="m-4 grid grid-cols-5 content-center gap-4 rounded-full px-4 outline outline-1 outline-purple-600 hover:outline-sky-700">
+                                    class="m-4 grid grid-cols-2 md:grid-cols-5 content-center md:gap-4 rounded-lg md:rounded-full px-4 outline outline-1 outline-purple-600 hover:outline-sky-700">
                                     <!-----------------Parte superior inferior-------------------->
                                     <div class="hover:bg-slate-300x rounded-full">
                                         <div class="m-4 p-4 tracking-wide">
@@ -89,7 +89,7 @@
                             @endforeach
 
                             @if ($back_time)
-                                <div class="m-2 grid grid-cols-5 content-center gap-4 px-4">
+                                <div class="m-2 grid grid-cols-2 md:grid-cols-5 content-center gap-4 px-4">
                                     <!-----------------Parte superior-------------------->
                                     <div class="rounded-lg bg-slate-200">
                                         <div class="p-4 tracking-wide">
@@ -122,7 +122,7 @@
                                 <!-- Borde morado -->
                                 @foreach ($flights_back as $flight)
                                     <div
-                                        class="m-4 grid grid-cols-5 content-center gap-4 rounded-full px-4 outline outline-1 outline-purple-600 hover:outline-sky-700">
+                                        class="m-4 grid grid-cols-2 md:grid-cols-5 content-center md:gap-4 rounded-lg md:rounded-full px-4 outline outline-1 outline-purple-600 hover:outline-sky-700">
                                         <!-----------------Parte superior inferior-------------------->
                                         <div class="hover:bg-slate-300x rounded-full">
                                             <div class="m-4 p-4 tracking-wide">
