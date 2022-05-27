@@ -183,8 +183,40 @@ class ExternalController extends Controller
 
     public function changeSeat()
     {
-        $flight_info = FlightHelper::getTotalSeats(true);
-        return view('pages.external.seat',compact('flight_info'));
+        $flight = Flight::find(5);
+        $lettersI = ["A", "B", "C", "D", "E", "F", "G", "H", "I" ];
+        $lettersN = ["A", "B", "C", "D", "E", "F", "G"];
+        $seats=[];
+
+        if($flight->is_international)
+        {
+            foreach($lettersI as $letter){
+                if($letter == 'A' || $letter == 'B')
+                    $num_max = 33;
+                else
+                    $num_max = 32;
+
+                for($i=1;$i<$num_max;$i++)
+                {
+                    $seat = $letter.$i;
+                    $busy = Ticket::where('flight_id', $flight->id)->where('seat', $seat)->first();
+                    $seats[$seat] = is_null($busy) ? 'free' : 'busy';
+                }
+            }
+        }
+        else
+        {
+            foreach($lettersN as $letter){
+                for($i=1;$i<26;$i++)
+                {
+                    $seat = $letter.$i;
+                    $busy = Ticket::where('flight_id', $flight->id)->where('seat', $seat)->first();
+                    $seats[$seat] = is_null($busy) ? 'free' : 'busy';
+                }
+            }
+        }
+
+        return view('pages.external.seat',compact('flight','seats'));
     }
 
     public function updateSeat(Request $request)
