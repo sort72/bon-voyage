@@ -194,7 +194,7 @@
                         action="{{ route('external.update-seat') }}">
                         @csrf
                         <input name="seat" value="`+seat+`" hidden/>
-                        <input name="ticket" value="`+ticket+`" hidden/>
+                        <input name="ticket" value="`+ticket_id+`" hidden />
                         <button class=" mt-4 bg-sky-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit"><i class="fa-solid fa-arrow-right-arrow-left"></i> Cambiar</button>
                     </form>`,
                 showCloseButton: true,
