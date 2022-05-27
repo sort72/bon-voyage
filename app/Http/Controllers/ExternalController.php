@@ -225,15 +225,13 @@ class ExternalController extends Controller
             }
         }
 
-        Log::alert($seats);
         return view('pages.external.seat',compact('flight','seats','ticket'));
     }
 
     public function updateSeat(ChangeSeatRequest $request)
     {
-        $seat = $request->seat;
         $ticket = Ticket::find($request->ticket);
-        $ticket->seat = $seat;
+        $ticket->seat = $request->input('seat');
         $ticket->checkin_done = 1;
         $ticket->save();
 
