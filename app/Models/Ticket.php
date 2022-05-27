@@ -12,6 +12,10 @@ class Ticket extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'passenger_birth_date' => 'date',
+    ];
+
     public function flight()
     {
         return $this->belongsTo(Flight::class);
@@ -20,6 +24,11 @@ class Ticket extends Model
     public function cart()
     {
         return $this->belongsTo(Cart::class);
+    }
+
+    public function getIsAdultAttribute()
+    {
+        return now()->diffInYears($this->passenger_birth_date) >= 18;
     }
 
 }
