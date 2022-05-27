@@ -58,7 +58,7 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $cards = $user->cards;
-        $cart = $user->activeCart();
+        $cart = $user->activeCart() ?? [];
         return view('pages.external.user.cart', compact('cards','cart'));
     }
 

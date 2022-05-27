@@ -176,6 +176,7 @@ class ExternalController extends Controller
                                 ->where('departure_time', '>', now()->subHour());
                         })
                         ->where('status', 'paid')
+                        ->where('checkin_done', 0)
                         ->first();
 
         if(!$ticket)
