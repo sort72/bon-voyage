@@ -84,7 +84,7 @@
 
       <!-- Género -->
       <div>
-        <label for="adult_gender">Género</label>
+        <label for="adult_gender">Género *</label>
         <select
           class="border-black-800 w-full rounded-xl border border-gray-400 p-1 overflow-hidden"
           name="adult_gender[]">
@@ -100,7 +100,7 @@
 
       <!-- Télefono -->
       <div>
-        <label for="adult_phone">Teléfono</label>
+        <label for="adult_phone">Teléfono *</label>
         <input
           class="w-full rounded-xl border border-gray-400 p-1"
           name="adult_phone[]"
@@ -114,7 +114,7 @@
 
       <!-- Nombre de contacto -->
       <div>
-        <label for="adult_emergency_name" class="block text-truncate">Nombre de contacto</label>
+        <label for="adult_emergency_name" class="block text-truncate">Nombre de contacto *</label>
         <input
           class="w-full rounded-xl border border-gray-400 p-1"
           name="adult_emergency_name[]"
@@ -128,7 +128,7 @@
 
       <!-- Telefono de contacto -->
       <div class="md:col-span-2 md:justify-self-center ">
-        <label class="block text-truncate" for="adult_emergency_contact"> Teléfono de contacto </label>
+        <label class="block text-truncate" for="adult_emergency_contact"> Teléfono de contacto *</label>
 
         <input
           class="w-full rounded-xl border border-gray-400 p-1"

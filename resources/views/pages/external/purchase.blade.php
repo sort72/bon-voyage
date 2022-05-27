@@ -50,7 +50,6 @@
                             <span>Valor por persona</span>
                             <span class="justify-self-end">{{ currency_format($one_person_value) }}</span>
                         </div>
-                        {{ $errors }}
                     </div>
 
                     <hr class="border-gray-400 my-3" />

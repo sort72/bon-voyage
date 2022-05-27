@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Models\Card;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\City;
+use App\Models\Ticket;
+
+use function PHPUnit\Framework\lessThanOrEqual;
 
 class UserController extends Controller
 {
@@ -50,7 +54,46 @@ class UserController extends Controller
 
     public function cart()
     {
-        return view('pages.external.user.cart');
+        $user = auth()->user();
+        $cards = $user->cards;
+        $cart = $user->activeCart();
+        return view('pages.external.user.cart', compact('cards','cart'));
+    }
+
+    public function deleteItem($id)
+    {
+            Ticket::find($id)->delete();
+
+            return response()->json(['success' => 'Article ID: ' . $id . ' has been deleted']);
+    }
+
+    public function payCart(Request $request)
+    {
+        $card = Card::find($request->card);
+        $balance =  $card->amount - $request->total;
+
+        if($balance>=0)
+        {
+            $card->amount -= $request->total;
+            $card->save();
+
+            $tickets = auth()->user()->tickets;
+            foreach($tickets as $ticket){
+                $ticket->status = 'paid';
+                $ticket->save();
+            }
+
+            $cart = auth()->user()->activeCart();
+            $cart->status = 'closed';
+            $cart->save();
+
+            return redirect()->route('external.profile.purchases-list')->with('success', 'Vuelos comprados con éxito!');
+        }
+        else
+        {
+            return "saldo insuficiente";
+        }
+
     }
 
 }

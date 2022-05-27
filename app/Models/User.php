@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class);
     }
 
+    public function activeCart()
+    {
+        return $this->carts()->where('status','opened')->first();
+    }
+
     public function tickets()
     {
         return $this->hasManyThrough(Ticket::class, Cart::class);

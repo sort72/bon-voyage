@@ -4,7 +4,7 @@
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
-          <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+          <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
             <!--
               Icon when menu is closed.
@@ -57,50 +57,50 @@
       <div class="mx-auto mb-2 px-2 sm:px-6 lg:px-8 flex-1 sm:items-stretch sm:justify-start">
         <div class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="{{ route('external.index') }}" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+
+            <a href="{{ route('external.index') }}"  class="{{ Route::is('external.index') ? 'border-b-2 border-sky-500 text-sky-500' : 'text-gray-400 rounded-md' }} hover:bg-sky-500 hover:text-white hover:rounded px-2 py-2  text-sm font-medium" aria-current="page">
                 <div class="text-center">
                     <i class="block fa-solid fa-plane-up"></i>
                     <span class="block w-full">Vuelos</span>
                 </div>
             </a>
 
-            <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+            <a href="#" class="{{ Route::is('external.sale') ? 'border-b-2 border-sky-500 text-sky-500' : 'text-gray-400 rounded-md' }} hover:bg-sky-500 hover:text-white hover:rounded px-2 py-2  text-sm font-medium" aria-current="page">
                 <div class="text-center">
                     <i class="block fa-solid fa-fire"></i>
                     <span class="block w-full">Ofertas</span>
                 </div>
             </a>
 
-            <a href="{{ route('external.checkin') }}" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+            <a href="{{ route('external.checkin') }}" class="{{ Route::is('external.checkin') ? 'border-b-2 border-sky-500 text-sky-500' : 'text-gray-400 rounded-md' }} hover:bg-sky-500 hover:text-white hover:rounded px-2 py-2  text-sm font-medium" aria-current="page">
                 <div class="text-center">
                     <i class="block fa-solid fa-suitcase"></i>
                     <span class="block w-full">Check-in</span>
                 </div>
             </a>
             @if(auth()->user())
-                <a href="{{ route('external.profile.card.index') }}" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <a href="{{ route('external.profile.card.index') }}" class="{{ Route::is('external.profile.card.index') ? 'border-b-2 border-sky-500 text-sky-500' : 'text-gray-400 rounded-md' }} hover:bg-sky-500 hover:text-white hover:rounded px-2 py-2  text-sm font-medium" aria-current="page">
                     <div class="text-center">
                         <i class="block fa-solid fa-credit-card"></i>
                         <span class="block w-full">Mis tarjetas</span>
                     </div>
                 </a>
 
-                <a href="{{ route('external.profile.booking-list') }}" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <a href="{{ route('external.profile.booking-list') }}" class="{{ Route::is('external.profile.booking-list') ? 'border-b-2 border-sky-500 text-sky-500' : 'text-gray-400 rounded-md' }} hover:bg-sky-500 hover:text-white hover:rounded px-2 py-2  text-sm font-medium" aria-current="page">
                     <div class="text-center">
                         <i class="block fa-solid fa-couch"></i>
                         <span class="block w-full">Mis reservas</span>
                     </div>
                 </a>
 
-                <a href="#" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <a href="#" class="{{ Route::is('external.wall') ? 'border-b-2 border-sky-500 text-sky-500' : 'text-gray-400 rounded-md' }} hover:bg-sky-500 hover:text-white hover:rounded px-2 py-2  text-sm font-medium" aria-current="page">
                     <div class="text-center">
                         <i class="block fa-solid fa-message"></i>
                         <span class="block w-full">Mi muro</span>
                     </div>
                 </a>
 
-                <a href="{{ route('external.profile.cart') }}" class="hover:bg-sky-500 hover:text-white text-gray-400 px-2 py-2 rounded-md text-sm font-medium" aria-current="page">
+                <a href="{{ route('external.profile.cart') }}" class="{{ Route::is('external.profile.cart') ? 'border-b-2 border-sky-500 text-sky-500' : 'text-gray-400 rounded-md' }} hover:bg-sky-500 hover:text-white hover:rounded px-2 py-2  text-sm font-medium" aria-current="page">
                     <div class="text-center">
                         <i class="block fa-solid fa-cart-plus"></i>
                         <span class="block w-full">Carrito de compras</span>
@@ -115,42 +115,37 @@
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="hidden mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="{{ route('external.index') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-plane-up"></i>  Vuelos</a>
 
-        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-fire"></i> Ofertas</a>
+        <a href="{{ route('external.index') }}" class="{{ Route::is('external.index') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-plane-up mt-1 mr-2"></i>  Vuelos</a>
 
-        <a href="{{ route('external.checkin') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-suitcase"></i> Check-in</a>
+        <a href="#" class="{{ Route::is('external.sale') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-fire mt-1 mr-2"></i> Ofertas</a>
+
+        <a href="{{ route('external.checkin') }}" class="{{ Route::is('external.checkin') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-suitcase mt-1 mr-2"></i> Check-in</a>
         @if(auth()->user())
 
-            <a href="{{ route('external.profile.card.index') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-credit-card"></i> Mis tarjetas</a>
+            <a href="{{ route('external.profile.card.index') }}" class="{{ Route::is('external.profile.card.index') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page"><i class="block fa-solid fa-credit-card mt-1 mr-2"></i> Mis tarjetas</a>
 
-            <a href="{{ route('external.profile.booking-list') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-couch"></i> Mis reservas</a>
+            <a href="{{ route('external.profile.booking-list') }}" class="{{ Route::is('external.profile.booking-list') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-couch mt-1 mr-2"></i> Mis reservas</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-message"></i> Mi muro</a>
+            <a href="#" class="{{ Route::is('external.wall') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-message mt-1 mr-2"></i> Mi muro</a>
 
-            <a href="{{ route('external.profile.cart') }}" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-cart-plus"></i> Carrito de compras</a>
+            <a href="{{ route('external.profile.cart') }}" class="{{ Route::is('external.profile.cart') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="block fa-solid fa-cart-plus mt-1 mr-2"></i> Carrito de compras</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> {{auth()->user()->name}} {{auth()->user()->surname}}</a>
+            <a href="{{route('external.profile.edit')}}" class="{{ Route::is('external.profile.edit') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> {{auth()->user()->name}} {{auth()->user()->surname}}</a>
 
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-suitcase mt-1 mr-2"></i> Mis viajes</a>
+            <a href="{{ route('external.profile.purchases-list') }}" class="{{ Route::is('external.profile.purchases-list') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-suitcase mt-1 mr-2"></i> Mis viajes</a>
 
             <form method="POST" action="{{ route('logout') }}" class="navbar-item desktop-icon-only">
                 @csrf
 
-                <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="{{ Route::is('logout') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium">
+                    <i class="fa-solid fa-arrow-right-from-bracket mt-1 mr-2"></i>
                     <span>Cerrar sesión</span>
                 </a>
             </form>
         @else
-
-            <a href="@if(auth()->user()) {{route('external.profile.edit')}} @else {{ route('login') }} @endif" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> Iniciar sesión</a>
-
-            <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-suitcase mt-1 mr-2"></i> Mis viajes</a>
-
+            <a href="{{ route('login') }}" class="{{ Route::is('login') ? 'bg-sky-500 text-white' : 'text-gray-400' }} focus:bg-sky-500 focus:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-user mt-1 mr-2"></i> Iniciar sesión</a>
         @endif
-        <a href="#" class="focus:bg-sky-600 text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"><i class="fa-solid fa-circle-question mt-1 mr-2"></i> Ayuda</a>
       </div>
     </div>
   </nav>

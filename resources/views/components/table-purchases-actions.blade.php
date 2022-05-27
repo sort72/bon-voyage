@@ -8,5 +8,7 @@
         </a>
         @include('datatables::delete', ['value' => $id])
     @endif
-
+    <a href="#" onclick="deleteItem({{$id}})" class="p-1 text-red-500 hover:bg-red-500 hover:text-white rounded" title="Realizar check-in">
+        <i class="fa-solid fa-trash-can"></i>
+    </a>
 </div>

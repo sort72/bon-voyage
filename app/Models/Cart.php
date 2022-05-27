@@ -11,4 +11,9 @@ class Cart extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }
