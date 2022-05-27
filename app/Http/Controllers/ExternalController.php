@@ -245,7 +245,7 @@ class ExternalController extends Controller
         $ticket->checkin_done = 1;
         $ticket->save();
 
-        //Mail::to($ticket->passenger_email)->send(new BoardingPass($ticket));
+        Mail::to($ticket->passenger_email)->send(new BoardingPass($ticket));
         return redirect()->route('external.profile.purchases-list')->with('success', 'Check in realizado!.');
     }
 
