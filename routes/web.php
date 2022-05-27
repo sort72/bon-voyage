@@ -35,6 +35,7 @@ Route::as('external.')->group(function(){
         Route::get('/checkin', [ExternalController::class, 'checkin'])->name('checkin');
         Route::post('/checkin', [ExternalController::class, 'validateCheckin'])->name('validate-checkin');
         Route::get('/checkin/cambio-silla', [ExternalController::class, 'changeSeat'])->name('change-seat');
+        Route::post('/checkin/cambio-silla', [ExternalController::class, 'updateSeat'])->name('update-seat');
     });
 
     Route::middleware(['auth', 'role:client'])->group(function() {

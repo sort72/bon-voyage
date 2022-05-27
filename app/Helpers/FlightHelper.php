@@ -38,29 +38,29 @@ class FlightHelper
             if($class == 'first_class') {
                 $number_min = 1;
                 $number_max = 6;
-                $letter_max = 8;
+                $letter_max = 7;
             }
             else {
                 $number_min = 7;
                 $number_max = 31;
-                $letter_max = 8;
+                $letter_max = 7;
             }
         }
         else {
             if($class == 'first_class') {
                 $number_min = 1;
                 $number_max = 4;
-                $letter_max = 6;
+                $letter_max = 5;
             }
             else {
                 $number_min = 5;
                 $number_max = 25;
-                $letter_max = 6;
+                $letter_max = 5;
             }
         }
 
         $letter_min = 0;
-        $letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I" ];
+        $letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
         do {
             $letter = $letters[random_int($letter_min, $letter_max)];

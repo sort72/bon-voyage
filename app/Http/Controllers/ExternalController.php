@@ -7,6 +7,7 @@ use App\Helpers\FlightHelper;
 use App\Http\Requests\BookFlightRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookingRequest;
+use App\Http\Requests\ChangeSeatRequest;
 use App\Http\Requests\SearchFlightRequest;
 use App\Models\Cart;
 use App\Models\Card;
@@ -184,8 +185,10 @@ class ExternalController extends Controller
     public function changeSeat()
     {
         $flight = Flight::find(5);
-        $lettersI = ["A", "B", "C", "D", "E", "F", "G", "H", "I" ];
-        $lettersN = ["A", "B", "C", "D", "E", "F", "G"];
+        $ticket = 2;
+        $ticket_class = 'economy_class';
+        $lettersI = ["A", "B", "C", "D", "E", "F", "G", "H"];
+        $lettersN = ["A", "B", "C", "D", "E", "F"];
         $seats=[];
 
         if($flight->is_international)
@@ -215,12 +218,16 @@ class ExternalController extends Controller
                 }
             }
         }
-
-        return view('pages.external.seat',compact('flight','seats'));
+        return view('pages.external.seat',compact('flight','seats','ticket','ticket_class'));
     }
 
-    public function updateSeat(Request $request)
+    public function updateSeat(ChangeSeatRequest $request)
     {
-
+        Log::alert('hola, cambio silla');
+        $seat = $request->seat;
+        $ticket = Ticket::find($request->ticket);
+        $ticket->seat = $seat;
+        $ticket->save();
+        return redirect()->route('external.checkin')->with('success', 'Silla actualizada correctamente.');
     }
 }
