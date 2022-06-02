@@ -25,13 +25,13 @@ class SearchFlightRequest extends FormRequest
     public function rules()
     {
         return [
-            'destination_id' => ['required', 'exists:destinations,id', 'different:origin_id'],
-            'origin_id' => ['required', 'exists:destinations,id', 'different:destination_id'],
-            'passengers' => ['required', 'numeric', 'min:0', 'max:10'],
-            'adults_count' => ['required', 'numeric', 'min:1', 'max:10'],
-            'kids_count' => ['required', 'numeric', 'min:0', 'max:10'],
-            'flight_class' => ['required', 'in:first_class,economy_class'],
-            'departure_time' => ['required', 'date', 'after:' . Carbon::now('America/Bogota')->subDay()],
+            'destination_id' => ['nullable', 'exists:destinations,id', 'different:origin_id'],
+            'origin_id' => ['nullable', 'exists:destinations,id', 'different:destination_id'],
+            'passengers' => ['nullable', 'numeric', 'min:0', 'max:10'],
+            'adults_count' => ['nullable', 'numeric', 'min:1', 'max:10'],
+            'kids_count' => ['nullable', 'numeric', 'min:0', 'max:10'],
+            'flight_class' => ['nullable', 'in:first_class,economy_class'],
+            'departure_time' => ['nullable', 'date', 'after:' . Carbon::now('America/Bogota')->subDay()],
             'back_time' => ['nullable', 'date', 'after_or_equal:departure_time'],
         ];
     }

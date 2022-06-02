@@ -46,14 +46,19 @@ class ExternalController extends Controller
     public function flights(SearchFlightRequest $request)
     {
         $found = 1;
-        $flights = Flight::where('origin_id', $request->origin_id)
-                        ->where('destination_id', $request->destination_id)
-                        ->whereBetween('departure_time', [DateHelper::addColombiaDifference($request->departure_time . ' 00:00:00'), DateHelper::addColombiaDifference($request->departure_time . ' 23:59:59')])
-                        ->get();
+        $flights = Flight::select('*');
+
+        if($request->origin_id) $flights = $flights->where('origin_id', $request->origin_id);
+        if($request->destination_id) $flights = $flights->where('destination_id', $request->destination_id);
+
+        if($request->departure_time) $flights = $flights->whereBetween('departure_time', [DateHelper::addColombiaDifference($request->departure_time . ' 00:00:00'), DateHelper::addColombiaDifference($request->departure_time . ' 23:59:59')]);
+        else $flights = $flights->where('departure_time', '>=', DateHelper::addColombiaDifference(now()->format('Y-m-d') . ' 00:00:00'));
+
+        $flights = $flights->orderBy('departure_time', 'ASC')->get();
 
         if(!$flights->count()) $found = 0;
 
-        $flights_back = null;
+        $flights_back = [];
 
         if($request->has('back_time') && $request->back_time !='') {
 
@@ -65,40 +70,55 @@ class ExternalController extends Controller
             if(!$flights_back->count()) $found = 0;
         }
 
+        $results = [];
+
+        foreach ($flights as $flight) {
+            $key = $flight->origin_id . '_' . $flight->destination_id;
+            if(!isset($results[$key])) $results[$key] = ['outbound_flights' => [], 'return_flights' => [], 'origin_name' => $flight->origin->city->name, 'destination_name' => $flight->destination->city->name];
+            $results[$key]['outbound_flights'][] = $flight;
+        }
+        foreach ($flights_back as $flight) {
+            $key = $flight->destination_id . '_' . $flight->origin_id;
+            // if(!isset($results[$key])) $results[$key] = ['outbound_flights' => [], 'return_flights' => []];
+            $results[$key]['return_flights'][] = $flight;
+        }
 
         $departure_time = $request->departure_time;
         $back_time = $request->back_time;
         $adults_count = $request->adults_count;
         $kids_count = $request->kids_count;
         $flight_class = $request->flight_class;
-        $origin_name = Destination::where('id', $request->origin_id)->with('city')->first()->city->name;
-        $destination_name = Destination::where('id', $request->destination_id)->with('city')->first()->city->name;
+        $origin_name = Destination::where('id', $request->origin_id)->with('city')->first()->city->name ?? 'A';
+        $destination_name = Destination::where('id', $request->destination_id)->with('city')->first()->city->name ?? 'B';
 
         if(auth()->check())
         {
             $user = User::find(auth()->user()->id);
-            $user->suggestions()->firstOrCreate(['destination_id' => $request->origin_id]);
-            $user->suggestions()->firstOrCreate(['destination_id' => $request->destination_id]);
+            if($request->origin_id) $user->suggestions()->firstOrCreate(['destination_id' => $request->origin_id]);
+            if($request->destination_id) $user->suggestions()->firstOrCreate(['destination_id' => $request->destination_id]);
         }
 
-        return view('pages.external.flights', compact('flights', 'flights_back', 'found', 'departure_time', 'back_time',
+        return view('pages.external.flights', compact('results', 'flights', 'flights_back', 'found', 'departure_time', 'back_time',
             'adults_count', 'kids_count', 'flight_class', 'origin_name', 'destination_name'));
     }
 
     public function booking(BookFlightRequest $request){
         $flight = Flight::find($request->flight_id);
         $inbound_flight = null;
+        $one_person_value = $request->flight_class =='first_class' ? $flight->discounted_business : $flight->discounted_economy;
         if($request->has('inbound_flight_id') && $request->inbound_flight_id) {
             $inbound_flight = Flight::find($request->inbound_flight_id);
 
             if($flight->destination_id != $inbound_flight->origin_id || $inbound_flight->destination_id != $flight->origin_id) return redirect('external.index');
+
+            $one_person_value += $request->flight_class =='first_class' ? $inbound_flight->discounted_business : $inbound_flight->discounted_economy;
         }
 
         return view('pages.external.booking', [
             'number_of_adults' => $request->adults_count,
             'number_of_children' => $request->kids_count,
             'passengers' => $request->passengers,
-            'one_person_value' => $request->flight_class =='first_class' ? $flight->discounted_business : $flight->discounted_economy,
+            'one_person_value' => $one_person_value,
             'class' => $request->flight_class,
             'flight' => $flight,
             'inbound_flight' => $inbound_flight,
@@ -119,17 +139,20 @@ class ExternalController extends Controller
         $flight = Flight::find($request->flight_id);
         $cards = Card::where('client_id', Auth()->user()->id)->get();
         $inbound_flight = null;
+        $one_person_value = $request->flight_class =='first_class' ? $flight->discounted_business : $flight->discounted_economy;
         if($request->has('inbound_flight_id') && $request->inbound_flight_id) {
             $inbound_flight = Flight::find($request->inbound_flight_id);
 
             if($flight->destination_id != $inbound_flight->origin_id || $inbound_flight->destination_id != $flight->origin_id) return redirect('external.index');
+
+            $one_person_value += $request->flight_class =='first_class' ? $inbound_flight->discounted_business : $inbound_flight->discounted_economy;
         }
 
         return view('pages.external.purchase', [
             'number_of_adults' => $request->adults_count,
             'number_of_children' => $request->kids_count,
             'passengers' => $request->passengers,
-            'one_person_value' => $request->flight_class =='first_class' ? $flight->discounted_business : $flight->discounted_economy,
+            'one_person_value' => $one_person_value,
             'class' => $request->flight_class,
             'flight' => $flight,
             'inbound_flight' => $inbound_flight,

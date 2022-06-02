@@ -3,7 +3,7 @@
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2">{{$flight->origin->city->name}} - {{$flight->destination->city->name}}</div>
       <p class="text-gray-700 text-base">
-        {{ DateHelper::beautify($flight->departure_time, 'complete_with_time') }}
+        {{ DateHelper::beautify($flight->departure_time, 'complete_with_time', $flight->origin->timezone) }}
       </p>
     </div>
     <div class="px-6 pt-4 pb-2 flex flex-wrap">
