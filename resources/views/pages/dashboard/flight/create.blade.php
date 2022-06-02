@@ -22,15 +22,6 @@
               @enderror
             </div>
 
-            <!-- Tiempo o duración -->
-            <div class="col-span-2">
-              <label class="font-medium text-sky-800" for="duration">Duración del vuelo</label>
-              <input class="mt-1 w-full border border-gray-300 rounded-md p-1" id="duration" min="0" name="duration" placeholder="Duración en minutos" required step="1" type="number" value="{{old('duration')}}" />
-              @error('duration')
-              <span class="text-red-500 font-semibold">{{$errors->first('duration')}}</span>
-              @enderror
-            </div>
-
             <!-- Origen -->
             <div>
               <label class="font-medium text-sky-800" for="origin_id">Origen</label>
@@ -56,6 +47,15 @@
               </select>
               @error('destination_id')
               <span class="text-red-500 font-semibold">{{$errors->first('destination_id')}}</span>
+              @enderror
+            </div>
+
+            <!-- Tiempo o duración -->
+            <div class="col-span-2">
+              <label class="font-medium text-sky-800" for="duration">Duración del vuelo</label>
+              <input class="mt-1 w-full border border-gray-300 rounded-md p-1" id="duration" min="0" name="duration" placeholder="Duración en minutos" required step="1" type="number" value="{{old('duration')}}" />
+              @error('duration')
+              <span class="text-red-500 font-semibold">{{$errors->first('duration')}}</span>
               @enderror
             </div>
 
