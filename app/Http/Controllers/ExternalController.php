@@ -50,6 +50,11 @@ class ExternalController extends Controller
 
         if($request->origin_id) $flights = $flights->where('origin_id', $request->origin_id);
         if($request->destination_id) $flights = $flights->where('destination_id', $request->destination_id);
+        if($request->minimum_economy_class_price) $flights = $flights->where('economy_class_price', '>=', $request->minimum_economy_class_price);
+        if($request->maximum_economy_class_price) $flights = $flights->where('economy_class_price', '<=', $request->maximum_economy_class_price);
+        if($request->minimum_business_class_price) $flights = $flights->where('first_class_price', '>=', $request->minimum_business_class_price);
+        if($request->maximum_business_class_price) $flights = $flights->where('first_class_price', '<=', $request->maximum_business_class_price);
+        if($request->duration) $flights = $flights->whereRaw('TIMESTAMPDIFF(MINUTE, departure_time, arrival_time) <= ?', [$request->duration]);
 
         if($request->departure_time) $flights = $flights->whereBetween('departure_time', [DateHelper::addColombiaDifference($request->departure_time . ' 00:00:00'), DateHelper::addColombiaDifference($request->departure_time . ' 23:59:59')]);
         else $flights = $flights->where('departure_time', '>=', DateHelper::addColombiaDifference(now()->format('Y-m-d') . ' 00:00:00'));
@@ -66,6 +71,9 @@ class ExternalController extends Controller
                             ->where('destination_id', $request->origin_id)
                             ->whereBetween('departure_time', [DateHelper::addColombiaDifference($request->back_time . ' 00:00:00'), DateHelper::addColombiaDifference($request->back_time . ' 23:59:59')])
                             ->get();
+
+            if($request->departure_time) $flights = $flights->whereBetween('departure_time', [DateHelper::addColombiaDifference($request->departure_time . ' 00:00:00'), DateHelper::addColombiaDifference($request->departure_time . ' 23:59:59')]);
+            else $flights = $flights->where('departure_time', '>=', DateHelper::addColombiaDifference(now()->format('Y-m-d') . ' 00:00:00'));
 
             if(!$flights_back->count()) $found = 0;
         }

@@ -33,6 +33,11 @@ class SearchFlightRequest extends FormRequest
             'flight_class' => ['nullable', 'in:first_class,economy_class'],
             'departure_time' => ['nullable', 'date', 'after:' . Carbon::now('America/Bogota')->subDay()],
             'back_time' => ['nullable', 'date', 'after_or_equal:departure_time'],
+            'minimum_economy_class_price' => ['nullable', 'numeric', 'min:0', 'max:100000000', 'lt:maximum_economy_class_price'],
+            'maximum_economy_class_price' => ['nullable', 'numeric', 'min:0', 'max:100000000'],
+            'minimum_business_class_price' => ['nullable', 'numeric', 'min:0', 'max:100000000', 'lt:maximum_business_class_price'],
+            'maximum_business_class_price' => ['nullable', 'numeric', 'min:0', 'max:100000000'],
+            'duration' => ['nullable', 'numeric', 'min:0', 'max:1000'],
         ];
     }
 }

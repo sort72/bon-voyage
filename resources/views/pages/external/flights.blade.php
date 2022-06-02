@@ -217,6 +217,7 @@
 
             </div>
         @else
+            @include('layouts.external.search')
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative my-8 mx-auto w-1/2" role="alert">
                 <strong class="font-bold">¡Lo sentimos!</strong>
                 <span class="block sm:inline">No se han encontrado vuelos. Por favor, inténtalo de nuevo utilizando otros criterios de búsqueda.</span>

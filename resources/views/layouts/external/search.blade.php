@@ -84,6 +84,43 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="pt-4">
+                    <p class="text-center text-white">Precio clase económica</p>
+                    <div class="flex justify-center">
+                        <div class="grid grid-cols-3 rounded-l bg-white items-center p-2 h-16">
+                            <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Precio mínimo</label>
+                            <input type="text" name="minimum_economy_class_price" value="{{ old('minimum_economy_class_price') }}" placeholder="" class="col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
+                        </div>
+                        <div class="grid grid-cols-3 rounded-r border-l-2 border-gray-600 bg-white items-center p-2 h-16">
+                            <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Precio máximo</label>
+                            <input type="text" name="maximum_economy_class_price" value="{{ old('maximum_economy_class_price') }}" placeholder="" class="col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-4">
+                    <p class="text-center text-white">Precio primera clase</p>
+                    <div class="flex justify-center">
+                        <div class="grid grid-cols-3 rounded-l bg-white items-center p-2 h-16">
+                            <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Precio mínimo</label>
+                            <input type="text" name="minimum_business_class_price" value="{{ old('minimum_business_class_price') }}" placeholder="" class="col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
+                        </div>
+                        <div class="grid grid-cols-3 rounded-r border-l-2 border-gray-600 bg-white items-center p-2 h-16">
+                            <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Precio máximo</label>
+                            <input type="text" name="maximum_business_class_price" value="{{ old('maximum_business_class_price') }}" placeholder="" class="col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-4">
+                    <div class="flex justify-center">
+                        <div class="grid grid-cols-3 rounded bg-white items-center p-2 h-16">
+                            <label id="label2" class="col-span-3 ml-2 text-xs leading-4">Duración máxima del vuelo (minutos)</label>
+                            <input type="text" name="duration" value="{{ old('duration') }}" placeholder="" class="col-span-3 rounded focus:outline-offset-0 focus:outline-sky-500 border-none text-gray-700"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex">
                     <div class="w-full text-center">
                         <button class=" mx-3 lg:mt-4 mt-3 bg-orange-600 transition duration-150 ease-in-out hover:bg-orange-500 rounded-lg font-semibold text-white p-3 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-orange-500"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
                     </div>
