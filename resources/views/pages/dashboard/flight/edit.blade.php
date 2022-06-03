@@ -50,7 +50,7 @@
                     @else
                         <option val="">Seleccione...</option>
                         @foreach ($destinations as $destination)
-                            <option @if(old('origin_id', $flight->origin_id) == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->city->name}}</option>
+                            <option @if(old('destination_id', $flight->destination_id) == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->city->name}}</option>
                         @endforeach
                     @endif
                 </select>
