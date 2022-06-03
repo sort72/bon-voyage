@@ -39,16 +39,52 @@
                         <input name="total" value="{{$total}}" hidden />
                     </div>
                 </div>
-                <div class="col-start-2 col-span-2 grid border-2 border-gray-400 bg-white rounded-xl shadow-md p-4 overflow-hidden justify-items-center my-10">
+                <div class="col-start-2 col-span-2 grid border-2 border-gray-400 bg-white rounded-xl shadow-md p-4 overflow-hidden justify-items-center my-10" x-data="{ show: true }">
                     <p class="mt-0 text-center sm:text-xl md:text-2xl mb-4 font-bold leading-tight text-sky-500">¿Cómo deseas pagar?</p>
-                    <p class="text-center text-gray-600 font-bold mt-6">Tus tarjetas Débito/Crédito</p>
-                    <select name="card" id="card"
-                        class="iblock my-4 w-1/3 rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
-                        <option value="">Seleccione</option>
-                        @foreach ($cards as $card)
-                        <option value="{{$card->id}}">{{$card->type}}***{{substr($card->number,-4)}}</option>
-                        @endforeach
-                    </select>
+                    <div class="flex items-center">
+                        <div class="bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex flex-shrink-0 justify-center items-center relative">
+                            <input aria-labelledby="label1" checked type="radio" name="radio" class="checkbox appearance-none focus:opacity-100 focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 focus:outline-none text-sky-500 border rounded-full border-gray-400 absolute cursor-pointer w-full h-full checked:border-none" @click="show = true" />
+                            <div class="check-icon hidden border-4 border-sky-500 rounded-full w-full h-full z-1"></div>
+                        </div>
+                        <label id="label1" class="ml-2 text-sm leading-4 font-normal">Débito</label>
+                        <div class="ml-4  bg-white dark:bg-gray-100 rounded-full w-4 h-4 flex flex-shrink-0 justify-center items-center relative">
+                            <input aria-labelledby="label2" type="radio" name="radio" class="checkbox appearance-none focus:opacity-100 focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 focus:outline-none border rounded-full text-sky-500 border-gray-400 absolute cursor-pointer w-full h-full checked:border-none" @click="show = false" />
+                            <div class="check-icon hidden border-4 border-sky-500 rounded-full w-full h-full z-1"></div>
+                        </div>
+                        <label id="label2" class="ml-2 text-sm leading-4 font-normal">Crédito</label>
+                    </div>
+                    <div x-show="show">
+                        <p class="text-center text-gray-600 font-bold mt-6">Tus tarjetas Débito</p>
+                        <select name="card" id="card"
+                            class="iblock my-4 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
+                            <option value="">Seleccione</option>
+                            @foreach ($debit_cards as $card)
+                            <option onclick="fees({{$card->type}})" value="{{$card->id}}">@if($card->number[0] == '3') AMEX @elseif ($card->number[0] == '4') VISA @elseif ($card->number[0] == '5') MASTERCARD @else OTRO @endif***{{substr($card->number,-4)}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div x-show="!show">
+                        <p class="text-center text-gray-600 font-bold mt-6">Tus tarjetas Crédito</p>
+                        <select name="card" id="card"
+                            class="iblock my-4 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
+                            <option value="">Seleccione</option>
+                            @foreach ($credit_cards as $card)
+                            <option onclick="fees({{$card->type}})" value="{{$card->id}}">@if($card->number[0] == '3') AMEX @elseif ($card->number[0] == '4') VISA @elseif ($card->number[0] == '5') MASTERCARD @else OTRO @endif***{{substr($card->number,-4)}}</option>
+                            @endforeach
+                        </select>
+                        <p class="text-center text-gray-600 font-bold mt-6">Cuotas</p>
+                        <select name="fees" id="fees"
+                            class="iblock my-4 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
+                            <option value="">Seleccione</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="6">6</option>
+                            <option value="12">12</option>
+                            <option value="24">24</option>
+                            <option value="36">36</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="flex justify-center">
