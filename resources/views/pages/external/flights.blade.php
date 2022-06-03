@@ -56,7 +56,7 @@
                                                         value="{{ $flight->id }}"
                                                         data-economy-price="{{$flight->discounted_economy}}"
                                                         data-business-price="{{$flight->discounted_business}}"
-                                                        class="form-check-input input_outbund float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white align-top transition duration-200 checked:border-slate-600 checked:bg-blue-600 focus:outline-none"
+                                                        class="form-check-input input_outbund float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white align-top transition duration-200 checked:border-slate-600 checked:bg-sky-600 focus:outline-none"
                                                         type="radio" onclick="changePrices('{{$key}}', {{$flight->id}},{{$flight->discounted_economy}},{{$flight->discounted_business}}, {{ $flight->discount }},this)" />
                                                     <label for="flight_{{ $flight->id }}" class="form-check-label inline-block text-slate-800"> {{ DateHelper::beautify($flight->departure_time, 'complete', $flight->origin->timezone) }} </label>
                                                 </div>
@@ -135,7 +135,7 @@
                                                             value="{{ $flight->id }}"
                                                             data-economy-price="{{$flight->discounted_economy}}"
                                                             data-business-price="{{$flight->discounted_business}}"
-                                                            class="form-check-input input_return float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white align-top transition duration-200 checked:border-slate-600 checked:bg-blue-600 focus:outline-none"
+                                                            class="form-check-input input_return float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white align-top transition duration-200 checked:border-slate-600 checked:bg-sky-600 focus:outline-none"
                                                             type="radio"  onclick="changePrices('{{$key}}', 0,{{$flight->discounted_economy}},{{$flight->discounted_business}}, {{ $flight->discount }},this, {{$flight->id}})" />
                                                         <label for="flight_{{ $flight->id }}" class="form-check-label inline-block text-slate-800"> {{ DateHelper::beautify($flight->departure_time, 'complete', $flight->origin->timezone) }} </label>
                                                     </div>

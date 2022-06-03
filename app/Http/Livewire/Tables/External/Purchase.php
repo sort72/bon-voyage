@@ -21,12 +21,13 @@ class Purchase extends LivewireDatatable
         // Aqui hay que hacerlo así porque al tener dos relaciones hacia destinations, LivewireDatatables muestra el mismo valor para ambos campos
         return Ticket::query()
             ->leftJoin('flights', 'flights.id', '=', 'tickets.flight_id')
+            ->leftJoin('carts', 'carts.id', '=', 'tickets.cart_id')
             ->leftJoin('destinations as dest', 'dest.id', '=', 'flights.destination_id')
             ->leftJoin('destinations as orig', 'orig.id', '=', 'flights.origin_id')
             ->leftJoin('world_cities as destCity', 'destCity.id', '=', 'dest.city_id')
             ->leftJoin('world_cities as origCity', 'origCity.id', '=', 'orig.city_id')
             ->whereIn('cart_id', $carts)
-            ->where('status', 'paid')
+            ->where('tickets.status', 'paid')
             ->withTrashed()
             ->orderBy('flights.departure_time', 'desc');
 
@@ -63,6 +64,8 @@ class Purchase extends LivewireDatatable
             Column::callback(['price'], function ($price) {
                 return currency_format($price);
             })->label('Precio')->searchable(),
+
+            Column::name('carts.fees')->label('Cuotas')->searchable(),
 
             Column::callback(['created_at'], function ($created_at) {
                 return DateHelper::beautify($created_at, 'short_complete_with_time');

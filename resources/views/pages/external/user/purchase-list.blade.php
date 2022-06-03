@@ -8,7 +8,7 @@
 
     <div class="py-2">
         <div class="mx-auto sm:px-6 lg:px-8">
-            <h3 class="text-2xl font-semibold text-blue-500 px-1">Mis compras</h3>
+            <h3 class="text-2xl font-semibold text-sky-500 px-1">Mis compras</h3>
             <p>Puedes realizar el checkin de tu vuelo 24 horas antes del mismo y modificar la silla.</p>
             <p class="px-1 mb-4">
                 Aquí aparecen también vuelos que ya hayan pasado. Los vuelos en los que puedes realizar el checkin aparecen con un ícono

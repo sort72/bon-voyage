@@ -7,7 +7,7 @@
 <div class="container mx-auto mt-8">
     <div>
         <div class="flex justify-between">
-            <h3 class="text-blue-400 text-3xl font-semibold">Modificar tarjeta</h3>
+            <h3 class="text-sky-400 text-3xl font-semibold">Modificar tarjeta</h3>
             <a class="text-white py-2 px-5 rounded bg-sky-500 hover:bg-sky-700" href="{{route('external.profile.card.index')}}">Volver al listado</a>
         </div>
         <div class="p-5 mt-4 border-b bg-white max-w-lg mx-auto border-gray-200 sm:rounded-lg shadow-md">

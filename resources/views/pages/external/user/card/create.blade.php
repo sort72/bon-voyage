@@ -8,7 +8,6 @@
     <div>
         <div class="flex justify-center">
             <h3 class="text-sky-500 text-3xl font-semibold">Añadir tarjeta</h3>
-            <a class="text-white py-2 px-5 rounded bg-sky-500 hover:bg-sky-700" href="{{route('external.profile.card.index')}}">Volver al listado</a>
         </div>
         <div class="p-5 mt-4 border-b bg-white max-w-lg mx-auto border-gray-200 sm:rounded-lg shadow-md my-4">
             <form method="POST" action="{{route('external.profile.card.store')}}">
@@ -62,6 +61,9 @@
 
                     <div class="mt-5 text-center">
                         <button type="submit" class=" my-2 w-24 text-white py-2 px-5 rounded bg-sky-500 hover:bg-sky-600">Añadir</button>
+                    </div>
+                    <div class="mt-5 text-center flex items-center">
+                        <a class=" text-white py-2 px-5 rounded bg-gray-400 hover:bg-gray-600" href="{{route('external.profile.card.index')}}">Volver al listado</a>
                     </div>
                 </div>
             </form>

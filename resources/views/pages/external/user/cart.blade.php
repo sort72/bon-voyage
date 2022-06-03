@@ -9,7 +9,7 @@
     <div class="py-2">
         <div class="mx-auto sm:px-6 lg:px-8">
             <div class="">
-                <h3 class="text-2xl font-semibold text-blue-500 px-1">Carrito</h3>
+                <h3 class="text-2xl font-semibold text-sky-500 px-1">Carrito</h3>
                 <p>Vuelos añadidos a tu carrito pendientes por pagar.</p>
                 <div class="overflow-hidden">
                     <div class="px-1 border-b border-gray-200 sm:rounded-lg shadow-md">
@@ -59,7 +59,7 @@
                             class="iblock my-4 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
                             <option value="">Seleccione</option>
                             @foreach ($debit_cards as $card)
-                            <option onclick="fees({{$card->type}})" value="{{$card->id}}">@if($card->number[0] == '3') AMEX @elseif ($card->number[0] == '4') VISA @elseif ($card->number[0] == '5') MASTERCARD @else OTRO @endif***{{substr($card->number,-4)}}</option>
+                            <option value="{{$card->id}}">@if($card->number[0] == '3') AMEX @elseif ($card->number[0] == '4') VISA @elseif ($card->number[0] == '5') MASTERCARD @else OTRO @endif***{{substr($card->number,-4)}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -69,12 +69,11 @@
                             class="iblock my-4 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
                             <option value="">Seleccione</option>
                             @foreach ($credit_cards as $card)
-                            <option onclick="fees({{$card->type}})" value="{{$card->id}}">@if($card->number[0] == '3') AMEX @elseif ($card->number[0] == '4') VISA @elseif ($card->number[0] == '5') MASTERCARD @else OTRO @endif***{{substr($card->number,-4)}}</option>
+                            <option value="{{$card->id}}">@if($card->number[0] == '3') AMEX @elseif ($card->number[0] == '4') VISA @elseif ($card->number[0] == '5') MASTERCARD @else OTRO @endif***{{substr($card->number,-4)}}</option>
                             @endforeach
                         </select>
                         <p class="text-center text-gray-600 font-bold mt-6">Cuotas</p>
-                        <select name="fees" id="fees"
-                            class="iblock my-4 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
+                        <select name="fees" class="iblock my-4 w-full rounded-md shadow-sm border-gray-300 focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50">
                             <option value="">Seleccione</option>
                             <option value="1">1</option>
                             <option value="2">2</option>

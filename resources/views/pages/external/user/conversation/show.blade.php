@@ -4,7 +4,7 @@
 
     <div class="max-w-5xl mx-auto py-6">
         <div class="flex justify-end">
-            <a href="{{ route('external.profile.conversation.index') }}" class="bgs-blue-400 bg-sky-500 hover:bg-sky-600 text-white rounded shadow py-2 px-3">Volver al listado</a>
+            <a href="{{ route('external.profile.conversation.index') }}" class="bgs-sky-400 bg-sky-500 hover:bg-sky-600 text-white rounded shadow py-2 px-3">Volver al listado</a>
         </div>
         <div class="container my-2 mx-auto p-5 border rounded-lg border-gray-500 shadow-gray-400 shadow-lg">
             <form action="{{ route('external.profile.conversation.new-message', $conversation) }}"

@@ -82,7 +82,7 @@ class UserController extends Controller
         {
             $card->amount -= $request->total;
             if($card->type == 'credit')
-                $card->debt = $request->total;
+                $card->debt += $request->total;
             $card->save();
 
             $tickets = auth()->user()->activeCart()->tickets;
@@ -95,6 +95,7 @@ class UserController extends Controller
 
             $cart = auth()->user()->activeCart();
             $cart->status = 'closed';
+            $cart->fees = $request->fees;
             $cart->save();
 
             return redirect()->route('external.profile.purchases-list')->with('success', 'Vuelos comprados con éxito!');
