@@ -76,8 +76,14 @@ La contraseña para todos los usuarios es la misma: **password**
 
 - Laravel 8
 - Tailwind 3
+- Laravel Livewire
+- Livewire datatables
+- Laravel world database
+- LivewireSelect
 - Alpine js
 - flatpickr
+- sweetalert2
+  
 
 ## Creditos
 
