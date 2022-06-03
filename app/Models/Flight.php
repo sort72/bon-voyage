@@ -6,6 +6,7 @@ use App\Helpers\LocationHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 class Flight extends Model
 {
@@ -14,7 +15,7 @@ class Flight extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'departure_time' => 'datetime',
+        // 'departure_time' => 'datetime',
         'arrival_time' => 'datetime',
     ];
 
@@ -30,7 +31,7 @@ class Flight extends Model
 
     public function getDurationAttribute()
     {
-        return $this->departure_time->diffInMinutes($this->arrival_time);
+        return Carbon::parse($this->departure_time)->diffInMinutes($this->arrival_time);
     }
 
     public function tickets()

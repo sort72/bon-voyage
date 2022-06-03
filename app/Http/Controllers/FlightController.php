@@ -88,7 +88,7 @@ class FlightController extends Controller
         }
 
         $destinations = Destination::all();
-        $flight->departure_time = $flight->departure_time->timezone('America/Bogota');
+        $flight->departure_time = Carbon::parse($flight->departure_time)->timezone('America/Bogota');
         $flight->arrival_time = $flight->arrival_time->timezone('America/Bogota');
         return view('pages.dashboard.flight.edit', compact('flight','destinations', 'cant_edit'));
     }
@@ -103,6 +103,7 @@ class FlightController extends Controller
     public function update(FlightRequest $request, Flight $flight)
     {
         $departure_time = Carbon::parse($request->departure_time, 'America/Bogota')->setTimezone('UTC');
+        // dd([$request->departure_time, $departure_time]);
         $arrival_time = Carbon::parse($departure_time)->addMinutes($request->duration);
 
         $flight->update([
