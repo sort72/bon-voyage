@@ -38,7 +38,7 @@ class CardController extends Controller
     {
         Card::create([
             'client_id' => Auth()->user()->id,
-            'type' => 'credit',
+            'type' => $request->type,
             'holder_name' => $request->holder_name,
             'number' => $request->number,
             'expiration_date' => $request->expiration_date,

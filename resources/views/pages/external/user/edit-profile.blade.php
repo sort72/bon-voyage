@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="container mx-auto my-8">
-        <h1 class="mt-0 text-center sm:text-xl md:text-4xl mb-4 font-bold leading-tight text-blue-700">Editar perfil de
+        <h1 class="mt-0 text-center sm:text-xl md:text-4xl mb-4 font-bold leading-tight text-sky-700">Editar perfil de
             {{ $user->name . ' ' . $user->surname }}</h1>
         <div class="flex">
 

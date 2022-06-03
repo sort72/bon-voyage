@@ -23,6 +23,26 @@ class Card extends LivewireDatatable
         return [
             NumberColumn::name('number')->label('Número')->searchable(),
 
+            Column::callback(['type','number'],function($type,$number){
+                $name = '';
+                if($number[0] == '3')
+                    $name .= 'AMEX - ';
+                elseif($number[0] == '4')
+                    $name .= 'VISA - ';
+                elseif($number[0] == '5')
+                    $name .= 'MASTERCARD - ';
+                else
+                    $name .= 'OTRO - ';
+
+                if($type == 'credit')
+                    $name .= 'Crédito';
+                else
+                    $name .= 'Débito';
+
+                return $name;
+
+            })->label('Tipo')->searchable(),
+
             Column::name('holder_name')->label('Nombre titular')->searchable(),
 
             Column::name('expiration_date')->label('Fecha expiración')->searchable(),
@@ -30,6 +50,8 @@ class Card extends LivewireDatatable
             Column::name('cvc')->label('CVC')->searchable(),
 
             NumberColumn::name('amount')->label('Saldo')->searchable(),
+
+            NumberColumn::name('debt')->label('Deuda')->searchable(),
 
             DateColumn::name('created_at')->label('Fecha creación')->searchable(),
 

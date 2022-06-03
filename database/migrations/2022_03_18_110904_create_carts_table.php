@@ -18,6 +18,7 @@ class CreateCartsTable extends Migration
             $table->string('status')->nullable();
             $table->foreignId('user_id')->nullable()->cascadeOnDelete();
             $table->foreignId('card_id')->nullable()->cascadeOnDelete();
+            $table->integer('fees')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

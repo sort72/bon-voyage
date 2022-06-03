@@ -7,7 +7,7 @@
 <div class="container mx-auto mt-8">
     <div>
         <div class="flex justify-center">
-            <h3 class="text-blue-400 text-3xl font-semibold">Realizar checkin</h3>
+            <h3 class="text-sky-400 text-3xl font-semibold">Realizar checkin</h3>
         </div>
         <div class="p-5 mt-4 border-b bg-white max-w-lg mx-auto border-gray-200 sm:rounded-lg shadow-md">
             <form method="POST" action="{{route('external.validate-checkin')}}">

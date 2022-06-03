@@ -22,6 +22,7 @@ class CreateCardsTable extends Migration
             $table->string('number');
             $table->unsignedSmallInteger('cvc');
             $table->double('amount')->default(0);
+            $table->double('debt')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

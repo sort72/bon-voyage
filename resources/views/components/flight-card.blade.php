@@ -10,7 +10,7 @@
       <span class="inline-block bg-yellow-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ $flight->name }}</span>
       <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ FlightHelper::getFlightAvailableSeats($flight)['total'] }} sillas disponibles!</span>
       @if ($flight->discount)
-        <span class="inline-block bg-blue-400 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">¡Vuelo con descuento!</span>
+        <span class="inline-block bg-sky-400 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">¡Vuelo con descuento!</span>
       @endif
       <span class="inline-block bg-green-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2">Desde {{ currency_format($flight->discounted_economy) }}</span>
     </div>

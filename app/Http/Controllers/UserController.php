@@ -58,11 +58,12 @@ class UserController extends Controller
     public function cart()
     {
         $user = auth()->user();
-        $cards = $user->cards;
+        $credit_cards = $user->cards->where('type','credit');
+        $debit_cards = $user->cards->where('type','debit');
         $cart = Cart::where(['user_id' => Auth()->user()->id])
                 ->where('status', 'opened')
                 ->firstOrCreate();
-        return view('pages.external.user.cart', compact('cards','cart'));
+        return view('pages.external.user.cart', compact('credit_cards','debit_cards','cart'));
     }
 
     public function deleteItem($id)
@@ -80,6 +81,8 @@ class UserController extends Controller
         if($balance>=0)
         {
             $card->amount -= $request->total;
+            if($card->type == 'credit')
+                $card->debt += $request->total;
             $card->save();
 
             $tickets = auth()->user()->activeCart()->tickets;
@@ -92,6 +95,7 @@ class UserController extends Controller
 
             $cart = auth()->user()->activeCart();
             $cart->status = 'closed';
+            $cart->fees = $request->fees;
             $cart->save();
 
             return redirect()->route('external.profile.purchases-list')->with('success', 'Vuelos comprados con éxito!');
