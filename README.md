@@ -1,64 +1,88 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><img src="https://i.imgur.com/31YRPVd.png" alt="Bon Voyage" width="400"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Proyecto web de reserva de vuelos para una pequeña aerolínea operativa en diferentes países. Proyecto realizado con fines educativos.
 
-## About Laravel
+## Funcionalidades
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Apartado de noticias con los vuelos recientes
+- Búsqueda de vuelos por cualquier concepto (Precio, destino, fecha, clase)
+- Panel de administrador para publicación de nuevos vuelos
+- Mensajería privada entre clientes y administradores para resolver dudas
+- Check-in y cambio de silla visual
+- Envío de correos electrónicos con información de pasabordo y compras
+- Carrito de compras con vuelos seleccionados
+- Reserva de tiquetes
+- Diferentes roles de usuario (root, administrador, cliente, visitante)
+- Pagos con tarjetas creadas dentro del sistema, para simular una pasarela de pagos. Admite tarjetas de crédito y débito
+- Reserva y compra de tiquetes para múltiples pasajeros a la vez
+- Diseño responsive con Tailwind 3
+- Seeders con creación de países, ciudades, destinos, vuelos en fechas cercanas y cuentas de usuarios de prueba
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instalación
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Clonar el repositorio
 
-## Learning Laravel
+`
+git clone https://github.com/sort72/bon-voyage.git
+`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Inicializar composer
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+`
+composer install
+`
 
-## Laravel Sponsors
+Copiar el archivo .env.example y configurarlo con las credenciales necesarias (Principalmente para la conexión con la base de datos y de envío de correos electrónicos)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+`
+cp .env.example .env
+`
 
-### Premium Partners
+Generar una nueva clave para la aplicación
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+`
+php artisan key:generate
+` 
 
-## Contributing
+Ejecutar las migraciones y los seeders
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+`
+php artisan migrate --seed
+`
 
-## Code of Conduct
+Inicializar y correr npm
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+`
+npm install && npm run prod
+`
 
-## Security Vulnerabilities
+Con los pasos anteriores el proyecto estará listo para ser utilizado, si no se cuenta con un servidor apache, se puede ejecutar un servidor sobre la marcha con el comando
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+`
+php artisan serve
+`
 
-## License
+## Usuarios de prueba
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+La aplicación crea tres usuarios diferentes con los roles existentes, se puede iniciar sesión utilizando las siguientes credenciales:
+
+- Usuario root (Puede crear administradores): root@bon-voyage.com
+- Usuario administrador (Puede crear vuelos): admin@bon-voyage.com
+- Usuario cliente: cliente@bon-voyage.com
+
+La contraseña para todos los usuarios es la misma: **password**
+
+## Tecnologías utilizadas
+
+- Laravel 8
+- Tailwind 3
+- Alpine js
+- flatpickr
+
+## Creditos
+
+- [@sort72](https://github.com/sort72) - Alejandro Ortega
+- [@ttatiana18](https://github.com/ttatiana18) - Nicole Rios
+- [@JohanRestrepo19](https://github.com/JohanRestrepo19) - Johan Esteban Restrepo
+- [@Lyzder](https://github.com/Lyzder) - Santiago Torres
+- [@evelynrodriguez](https://github.com/evelynrodriguezc)
